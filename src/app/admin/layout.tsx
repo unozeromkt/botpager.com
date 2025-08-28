@@ -11,7 +11,7 @@ import {
   SidebarTrigger,
   SidebarFooter,
 } from "@/components/ui/sidebar"
-import { Bot, Paintbrush, FileText, Share2, Settings, Eye } from "lucide-react"
+import { Bot, Paintbrush, FileText, Share2, Settings, Eye, Download } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 
@@ -71,7 +71,13 @@ export default function AdminLayout({
           <header className="flex items-center justify-between p-4 border-b">
             <SidebarTrigger />
             <h1 className="text-xl font-semibold">Dashboard</h1>
-            <Settings />
+            <div className="flex items-center gap-4">
+                <Button variant="outline">
+                    <Download className="mr-2"/>
+                    Exportar HTML
+                </Button>
+                <Settings />
+            </div>
           </header>
           <main className="p-6">
             {children}
