@@ -1,3 +1,4 @@
+
 import { Bot } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -19,6 +20,11 @@ export function Header() {
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-end space-x-4">
+           <Button variant="ghost" asChild>
+            <Link href="/examples">
+              Ejemplos
+            </Link>
+          </Button>
           <Button variant="ghost" asChild>
             <Link href="/admin/appearance">
               Admin
