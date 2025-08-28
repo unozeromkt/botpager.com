@@ -1,4 +1,3 @@
-
 // src/app/demo-2/page.tsx
 "use client";
 
@@ -11,6 +10,8 @@ import type { Dispatch, SetStateAction } from "react";
 import { VerticalNav } from "@/components/layout/vertical-nav";
 import Link from 'next/link';
 import Image from 'next/image';
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Card, CardContent } from "@/components/ui/card";
 
 
 export type Section = "home" | "about" | "services" | "faq" | string;
@@ -33,8 +34,8 @@ export default function Demo2Page({
   const sections = {
     home: {
       icon: Home,
-      title: botData.home?.title || botData.whatWeDo.title,
-      description: botData.home?.description || botData.whatWeDo.description,
+      title: botData.home?.title || botData.whatWeDo?.title || "Bienvenido",
+      description: botData.home?.description || botData.whatWeDo?.description || "",
       cta: (
         <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
           <Link href="#bot-frame-section">
@@ -44,12 +45,39 @@ export default function Demo2Page({
         </Button>
       ),
     },
+    menu: {
+      icon: Briefcase,
+      title: botData.menu?.title,
+      content: botData.menu?.items && (
+        <ScrollArea className="h-[480px] pr-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {botData.menu.items.map((item: any, index: number) => (
+              <Card key={index} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <Image 
+                    src={item.image} 
+                    alt={item.name} 
+                    width={400} 
+                    height={300} 
+                    className="w-full h-40 object-cover"
+                    data-ai-hint={item.aiHint}
+                />
+                <CardContent className="p-4">
+                  <h3 className="font-bold text-lg text-foreground">{item.name}</h3>
+                  <p className="text-sm text-muted-foreground mt-1 h-12">{item.description}</p>
+                  <p className="text-primary font-semibold text-lg mt-3">{item.price}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </ScrollArea>
+      )
+    },
     services: {
       icon: Briefcase,
-      title: botData.services.title,
-      content: (
+      title: botData.services?.title,
+      content: botData.services?.items && (
         <div className="space-y-6">
-           <p className="text-muted-foreground">{botData.whatWeDo.description}</p>
+           <p className="text-muted-foreground">{botData.whatWeDo?.description}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
             {botData.services.items.map((service: any, index: number) => (
               <div key={index} className="flex items-start gap-4 p-4 rounded-lg hover:bg-card/80 transition-all">
@@ -66,13 +94,13 @@ export default function Demo2Page({
     },
     about: {
       icon: Users,
-      title: botData.aboutUs.title,
-      description: botData.aboutUs.description,
+      title: botData.aboutUs?.title,
+      description: botData.aboutUs?.description,
     },
     faq: {
       icon: HelpCircle,
-      title: botData.faqs.title,
-      content: (
+      title: botData.faqs?.title,
+      content: botData.faqs?.items && (
         <Accordion type="single" collapsible className="w-full">
           {botData.faqs.items.map((faq: any, index: number) => (
              <AccordionItem value={`item-${index}`} key={index}>
@@ -87,16 +115,19 @@ export default function Demo2Page({
   
   // A bit of a hack to support dynamic sections from different data sources
   const currentSectionKey = activeSection as keyof typeof sections;
-  const section = sections[currentSectionKey] || {
-    title: botData[currentSectionKey]?.title,
-    description: botData[currentSectionKey]?.description,
-    content: botData[currentSectionKey]?.content,
-  };
+  const sectionData = botData[activeSection];
+
+  const section = sectionData ? {
+    title: sectionData.title,
+    description: sectionData.description,
+    content: sections[currentSectionKey]?.content, // Use pre-defined content if available
+    cta: sections[currentSectionKey]?.cta
+  } : null;
 
 
   const renderContent = () => {
     
-    if (!section) return <div>Contenido no encontrado.</div>
+    if (!section || !section.title) return <div className="flex items-center justify-center h-full"><p>Contenido para "{activeSection}" no encontrado.</p></div>
 
     const content = section.content || (
       <>

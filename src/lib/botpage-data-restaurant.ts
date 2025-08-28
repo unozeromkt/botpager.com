@@ -1,4 +1,3 @@
-
 // src/lib/botpage-data-restaurant.ts
 
 function hexToHsl(hex: string): string {
@@ -29,7 +28,7 @@ function hexToHsl(hex: string): string {
 export const restaurantBotpageData = {
   appearance: {
     logoUrl: "",
-    heroImageUrl: "https://picsum.photos/seed/pizza/1200/800",
+    heroImageUrl: "https://picsum.photos/seed/pizzeria/1200/800",
     primaryColor: "#E53E3E", // Red for pizza sauce
     backgroundColor: "#2D3748", // Dark gray
     backgroundType: "image" as "color" | "image",
@@ -47,56 +46,67 @@ export const restaurantBotpageData = {
     title: "Pizza artesanal con sabor a fuego y tiempo.",
     description: "En Botzza Pizzería amasamos lento (48 h), horneamos al carbón y servimos con ingredientes frescos. Ordena por WhatsApp o visita nuestro salón. Entregas en El Poblado y Laureles.",
   },
-  whatWeDo: { // This would be the 'Menu' section
+  menu: {
     title: "Nuestro Menú",
     description: "Desde la clásica Margarita hasta nuestras creaciones de autor, cada pizza es una obra de arte culinaria.",
+    items: [
+      {
+        image: "https://picsum.photos/seed/margherita/400/300",
+        name: "Margherita D.O.P.",
+        description: "Tomate San Marzano, fior di latte, albahaca fresca y aceite de oliva extra virgen.",
+        price: "$26.900",
+        aiHint: "margherita pizza"
+      },
+      {
+        image: "https://picsum.photos/seed/diavola/400/300",
+        name: "Diavola + Formaggi",
+        description: "Tomate, mozzarella, pepperoni artesanal, miel picante y orégano fresco.",
+        price: "$32.900",
+        aiHint: "pepperoni pizza"
+      },
+      {
+        image: "https://picsum.photos/seed/veggie/400/300",
+        name: "Veggie Verde",
+        description: "Pesto de albahaca, zucchini, champiñones, aceitunas negras y tomates cherry.",
+        price: "$29.900",
+        aiHint: "veggie pizza"
+      },
+      {
+        image: "https://picsum.photos/seed/quattro/400/300",
+        name: "Quattro Formaggi",
+        description: "Mozzarella, gorgonzola, parmesano, ricotta y un toque de miel de abejas.",
+        price: "$35.900",
+        aiHint: "cheese pizza"
+      },
+      {
+        image: "https://picsum.photos/seed/prosciutto/400/300",
+        name: "Prosciutto e Funghi",
+        description: "Jamón prosciutto, champiñones frescos, mozzarella y rúgula.",
+        price: "$38.900",
+        aiHint: "prosciutto pizza"
+      },
+      {
+        image: "https://picsum.photos/seed/tropical/400/300",
+        name: "Tropical Botzza",
+        description: "Jamón artesanal, piña fresca, mozzarella, cilantro y salsa BBQ casera.",
+        price: "$31.900",
+        aiHint: "hawaiian pizza"
+      },
+    ]
   },
-  aboutUs: { // This would be the 'Location' section
+  order: {
+      title: "Haz tu Pedido",
+      description: "Nuestro bot está listo para tomar tu orden. ¡Solo tienes que hacer clic en el chat y empezar a pedir! O si lo prefieres, llámanos al (123) 456-7890."
+  },
+  location: {
     title: "Horarios y Ubicación",
     description: "Encuéntranos en Calle Falsa 123, de Martes a Domingo, de 12:00 PM a 11:00 PM. ¡Te esperamos para compartir el auténtico sabor de la pizza artesanal!",
   },
-  services: { // This would be part of the menu
-    title: "Especialidades de la Casa",
-    items: [
-      {
-        icon: "Pizza",
-        title: "Botzza Clásica",
-        description: "Salsa de tomate, mozzarella fresca, albahaca y un toque de aceite de oliva."
-      },
-      {
-        icon: "Pizza",
-        title: "Diávola",
-        description: "Para los amantes del picante, con salami, peperoncino y mozzarella."
-      },
-      {
-        icon: "Pizza",
-        title: "Quattro Formaggi",
-        description: "Una sinfonía de quesos: mozzarella, gorgonzola, parmesano y provolone."
-      },
-      {
-        icon: "Pizza",
-        title: "Vegana",
-        description: "Con vegetales de temporada asados, salsa de tomate y queso vegano."
-      }
-    ]
-  },
-  faqs: { // This could be part of an 'Order' section
-    title: "Cómo Pedir",
-    items: [
-      {
-        question: "¿Cómo puedo hacer un pedido?",
-        answer: "Puedes hacer tu pedido directamente a través de nuestro chatbot en esta página, llamarnos por teléfono o visitarnos en nuestro local."
-      },
-      {
-        question: "¿Tienen opciones sin gluten?",
-        answer: "¡Sí! Ofrecemos bases sin gluten por un costo adicional. Por favor, indícalo al momento de hacer tu pedido."
-      },
-      {
-        question: "¿Cuál es el área de cobertura para domicilios?",
-        answer: "Actualmente cubrimos las zonas de El Poblado y Laureles. Consulta con nuestro bot si tu dirección está dentro de nuestra cobertura."
-      },
-    ]
-  },
+  // Adding placeholder sections to avoid errors
+  whatWeDo: { title: "", description: ""},
+  aboutUs: { title: "", description: ""},
+  services: { title: "Servicios", items: [] },
+  faqs: { title: "Preguntas Frecuentes", items: [] },
   socials: {
     instagram: "https://instagram.com",
     facebook: "https://facebook.com",
