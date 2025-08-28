@@ -42,30 +42,6 @@ export default function Demo2Page({
           </Link>
         </Button>
       ),
-      content: (
-        <div className="space-y-8">
-            {botpageData.appearance.heroImageUrl && (
-                <div className="aspect-video w-full overflow-hidden rounded-xl shadow-lg">
-                    <Image 
-                        src={botpageData.appearance.heroImageUrl} 
-                        alt="Imagen de Héroe" 
-                        width={800}
-                        height={450}
-                        className="w-full h-full object-cover"
-                        data-ai-hint="corporate meeting"
-                    />
-                </div>
-            )}
-             <div className="pt-2">
-                 <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
-                    <Link href="#bot-frame-section">
-                        Empieza tu consulta
-                        <ArrowRight className="ml-2 h-5 w-5" />
-                    </Link>
-                </Button>
-             </div>
-        </div>
-      )
     },
     services: {
       icon: Briefcase,
@@ -75,7 +51,7 @@ export default function Demo2Page({
            <p className="text-muted-foreground">{botpageData.whatWeDo.description}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
             {botpageData.services.items.map((service, index) => (
-              <div key={index} className="flex items-start gap-4 p-4 rounded-lg hover:bg-card transition-all">
+              <div key={index} className="flex items-start gap-4 p-4 rounded-lg hover:bg-card/80 transition-all">
                 <div>{getIcon(service.icon)}</div>
                 <div>
                   <h3 className="font-semibold text-lg mb-1">{service.title}</h3>

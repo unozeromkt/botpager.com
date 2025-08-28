@@ -122,11 +122,11 @@ export default function AppearancePage() {
                   name="heroImageUrl"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>URL de Imagen de Héroe</FormLabel>
+                      <FormLabel>URL de Imagen de Fondo</FormLabel>
                       <FormControl>
-                        <Input placeholder="https://picsum.photos/800/600" {...field} />
+                        <Input placeholder="https://picsum.photos/1200/800" {...field} />
                       </FormControl>
-                      <FormDescription>Imagen principal para la sección de inicio.</FormDescription>
+                      <FormDescription>Imagen de fondo para la página principal.</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
