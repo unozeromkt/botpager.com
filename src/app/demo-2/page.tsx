@@ -3,7 +3,10 @@
 
 import { Button } from "@/components/ui/button";
 import { BotFrame } from "@/components/landing/bot-frame";
-import { ArrowRight, Users, Briefcase, HelpCircle, Home } from "lucide-react";
+import { ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { botpageData } from "@/lib/botpage-data";
+import * as LucideIcons from "lucide-react";
 
 export type Section = "home" | "about" | "services" | "faq";
 
@@ -12,6 +15,12 @@ export default function Demo2Page({
 }: {
   activeSection: Section;
 }) {
+
+  const getIcon = (name: string) => {
+    const Icon = (LucideIcons as any)[name];
+    return Icon ? <Icon className="h-8 w-8 text-primary" /> : <Briefcase className="h-8 w-8 text-primary" />;
+  };
+  
   const sections = {
     home: {
       icon: Home,
@@ -27,39 +36,67 @@ export default function Demo2Page({
     },
     services: {
       icon: Briefcase,
-      title: "¿Qué Hacemos?",
-      description:
-        "Nos especializamos en la reestructuración de deudas para personas y pequeños negocios. Nuestro enfoque se centra en crear acuerdos de pago viables y, cuando es necesario, guiar en el proceso de liquidación patrimonial para un nuevo comienzo financiero.",
+      title: botpageData.services.title,
+      content: (
+        <div className="space-y-6">
+           <p className="text-muted-foreground">{botpageData.whatWeDo.description}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {botpageData.services.items.map((service, index) => (
+              <div key={index} className="flex items-start gap-4">
+                <div>{getIcon(service.icon)}</div>
+                <div>
+                  <h3 className="font-semibold text-lg">{service.title}</h3>
+                  <p className="text-muted-foreground text-sm">{service.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ),
     },
     about: {
       icon: Users,
-      title: "Sobre Nosotros",
-      description:
-        "Somos un equipo de expertos financieros y legales comprometidos con tu bienestar. Creemos que todos merecen una segunda oportunidad y trabajamos incansablemente para encontrar la mejor solución a tu situación de endeudamiento.",
+      title: botpageData.aboutUs.title,
+      description: botpageData.aboutUs.description,
     },
     faq: {
       icon: HelpCircle,
-      title: "Preguntas Frecuentes",
-      description:
-        "¿Este proceso afecta mi historial de crédito? ¿Cuánto tiempo toma? ¿Necesito un abogado? Respondemos estas y otras dudas comunes. Para una respuesta más detallada, ¡pregunta a nuestro bot!",
+      title: botpageData.faqs.title,
+      content: (
+        <Accordion type="single" collapsible className="w-full">
+          {botpageData.faqs.items.map((faq, index) => (
+             <AccordionItem value={`item-${index}`} key={index}>
+              <AccordionTrigger>{faq.question}</AccordionTrigger>
+              <AccordionContent>{faq.answer}</AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      )
     },
   };
 
   const renderContent = () => {
-    // Fallback to home if the section is not found
     const section = sections[activeSection] || sections.home;
+    const content = section.content || (
+      <>
+        <p className="max-w-[600px] text-muted-foreground md:text-xl font-body">
+          {section.description}
+        </p>
+        <div className="flex flex-col gap-2 min-[400px]:flex-row pt-4">
+            {section.cta}
+        </div>
+      </>
+    );
+
     return (
       <div key={activeSection} className="flex flex-col justify-center space-y-6 animate-in fade-in duration-500">
         <div className="space-y-4">
           <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-primary-foreground">
             {section.title}
           </h1>
-          <p className="max-w-[600px] text-muted-foreground md:text-xl font-body">
-            {section.description}
-          </p>
-        </div>
-        <div className="flex flex-col gap-2 min-[400px]:flex-row">
-          {section.cta}
+          <div className="font-body">
+            {content}
+          </div>
         </div>
       </div>
     );
@@ -71,11 +108,11 @@ export default function Demo2Page({
         <section className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
             <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 items-start">
-              <div className="flex flex-col justify-start space-y-8">
-                <div className="min-h-[300px]">{renderContent()}</div>
-              </div>
-              <div className="flex items-center justify-center">
+               <div className="flex items-center justify-center">
                 <BotFrame />
+              </div>
+              <div className="flex flex-col justify-start space-y-8">
+                <div className="min-h-[400px]">{renderContent()}</div>
               </div>
             </div>
           </div>

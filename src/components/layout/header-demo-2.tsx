@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { cn } from '@/lib/utils';
 import type { Section } from '@/app/demo-2/page';
+import { botpageData } from '@/lib/botpage-data';
 
 interface HeaderDemo2Props {
   activeSection: Section;
@@ -22,14 +23,14 @@ interface HeaderDemo2Props {
 export function HeaderDemo2({ activeSection, setActiveSection }: HeaderDemo2Props) {
   const navItems: { key: Section; label: string; icon: React.ElementType }[] = [
     { key: 'home', label: 'Inicio', icon: Home },
-    { key: 'services', label: 'Qué hacemos', icon: Briefcase },
-    { key: 'about', label: 'Sobre Nosotros', icon: Users },
-    { key: 'faq', label: 'FAQ', icon: HelpCircle },
+    { key: 'services', label: botpageData.whatWeDo.title, icon: Briefcase },
+    { key: 'about', label: botpageData.aboutUs.title, icon: Users },
+    { key: 'faq', label: botpageData.faqs.title, icon: HelpCircle },
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60" style={{ '--header-height': '56px' } as React.CSSProperties}>
-      <div className="container flex h-14 max-w-screen-2xl items-center">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60" style={{ '--header-height': '64px' } as React.CSSProperties}>
+      <div className="container flex h-16 max-w-screen-2xl items-center">
         <div className="mr-4 flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
             <Bot className="h-6 w-6 text-primary" />
@@ -42,20 +43,19 @@ export function HeaderDemo2({ activeSection, setActiveSection }: HeaderDemo2Prop
                 variant="ghost"
                 onClick={() => setActiveSection(key)}
                 className={cn(
-                  'gap-2 px-4 py-2 text-base transition-colors hover:text-foreground',
+                  'gap-2 px-4 py-3 text-base font-medium transition-colors hover:text-foreground',
                   activeSection === key
-                    ? 'font-semibold text-foreground'
+                    ? 'font-semibold text-primary'
                     : 'font-normal text-muted-foreground'
                 )}
               >
-                <Icon className="h-5 w-5" />
                 {label}
               </Button>
             ))}
           </nav>
         </div>
         <div className="flex flex-1 items-center justify-end space-x-4">
-          <div className="md:hidden">
+           <div className="md:hidden">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button>
