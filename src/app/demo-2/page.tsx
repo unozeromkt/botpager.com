@@ -8,14 +8,10 @@ import { ArrowRight, Users, Briefcase, HelpCircle, Home } from "lucide-react";
 export type Section = "home" | "about" | "services" | "faq";
 
 export default function Demo2Page({
-  params,
+  activeSection,
 }: {
-  params: { activeSection: Section };
+  activeSection: Section;
 }) {
-
-  // This is a bit of a hack to pass the active section to the children
-  const activeSection = (params as any).activeSection as Section;
-  
   const sections = {
     home: {
       icon: Home,
