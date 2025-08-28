@@ -1,8 +1,8 @@
+
 // src/app/demo-2/page.tsx
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { BotFrame } from "@/components/landing/bot-frame";
 import { ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { botpageData } from "@/lib/botpage-data";
@@ -102,22 +102,5 @@ export default function Demo2Page({
     );
   };
 
-  return (
-    <div className="flex flex-col min-h-[calc(100vh-var(--header-height))] bg-background text-foreground">
-      <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 items-start">
-               <div className="flex items-center justify-center">
-                <BotFrame />
-              </div>
-              <div className="flex flex-col justify-start space-y-8">
-                <div className="min-h-[400px]">{renderContent()}</div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
-  );
+  return renderContent();
 }
