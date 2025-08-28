@@ -1,3 +1,4 @@
+
 // src/lib/botpage-data.ts
 
 function hexToHsl(hex: string): string {
@@ -100,6 +101,15 @@ export const botpageData = {
       }
     ]
   },
+  customSections: [
+    {
+        key: "blog",
+        label: "Nuestro Blog",
+        icon: "PenSquare",
+        title: "Artículos y Noticias Financieras",
+        content: "Bienvenido a nuestro espacio de conocimiento.\n\nAquí compartimos artículos, guías y noticias relevantes sobre el mundo de las finanzas, la insolvencia y la recuperación económica.\n\nNuestro objetivo es darte las herramientas para que tomes decisiones informadas."
+    }
+  ],
   socials: {
     instagram: "https://instagram.com",
     facebook: "https://facebook.com",

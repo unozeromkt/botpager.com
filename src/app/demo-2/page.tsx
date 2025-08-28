@@ -32,7 +32,7 @@ export default function Demo2Page({
     return Icon ? <Icon className="h-8 w-8 text-primary" /> : <Briefcase className="h-8 w-8 text-primary" />;
   };
   
-  const sections = {
+  const staticSections = {
     home: {
       icon: Home,
       title: botData.home?.title || botData.whatWeDo?.title || "Bienvenido",
@@ -142,34 +142,47 @@ export default function Demo2Page({
       )
     },
   };
+
+  const findSectionData = () => {
+    // Check in static sections first
+    if (activeSection in staticSections) {
+      const key = activeSection as keyof typeof staticSections;
+      const section = staticSections[key];
+      return {
+        ...section,
+        cta: staticSections[key]?.cta, 
+        content: section.content || (
+          <p className="max-w-[600px] text-muted-foreground md:text-xl font-normal">
+            {section.description}
+          </p>
+        )
+      };
+    }
+    // Check in custom sections
+    const customSection = botData.customSections?.find((s: any) => s.key === activeSection);
+    if (customSection) {
+      return {
+        title: customSection.title,
+        content: (
+            // whitespace-pre-wrap preserves line breaks from the textarea
+            <p className="max-w-[600px] text-muted-foreground md:text-xl font-normal whitespace-pre-wrap">
+              {customSection.content}
+            </p>
+        )
+      };
+    }
+    return null;
+  }
   
-  // A bit of a hack to support dynamic sections from different data sources
-  const currentSectionKey = activeSection as keyof typeof sections;
-  const sectionData = botData[activeSection] || sections[currentSectionKey];
-
-
-  const section = sectionData ? {
-    title: sectionData.title,
-    description: sectionData.description,
-    content: sectionData.content || sections[currentSectionKey]?.content, // Use pre-defined content if available
-    cta: sections[currentSectionKey]?.cta
-  } : null;
+  const sectionData = findSectionData();
 
 
   const renderContent = () => {
     
-    if (!section || !section.title) return <div className="flex items-center justify-center h-full"><p>Contenido para "{activeSection}" no encontrado.</p></div>
+    if (!sectionData || !sectionData.title) return <div className="flex items-center justify-center h-full"><p>Contenido para "{activeSection}" no encontrado.</p></div>
 
-    const content = section.content || (
-      <>
-        <p className="max-w-[600px] text-muted-foreground md:text-xl font-normal">
-          {section.description}
-        </p>
-        { section.cta && <div className="pt-8">
-            {section.cta}
-        </div>}
-      </>
-    );
+    const content = sectionData.content;
+    const cta = sectionData.cta;
 
     return (
       <div key={activeSection} className="flex flex-col justify-center space-y-6 animate-in fade-in-50 duration-500 min-h-[450px]">
@@ -179,16 +192,19 @@ export default function Demo2Page({
             <VerticalNav
               activeSection={activeSection}
               setActiveSection={setActiveSection}
-              navItems={botData.navItems}
+              navItems={[...botData.navItems, ...(botData.customSections || [])]}
               isMobile={true}
             />
           </div>
           <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-foreground">
-            {section.title}
+            {sectionData.title}
           </h1>
           <div className="font-body">
             {content}
           </div>
+           { cta && <div className="pt-8">
+            {cta}
+          </div>}
         </div>
       </div>
     );

@@ -20,7 +20,9 @@ export default function Demo2Layout({
 }>) {
   const [activeSection, setActiveSection] = useState<Section>("home");
   const [isChatFocused, setIsChatFocused] = useState(false);
-  const { appearance } = botpageData;
+  const { appearance, navItems, customSections = [] } = botpageData;
+
+  const allNavItems = [...navItems, ...customSections];
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -54,7 +56,7 @@ export default function Demo2Layout({
                  <VerticalNav
                   activeSection={activeSection}
                   setActiveSection={setActiveSection}
-                  navItems={botpageData.navItems}
+                  navItems={allNavItems}
                 />
               </div>
               <div className="flex-1 min-h-[450px] bg-card/40 backdrop-blur-lg rounded-xl p-8 border border-white/10 shadow-2xl">

@@ -1,3 +1,4 @@
+
 // src/app/admin/sections/page.tsx
 "use client";
 
@@ -20,6 +21,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "@/hooks/use-toast";
 import { PlusCircle, Trash2 } from "lucide-react";
+import { botpageData } from "@/lib/botpage-data";
 
 // Esquema para la sección "Qué hacemos"
 const whatWeDoSchema = z.object({
@@ -43,7 +45,7 @@ const serviceSchema = z.object({
 // Esquema para la sección de "Servicios"
 const servicesSchema = z.object({
   title: z.string().min(1, "El título es requerido."),
-  services: z.array(serviceSchema),
+  items: z.array(serviceSchema),
 });
 
 // Esquema para una sola pregunta frecuente
@@ -55,47 +57,71 @@ const faqSchema = z.object({
 // Esquema para la sección de "Preguntas Frecuentes"
 const faqsSchema = z.object({
   title: z.string().min(1, "El título es requerido."),
-  faqs: z.array(faqSchema),
+  items: z.array(faqSchema),
+});
+
+// Esquema para una sección personalizada
+const customSectionSchema = z.object({
+  key: z.string().min(1, "La clave es requerida (ej: 'mi-seccion')."),
+  label: z.string().min(1, "El título del tab es requerido."),
+  icon: z.string().min(1, "El ícono es requerido."),
+  title: z.string().min(1, "El título del contenido es requerido."),
+  content: z.string().min(1, "El contenido es requerido."),
+});
+
+// Esquema para el conjunto de secciones personalizadas
+const customSectionsSchema = z.object({
+  sections: z.array(customSectionSchema),
 });
 
 
 export default function SectionsPage() {
   const whatWeDoForm = useForm<z.infer<typeof whatWeDoSchema>>({
     resolver: zodResolver(whatWeDoSchema),
-    defaultValues: { title: "Qué hacemos", description: "" },
+    defaultValues: botpageData.whatWeDo,
   });
 
   const aboutUsForm = useForm<z.infer<typeof aboutUsSchema>>({
     resolver: zodResolver(aboutUsSchema),
-    defaultValues: { title: "Sobre Nosotros", description: "" },
+    defaultValues: botpageData.aboutUs,
   });
 
   const servicesForm = useForm<z.infer<typeof servicesSchema>>({
     resolver: zodResolver(servicesSchema),
-    defaultValues: { title: "Servicios", services: [{ icon: "Briefcase", title: "", description: "" }] },
+    defaultValues: botpageData.services,
   });
 
   const { fields: serviceFields, append: appendService, remove: removeService } = useFieldArray({
     control: servicesForm.control,
-    name: "services",
+    name: "items",
   });
 
   const faqsForm = useForm<z.infer<typeof faqsSchema>>({
     resolver: zodResolver(faqsSchema),
-    defaultValues: { title: "Preguntas Frecuentes", faqs: [{ question: "", answer: "" }] },
+    defaultValues: botpageData.faqs,
   });
 
   const { fields: faqFields, append: appendFaq, remove: removeFaq } = useFieldArray({
     control: faqsForm.control,
-    name: "faqs",
+    name: "items",
+  });
+
+  const customSectionsForm = useForm<z.infer<typeof customSectionsSchema>>({
+    resolver: zodResolver(customSectionsSchema),
+    defaultValues: { sections: botpageData.customSections || [] },
+  });
+
+  const { fields: customFields, append: appendCustom, remove: removeCustom } = useFieldArray({
+    control: customSectionsForm.control,
+    name: "sections",
   });
   
   const onSubmit = (data: any, section: string) => {
     toast({
       title: `Sección "${section}" guardada`,
-      description: "El contenido ha sido actualizado.",
+      description: "El contenido ha sido actualizado (simulado).",
     });
-    console.log(data);
+    console.log("Guardando datos para:", section, data);
   };
 
   return (
@@ -107,12 +133,13 @@ export default function SectionsPage() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Tabs defaultValue="what-we-do">
-          <TabsList className="grid w-full grid-cols-4">
+        <Tabs defaultValue="what-we-do" className="w-full">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="what-we-do">Qué hacemos</TabsTrigger>
             <TabsTrigger value="about-us">Sobre Nosotros</TabsTrigger>
             <TabsTrigger value="services">Servicios</TabsTrigger>
             <TabsTrigger value="faqs">FAQs</TabsTrigger>
+            <TabsTrigger value="custom">Personalizadas</TabsTrigger>
           </TabsList>
 
           {/* Pestaña: Qué hacemos */}
@@ -168,7 +195,7 @@ export default function SectionsPage() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <FormField
                         control={servicesForm.control}
-                        name={`services.${index}.icon`}
+                        name={`items.${index}.icon`}
                         render={({ field }) => (
                            <FormItem>
                             <FormLabel>Ícono (Lucide)</FormLabel>
@@ -179,7 +206,7 @@ export default function SectionsPage() {
                       />
                       <FormField
                         control={servicesForm.control}
-                        name={`services.${index}.title`}
+                        name={`items.${index}.title`}
                         render={({ field }) => (
                            <FormItem>
                             <FormLabel>Título del Servicio</FormLabel>
@@ -190,7 +217,7 @@ export default function SectionsPage() {
                       />
                        <FormField
                         control={servicesForm.control}
-                        name={`services.${index}.description`}
+                        name={`items.${index}.description`}
                         render={({ field }) => (
                            <FormItem>
                             <FormLabel>Descripción</FormLabel>
@@ -206,7 +233,7 @@ export default function SectionsPage() {
                   </Card>
                 ))}
                 <div className="flex gap-4">
-                    <Button type="button" variant="outline" onClick={() => appendService({ icon: "", title: "", description: "" })}>
+                    <Button type="button" variant="outline" onClick={() => appendService({ icon: "Briefcase", title: "", description: "" })}>
                         <PlusCircle className="mr-2 h-4 w-4" /> Añadir Servicio
                     </Button>
                     <Button type="submit">Guardar Cambios</Button>
@@ -223,7 +250,7 @@ export default function SectionsPage() {
                   <Card key={field.id} className="relative p-4 space-y-4">
                      <FormField
                         control={faqsForm.control}
-                        name={`faqs.${index}.question`}
+                        name={`items.${index}.question`}
                         render={({ field }) => (
                            <FormItem>
                             <FormLabel>Pregunta</FormLabel>
@@ -234,7 +261,7 @@ export default function SectionsPage() {
                       />
                        <FormField
                         control={faqsForm.control}
-                        name={`faqs.${index}.answer`}
+                        name={`items.${index}.answer`}
                         render={({ field }) => (
                            <FormItem>
                             <FormLabel>Respuesta</FormLabel>
@@ -251,6 +278,89 @@ export default function SectionsPage() {
                 <div className="flex gap-4">
                     <Button type="button" variant="outline" onClick={() => appendFaq({ question: "", answer: "" })}>
                         <PlusCircle className="mr-2 h-4 w-4" /> Añadir Pregunta
+                    </Button>
+                    <Button type="submit">Guardar Cambios</Button>
+                </div>
+              </form>
+            </Form>
+          </TabsContent>
+          
+           {/* Pestaña: Secciones Personalizadas */}
+           <TabsContent value="custom">
+             <Form {...customSectionsForm}>
+              <form onSubmit={customSectionsForm.handleSubmit(data => onSubmit(data, "Personalizadas"))} className="space-y-8 mt-6">
+                 <CardDescription>Crea tus propias secciones de contenido para la Botpage.</CardDescription>
+                {customFields.map((field, index) => (
+                  <Card key={field.id} className="relative p-4 space-y-4">
+                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                       <FormField
+                          control={customSectionsForm.control}
+                          name={`sections.${index}.key`}
+                          render={({ field }) => (
+                             <FormItem>
+                              <FormLabel>Clave Única</FormLabel>
+                              <FormControl><Input {...field} placeholder="ejemplo-seccion" /></FormControl>
+                               <FormDescription>Identificador sin espacios.</FormDescription>
+                              <FormMessage />
+                             </FormItem>
+                          )}
+                        />
+                         <FormField
+                          control={customSectionsForm.control}
+                          name={`sections.${index}.label`}
+                          render={({ field }) => (
+                             <FormItem>
+                              <FormLabel>Título del Tab</FormLabel>
+                              <FormControl><Input {...field} placeholder="Mi Nueva Sección" /></FormControl>
+                               <FormDescription>El texto que se verá en el menú.</FormDescription>
+                              <FormMessage />
+                             </FormItem>
+                          )}
+                        />
+                         <FormField
+                          control={customSectionsForm.control}
+                          name={`sections.${index}.icon`}
+                          render={({ field }) => (
+                             <FormItem>
+                              <FormLabel>Ícono (Lucide)</FormLabel>
+                              <FormControl><Input {...field} placeholder="Star" /></FormControl>
+                               <FormDescription>Nombre del ícono.</FormDescription>
+                              <FormMessage />
+                             </FormItem>
+                          )}
+                        />
+                     </div>
+                     <FormField
+                        control={customSectionsForm.control}
+                        name={`sections.${index}.title`}
+                        render={({ field }) => (
+                           <FormItem>
+                            <FormLabel>Título del Contenido</FormLabel>
+                            <FormControl><Input {...field} placeholder="El título principal de tu sección" /></FormControl>
+                            <FormMessage />
+                           </FormItem>
+                        )}
+                      />
+                       <FormField
+                        control={customSectionsForm.control}
+                        name={`sections.${index}.content`}
+                        render={({ field }) => (
+                           <FormItem>
+                            <FormLabel>Contenido (Editor Básico)</FormLabel>
+                            <FormControl><Textarea rows={8} {...field} placeholder="Escribe aquí tu contenido. Puedes usar saltos de línea." /></FormControl>
+                            <FormDescription>Este es un editor de texto simple. Futuramente será un editor WYSIWYG.</FormDescription>
+                            <FormMessage />
+                           </FormItem>
+                        )}
+                      />
+                    <Button type="button" variant="ghost" size="icon" className="absolute top-2 right-2" onClick={() => removeCustom(index)}>
+                      <Trash2 className="h-4 w-4 text-destructive" />
+                    </Button>
+                  </Card>
+                ))}
+                <div className="flex gap-4">
+                    <Button type="button" variant="outline" onClick={() => appendCustom({ key: "", label: "", icon: "FileText", title: "", content: "" })}>
+                        <PlusCircle className="mr-2 h-4 w-4" /> Añadir Sección
                     </Button>
                     <Button type="submit">Guardar Cambios</Button>
                 </div>
