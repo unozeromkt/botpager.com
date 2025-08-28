@@ -1,4 +1,3 @@
-
 // src/lib/botpage-data.ts
 
 function hexToHsl(hex: string): string {
@@ -31,9 +30,9 @@ export const botpageData = {
     logoUrl: "",
     primaryColor: "#6B46C1",
     backgroundColor: "#F3F4F6",
-    primaryColorHsl: hexToHsl("#6B46C1"),
-    backgroundColorHsl: hexToHsl("#F3F4F6"),
-    iframeCode: `<iframe id="JotFormIFrame-01971cae816e73068d6b8e6f19ab11aa4dac" title="ISSA: Representante de ventas Online" allowTransparency allow="geolocation; microphone; camera; fullscreen" src="https://agent.jotform.com/01971cae816e73068d6b8e6f19ab11aa4dac?embedMode=iframe&background=0&header=1&source=embed-next" frameBorder="0" style={{minWidth: '100%', height: '100%', border: 'none', width: '100%'}} scrolling="no"></iframe>`
+    get primaryColorHsl() { return hexToHsl(this.primaryColor); },
+    get backgroundColorHsl() { return hexToHsl(this.backgroundColor); },
+    iframeCode: `<iframe id="JotFormIFrame-01971cae816e73068d6b8e6f19ab11aa4dac" title="ISSA: Representante de ventas Online" allowTransparency="true" allow="geolocation; microphone; camera; fullscreen" src="https://agent.jotform.com/01971cae816e73068d6b8e6f19ab11aa4dac?embedMode=iframe&background=0&header=1&source=embed-next" frameBorder="0" style="min-width: 100%; height: 100%; border:none; width:100%;" scrolling="no"></iframe>`
   },
   whatWeDo: {
     title: "Qué hacemos",
