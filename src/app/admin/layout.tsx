@@ -14,6 +14,8 @@ import {
 import { Bot, Paintbrush, FileText, Share2, Settings, Eye, Download } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
+import { botpageData } from "@/lib/botpage-data"
 
 export default function AdminLayout({
   children,
@@ -26,7 +28,11 @@ export default function AdminLayout({
         <Sidebar>
           <SidebarHeader>
             <div className="flex items-center gap-2">
-              <Bot className="h-6 w-6 text-primary" />
+               {botpageData.appearance.logoUrl ? (
+                <Image src={botpageData.appearance.logoUrl} alt="Logo" width={24} height={24} />
+              ) : (
+                <Bot className="h-6 w-6 text-primary" />
+              )}
               <span className="text-lg font-semibold font-headline">Botpage Admin</span>
             </div>
           </SidebarHeader>
@@ -69,14 +75,18 @@ export default function AdminLayout({
         </Sidebar>
         <SidebarInset>
           <header className="flex items-center justify-between p-4 border-b">
-            <SidebarTrigger />
-            <h1 className="text-xl font-semibold">Dashboard</h1>
+            <div className="flex items-center gap-2">
+              <SidebarTrigger />
+              <h1 className="text-xl font-semibold">Dashboard</h1>
+            </div>
             <div className="flex items-center gap-4">
                 <Button variant="outline">
                     <Download className="mr-2"/>
                     Exportar HTML
                 </Button>
-                <Settings />
+                <Button variant="ghost" size="icon">
+                  <Settings />
+                </Button>
             </div>
           </header>
           <main className="p-6">

@@ -34,6 +34,12 @@ export const botpageData = {
     get backgroundColorHsl() { return hexToHsl(this.backgroundColor); },
     iframeCode: `<iframe id="JotFormIFrame-01971cae816e73068d6b8e6f19ab11aa4dac" title="ISSA: Representante de ventas Online" allowTransparency="true" allow="geolocation; microphone; camera; fullscreen" src="https://agent.jotform.com/01971cae816e73068d6b8e6f19ab11aa4dac?embedMode=iframe&background=0&header=1&source=embed-next" frameBorder="0" style="min-width: 100%; height: 100%; border:none; width:100%;" scrolling="no"></iframe>`
   },
+  navItems: [
+    { key: 'home', label: 'Inicio', icon: 'Home' },
+    { key: 'services', label: 'Servicios', icon: 'Briefcase' },
+    { key: 'about', label: 'Nosotros', icon: 'Users' },
+    { key: 'faq', label: 'Preguntas', icon: 'HelpCircle' },
+  ],
   whatWeDo: {
     title: "Qué hacemos",
     description: "Nos especializamos en la reestructuración de deudas para personas y pequeños negocios. Nuestro enfoque se centra en crear acuerdos de pago viables y, cuando es necesario, guiar en el proceso de liquidación patrimonial para un nuevo comienzo financiero.",
