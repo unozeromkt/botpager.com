@@ -12,9 +12,9 @@ export function Header() {
             <span className="font-bold font-headline">FinanceFlow AI</span>
           </Link>
           <nav className="hidden items-center gap-6 text-sm md:flex">
-            <Link href="#" className="text-muted-foreground transition-colors hover:text-foreground">Servicios</Link>
-            <Link href="#" className="text-muted-foreground transition-colors hover:text-foreground">Nosotros</Link>
-            <Link href="#" className="text-muted-foreground transition-colors hover:text-foreground">Contacto</Link>
+            <Link href="/" className="text-muted-foreground transition-colors hover:text-foreground">Demo 1</Link>
+            <Link href="/demo-2" className="text-muted-foreground transition-colors hover:text-foreground">Demo 2</Link>
+            <Link href="#" className="text-muted-foreground transition-colors hover:text-foreground">Demo 3</Link>
           </nav>
         </div>
         <div className="flex flex-1 items-center justify-end space-x-4">
