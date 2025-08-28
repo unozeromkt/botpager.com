@@ -1,3 +1,4 @@
+
 // src/app/demo-2/layout.tsx
 "use client";
 
@@ -19,23 +20,26 @@ export default function Demo2Layout({
 }>) {
   const [activeSection, setActiveSection] = useState<Section>("home");
   const [isChatFocused, setIsChatFocused] = useState(false);
+  const { appearance } = botpageData;
 
   return (
     <div className="flex flex-col min-h-screen">
        <Header />
        <main className="flex-1 w-full relative">
-         {botpageData.appearance.heroImageUrl && (
-            <Image
-              src={botpageData.appearance.heroImageUrl}
-              alt="Background"
-              fill
-              objectFit="cover"
-              className="absolute inset-0 z-0"
-              data-ai-hint="personal finance"
-            />
+         {appearance.backgroundType === 'image' && appearance.heroImageUrl && (
+            <>
+              <Image
+                src={appearance.heroImageUrl}
+                alt="Background"
+                fill
+                objectFit="cover"
+                className="absolute inset-0 z-0"
+                data-ai-hint="personal finance"
+              />
+              <div className="absolute inset-0 z-10 bg-background/70 backdrop-blur-sm"></div>
+            </>
          )}
-         <div className="absolute inset-0 z-10 bg-background/70 backdrop-blur-sm"></div>
-
+         
         <section className="container mx-auto py-12 md:py-20 relative z-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
             

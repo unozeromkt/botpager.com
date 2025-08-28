@@ -21,6 +21,7 @@ import { toast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
 import { botpageData } from "@/lib/botpage-data";
 import { useEffect } from "react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 // Esquema para la sección de apariencia
 const appearanceSchema = z.object({
@@ -29,6 +30,7 @@ const appearanceSchema = z.object({
   iframeCode: z.string().min(1, "El código del iframe es requerido."),
   primaryColor: z.string().regex(/^#[A-Fa-f0-9]{6}$/, "Debe ser un código de color hexadecimal de 6 dígitos (ej: #FFFFFF)."),
   backgroundColor: z.string().regex(/^#[A-Fa-f0-9]{6}$/, "Debe ser un código de color hexadecimal de 6 dígitos (ej: #FFFFFF)."),
+  backgroundType: z.enum(["color", "image"]),
 });
 
 function hexToHsl(hex: string): string {
@@ -65,11 +67,13 @@ export default function AppearancePage() {
       iframeCode: botpageData.appearance.iframeCode,
       primaryColor: botpageData.appearance.primaryColor,
       backgroundColor: botpageData.appearance.backgroundColor,
+      backgroundType: botpageData.appearance.backgroundType,
     },
   });
 
    const watchPrimary = form.watch("primaryColor");
    const watchBackground = form.watch("backgroundColor");
+   const watchBackgroundType = form.watch("backgroundType");
 
    useEffect(() => {
     if (document.documentElement) {
@@ -117,7 +121,81 @@ export default function AppearancePage() {
                     </FormItem>
                   )}
                 />
-                <FormField
+                 <FormField
+                  control={form.control}
+                  name="primaryColor"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Color Primario</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <Input type="color" {...field} className="w-24 h-12 p-1" />
+                          <span className="absolute left-28 top-1/2 -translate-y-1/2 font-mono text-muted-foreground">{field.value.toUpperCase()}</span>
+                        </div>
+                      </FormControl>
+                       <FormDescription>Elige el color principal para tu Botpage.</FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+            </div>
+             <FormField
+                control={form.control}
+                name="backgroundType"
+                render={({ field }) => (
+                  <FormItem className="space-y-3">
+                    <FormLabel>Tipo de Fondo</FormLabel>
+                    <FormControl>
+                      <RadioGroup
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                        className="flex flex-col space-y-1"
+                      >
+                        <FormItem className="flex items-center space-x-3 space-y-0">
+                          <FormControl>
+                            <RadioGroupItem value="color" />
+                          </FormControl>
+                          <FormLabel className="font-normal">
+                            Color de Fondo
+                          </FormLabel>
+                        </FormItem>
+                        <FormItem className="flex items-center space-x-3 space-y-0">
+                          <FormControl>
+                            <RadioGroupItem value="image" />
+                          </FormControl>
+                          <FormLabel className="font-normal">
+                            Imagen de Fondo
+                          </FormLabel>
+                        </FormItem>
+                      </RadioGroup>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {watchBackgroundType === 'color' && (
+                 <FormField
+                  control={form.control}
+                  name="backgroundColor"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Color de Fondo</FormLabel>
+                      <FormControl>
+                         <div className="relative">
+                          <Input type="color" {...field} className="w-24 h-12 p-1" />
+                          <span className="absolute left-28 top-1/2 -translate-y-1/2 font-mono text-muted-foreground">{field.value.toUpperCase()}</span>
+                        </div>
+                      </FormControl>
+                      <FormDescription>Elige el color de fondo para tu Botpage.</FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
+
+               {watchBackgroundType === 'image' && (
+                 <FormField
                   control={form.control}
                   name="heroImageUrl"
                   render={({ field }) => (
@@ -131,43 +209,8 @@ export default function AppearancePage() {
                     </FormItem>
                   )}
                 />
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="primaryColor"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Color Primario</FormLabel>
-                    <FormControl>
-                      <div className="relative">
-                        <Input type="color" {...field} className="w-24 h-12 p-1" />
-                         <span className="absolute left-28 top-1/2 -translate-y-1/2 font-mono text-muted-foreground">{field.value.toUpperCase()}</span>
-                      </div>
-                    </FormControl>
-                    <FormDescription>Elige el color principal para tu Botpage.</FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-               <FormField
-                control={form.control}
-                name="backgroundColor"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Color de Fondo</FormLabel>
-                    <FormControl>
-                       <div className="relative">
-                        <Input type="color" {...field} className="w-24 h-12 p-1" />
-                        <span className="absolute left-28 top-1/2 -translate-y-1/2 font-mono text-muted-foreground">{field.value.toUpperCase()}</span>
-                      </div>
-                    </FormControl>
-                    <FormDescription>Elige el color de fondo para tu Botpage.</FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+               )}
+            
             <FormField
               control={form.control}
               name="iframeCode"

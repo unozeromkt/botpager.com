@@ -1,3 +1,4 @@
+
 // src/lib/botpage-data.ts
 
 function hexToHsl(hex: string): string {
@@ -31,6 +32,7 @@ export const botpageData = {
     heroImageUrl: "https://picsum.photos/seed/finance/1200/800",
     primaryColor: "#6B46C1",
     backgroundColor: "#1C1721",
+    backgroundType: "image" as "color" | "image",
     get primaryColorHsl() { return hexToHsl(this.primaryColor); },
     get backgroundColorHsl() { return hexToHsl(this.backgroundColor); },
     iframeCode: `<iframe id="JotFormIFrame-01971cae816e73068d6b8e6f19ab11aa4dac" title="ISSA: Representante de ventas Online" allowTransparency="true" allow="geolocation; microphone; camera; fullscreen" src="https://agent.jotform.com/01971cae816e73068d6b8e6f19ab11aa4dac?embedMode=iframe&background=0&header=1&source=embed-next" frameBorder="0" style="min-width: 100%; height: 100%; border:none; width:100%;" scrolling="no"></iframe>`
