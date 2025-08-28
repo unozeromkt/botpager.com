@@ -1,3 +1,4 @@
+
 // src/app/admin/appearance/page.tsx
 "use client";
 
@@ -18,51 +19,74 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
+import { botpageData } from "@/lib/botpage-data";
+import { useEffect } from "react";
 
 // Esquema para la sección de apariencia
 const appearanceSchema = z.object({
   logoUrl: z.string().url().optional().or(z.literal('')),
   iframeCode: z.string().min(1, "El código del iframe es requerido."),
-  primaryColor: z.string().regex(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/, "Debe ser un código de color hexadecimal válido (ej: #FFFFFF)."),
+  primaryColor: z.string().regex(/^#[A-Fa-f0-9]{6}$/, "Debe ser un código de color hexadecimal de 6 dígitos (ej: #FFFFFF)."),
+  backgroundColor: z.string().regex(/^#[A-Fa-f0-9]{6}$/, "Debe ser un código de color hexadecimal de 6 dígitos (ej: #FFFFFF)."),
 });
+
+function hexToHsl(hex: string): string {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    if (!result) return "0 0% 0%";
+    let r = parseInt(result[1], 16) / 255;
+    let g = parseInt(result[2], 16) / 255;
+    let b = parseInt(result[3], 16) / 255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    let h = 0, s = 0, l = (max + min) / 2;
+    if (max !== min) {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+        case g: h = (b - r) / d + 2; break;
+        case b: h = (r - g) / d + 4; break;
+      }
+      h /= 6;
+    }
+    h = Math.round(h * 360);
+    s = Math.round(s * 100);
+    l = Math.round(l * 100);
+    return `${h} ${s}% ${l}%`;
+}
+
 
 export default function AppearancePage() {
    const form = useForm<z.infer<typeof appearanceSchema>>({
     resolver: zodResolver(appearanceSchema),
     defaultValues: {
-      logoUrl: "",
-      iframeCode: `<iframe
-  id="JotFormIFrame-01971cae816e73068d6b8e6f19ab11aa4dac"
-  title="ISSA: Representante de ventas Online"
-  onLoad={() => {
-      if (typeof window !== 'undefined' && window.parent) {
-          window.parent.scrollTo(0, 0)
-      }
-    }
-  }
-  allowTransparency
-  allow="geolocation; microphone; camera; fullscreen"
-  src="https://agent.jotform.com/01971cae816e73068d6b8e6f19ab11aa4dac?embedMode=iframe&background=0&header=1&source=embed-next"
-  frameBorder="0"
-  style={{
-    minWidth: '100%',
-    height: '100%',
-    border: 'none',
-    width: '100%',
-  }}
-  scrolling="no"
->
-</iframe>`,
-      primaryColor: "#6B46C1",
+      logoUrl: botpageData.appearance.logoUrl,
+      iframeCode: botpageData.appearance.iframeCode,
+      primaryColor: botpageData.appearance.primaryColor,
+      backgroundColor: botpageData.appearance.backgroundColor,
     },
   });
 
+   const watchPrimary = form.watch("primaryColor");
+   const watchBackground = form.watch("backgroundColor");
+
+   useEffect(() => {
+    if (document.documentElement) {
+      document.documentElement.style.setProperty('--primary-dynamic', hexToHsl(watchPrimary));
+      document.documentElement.style.setProperty('--background-dynamic', hexToHsl(watchBackground));
+    }
+  }, [watchPrimary, watchBackground]);
+
+
   const onSubmit = (data: z.infer<typeof appearanceSchema>) => {
+    // This would in a real scenario save to a database.
+    // For now, we'll just show a toast.
     toast({
       title: "Apariencia guardada",
-      description: "La configuración de la apariencia ha sido actualizada.",
+      description: "La configuración de la apariencia ha sido actualizada (simulado).",
     });
-    console.log(data);
+    console.log("Saving data...", data);
+    console.log("Primary HSL:", hexToHsl(data.primaryColor))
+    console.log("Background HSL:", hexToHsl(data.backgroundColor))
   };
 
   return (
@@ -90,20 +114,42 @@ export default function AppearancePage() {
                 </FormItem>
               )}
             />
-             <FormField
-              control={form.control}
-              name="primaryColor"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Color Primario</FormLabel>
-                  <FormControl>
-                    <Input type="color" {...field} className="w-24 h-12" />
-                  </FormControl>
-                  <FormDescription>Elige el color principal para tu Botpage.</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="primaryColor"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Color Primario</FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <Input type="color" {...field} className="w-24 h-12 p-1" />
+                         <span className="absolute left-28 top-1/2 -translate-y-1/2 font-mono text-muted-foreground">{field.value.toUpperCase()}</span>
+                      </div>
+                    </FormControl>
+                    <FormDescription>Elige el color principal para tu Botpage.</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+               <FormField
+                control={form.control}
+                name="backgroundColor"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Color de Fondo</FormLabel>
+                    <FormControl>
+                       <div className="relative">
+                        <Input type="color" {...field} className="w-24 h-12 p-1" />
+                        <span className="absolute left-28 top-1/2 -translate-y-1/2 font-mono text-muted-foreground">{field.value.toUpperCase()}</span>
+                      </div>
+                    </FormControl>
+                    <FormDescription>Elige el color de fondo para tu Botpage.</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <FormField
               control={form.control}
               name="iframeCode"
