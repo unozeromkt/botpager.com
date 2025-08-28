@@ -113,7 +113,7 @@ function BotpageContent() {
               <div className="flex flex-col justify-start space-y-8">
                 <div className="min-h-[400px]">{renderContent()}</div>
               </div>
-              <div className="flex items-center justify-center">
+              <div className="flex items-center justify-center sticky top-24 h-[688px]">
                 <BotFrame />
               </div>
             </div>
