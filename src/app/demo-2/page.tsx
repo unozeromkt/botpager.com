@@ -5,7 +5,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { botpageData } from "@/lib/botpage-data";
+import { botpageData as defaultBotData } from "@/lib/botpage-data";
 import * as LucideIcons from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
 import { VerticalNav } from "@/components/layout/vertical-nav";
@@ -13,14 +13,16 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 
-export type Section = "home" | "about" | "services" | "faq";
+export type Section = "home" | "about" | "services" | "faq" | string;
 
 export default function Demo2Page({
   activeSection,
-  setActiveSection
+  setActiveSection,
+  botData = defaultBotData,
 }: {
   activeSection: Section;
   setActiveSection: Dispatch<SetStateAction<Section>>;
+  botData?: any;
 }) {
 
   const getIcon = (name: string) => {
@@ -31,9 +33,8 @@ export default function Demo2Page({
   const sections = {
     home: {
       icon: Home,
-      title: "Recupera tu vida financiera, a tu manera.",
-      description:
-        "Ofrecemos un camino claro para salir de deudas a personas y pequeños comerciantes, mediante acuerdos flexibles o liquidación patrimonial.",
+      title: botData.home?.title || botData.whatWeDo.title,
+      description: botData.home?.description || botData.whatWeDo.description,
       cta: (
         <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
           <Link href="#bot-frame-section">
@@ -45,12 +46,12 @@ export default function Demo2Page({
     },
     services: {
       icon: Briefcase,
-      title: botpageData.services.title,
+      title: botData.services.title,
       content: (
         <div className="space-y-6">
-           <p className="text-muted-foreground">{botpageData.whatWeDo.description}</p>
+           <p className="text-muted-foreground">{botData.whatWeDo.description}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-            {botpageData.services.items.map((service, index) => (
+            {botData.services.items.map((service: any, index: number) => (
               <div key={index} className="flex items-start gap-4 p-4 rounded-lg hover:bg-card/80 transition-all">
                 <div>{getIcon(service.icon)}</div>
                 <div>
@@ -65,15 +66,15 @@ export default function Demo2Page({
     },
     about: {
       icon: Users,
-      title: botpageData.aboutUs.title,
-      description: botpageData.aboutUs.description,
+      title: botData.aboutUs.title,
+      description: botData.aboutUs.description,
     },
     faq: {
       icon: HelpCircle,
-      title: botpageData.faqs.title,
+      title: botData.faqs.title,
       content: (
         <Accordion type="single" collapsible className="w-full">
-          {botpageData.faqs.items.map((faq, index) => (
+          {botData.faqs.items.map((faq: any, index: number) => (
              <AccordionItem value={`item-${index}`} key={index}>
               <AccordionTrigger className="text-base font-semibold hover:no-underline">{faq.question}</AccordionTrigger>
               <AccordionContent className="pt-2 text-muted-foreground">{faq.answer}</AccordionContent>
@@ -83,17 +84,28 @@ export default function Demo2Page({
       )
     },
   };
+  
+  // A bit of a hack to support dynamic sections from different data sources
+  const currentSectionKey = activeSection as keyof typeof sections;
+  const section = sections[currentSectionKey] || {
+    title: botData[currentSectionKey]?.title,
+    description: botData[currentSectionKey]?.description,
+    content: botData[currentSectionKey]?.content,
+  };
+
 
   const renderContent = () => {
-    const section = sections[activeSection] || sections.home;
+    
+    if (!section) return <div>Contenido no encontrado.</div>
+
     const content = section.content || (
       <>
         <p className="max-w-[600px] text-muted-foreground md:text-xl font-normal">
           {section.description}
         </p>
-        <div className="pt-8">
+        { section.cta && <div className="pt-8">
             {section.cta}
-        </div>
+        </div>}
       </>
     );
 
@@ -105,7 +117,7 @@ export default function Demo2Page({
             <VerticalNav
               activeSection={activeSection}
               setActiveSection={setActiveSection}
-              navItems={botpageData.navItems}
+              navItems={botData.navItems}
               isMobile={true}
             />
           </div>

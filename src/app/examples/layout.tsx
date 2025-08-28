@@ -24,7 +24,6 @@ export default function ExamplesLayout({
   children: React.ReactNode;
 }>) {
   const pathname = usePathname();
-  const [isChatFocused, setIsChatFocused] = useState(false);
 
   return (
     <div className="flex flex-col min-h-screen">
