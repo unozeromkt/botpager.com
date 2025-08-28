@@ -1,3 +1,4 @@
+
 // src/app/demo-2/page.tsx
 "use client";
 
@@ -9,6 +10,7 @@ import * as LucideIcons from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
 import { VerticalNav } from "@/components/layout/vertical-nav";
 import Link from 'next/link';
+import Image from 'next/image';
 
 
 export type Section = "home" | "about" | "services" | "faq";
@@ -40,6 +42,30 @@ export default function Demo2Page({
           </Link>
         </Button>
       ),
+      content: (
+        <div className="space-y-8">
+            {botpageData.appearance.heroImageUrl && (
+                <div className="aspect-video w-full overflow-hidden rounded-xl shadow-lg">
+                    <Image 
+                        src={botpageData.appearance.heroImageUrl} 
+                        alt="Imagen de Héroe" 
+                        width={800}
+                        height={450}
+                        className="w-full h-full object-cover"
+                        data-ai-hint="corporate meeting"
+                    />
+                </div>
+            )}
+             <div className="pt-2">
+                 <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+                    <Link href="#bot-frame-section">
+                        Empieza tu consulta
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                </Button>
+             </div>
+        </div>
+      )
     },
     services: {
       icon: Briefcase,

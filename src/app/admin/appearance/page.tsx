@@ -25,6 +25,7 @@ import { useEffect } from "react";
 // Esquema para la sección de apariencia
 const appearanceSchema = z.object({
   logoUrl: z.string().url().optional().or(z.literal('')),
+  heroImageUrl: z.string().url().optional().or(z.literal('')),
   iframeCode: z.string().min(1, "El código del iframe es requerido."),
   primaryColor: z.string().regex(/^#[A-Fa-f0-9]{6}$/, "Debe ser un código de color hexadecimal de 6 dígitos (ej: #FFFFFF)."),
   backgroundColor: z.string().regex(/^#[A-Fa-f0-9]{6}$/, "Debe ser un código de color hexadecimal de 6 dígitos (ej: #FFFFFF)."),
@@ -60,6 +61,7 @@ export default function AppearancePage() {
     resolver: zodResolver(appearanceSchema),
     defaultValues: {
       logoUrl: botpageData.appearance.logoUrl,
+      heroImageUrl: botpageData.appearance.heroImageUrl,
       iframeCode: botpageData.appearance.iframeCode,
       primaryColor: botpageData.appearance.primaryColor,
       backgroundColor: botpageData.appearance.backgroundColor,
@@ -100,20 +102,36 @@ export default function AppearancePage() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <CardContent className="space-y-8">
-            <FormField
-              control={form.control}
-              name="logoUrl"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>URL del Logo</FormLabel>
-                  <FormControl>
-                    <Input placeholder="https://tu-empresa.com/logo.png" {...field} />
-                  </FormControl>
-                  <FormDescription>Pega la URL de una imagen para tu logo.</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                 <FormField
+                  control={form.control}
+                  name="logoUrl"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>URL del Logo</FormLabel>
+                      <FormControl>
+                        <Input placeholder="https://tu-empresa.com/logo.png" {...field} />
+                      </FormControl>
+                      <FormDescription>Pega la URL de una imagen para tu logo.</FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="heroImageUrl"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>URL de Imagen de Héroe</FormLabel>
+                      <FormControl>
+                        <Input placeholder="https://picsum.photos/800/600" {...field} />
+                      </FormControl>
+                      <FormDescription>Imagen principal para la sección de inicio.</FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+            </div>
             <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
