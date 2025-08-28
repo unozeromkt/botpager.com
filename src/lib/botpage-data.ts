@@ -26,8 +26,8 @@ function hexToHsl(hex: string): string {
 
 const rawBotData = {
   appearance: {
-    logoUrl: "http://botpager.com/img/botpager-logo.png",
-    heroImageUrl: "http://botpager.com/img/hero-botpager.webp",
+    logoUrl: "/img/botpager-logo.png",
+    heroImageUrl: "/img/hero-botpager.webp",
     primaryColor: "#8975c6",
     backgroundColor: "#1C1721",
     backgroundType: "image" as "color" | "image",
