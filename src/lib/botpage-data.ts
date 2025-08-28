@@ -1,4 +1,3 @@
-
 // src/lib/botpage-data.ts
 
 function hexToHsl(hex: string): string {
@@ -43,6 +42,10 @@ export const botpageData = {
     { key: 'about', label: 'Nosotros', icon: 'Users' },
     { key: 'faq', label: 'Preguntas', icon: 'HelpCircle' },
   ],
+  home: {
+    title: "Te ayudamos a recuperar tu vida financiera.",
+    description: "Persona natural y pequeños comerciantes. A través de este proceso puedes salir de deudas, por medio de un acuerdo o liquidación patrimonial."
+  },
   whatWeDo: {
     title: "Qué hacemos",
     description: "Nos especializamos en la reestructuración de deudas para personas y pequeños negocios. Nuestro enfoque se centra en crear acuerdos de pago viables y, cuando es necesario, guiar en el proceso de liquidación patrimonial para un nuevo comienzo financiero.",

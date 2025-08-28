@@ -52,7 +52,7 @@ export default function Demo2Page({
         <ScrollArea className="h-[480px] pr-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {botData.menu.items.map((item: any, index: number) => (
-              <Card key={index} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <Card key={index} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
                 <Image 
                     src={item.image} 
                     alt={item.name} 
@@ -61,9 +61,9 @@ export default function Demo2Page({
                     className="w-full h-40 object-cover"
                     data-ai-hint={item.aiHint}
                 />
-                <CardContent className="p-4">
+                <CardContent className="p-4 flex flex-col flex-1">
                   <h3 className="font-bold text-lg text-foreground">{item.name}</h3>
-                  <p className="text-sm text-muted-foreground mt-1 h-12">{item.description}</p>
+                  <p className="text-sm text-muted-foreground mt-1 flex-1">{item.description}</p>
                   <p className="text-primary font-semibold text-lg mt-3">{item.price}</p>
                 </CardContent>
               </Card>
@@ -115,12 +115,13 @@ export default function Demo2Page({
   
   // A bit of a hack to support dynamic sections from different data sources
   const currentSectionKey = activeSection as keyof typeof sections;
-  const sectionData = botData[activeSection];
+  const sectionData = botData[activeSection] || sections[currentSectionKey];
+
 
   const section = sectionData ? {
     title: sectionData.title,
     description: sectionData.description,
-    content: sections[currentSectionKey]?.content, // Use pre-defined content if available
+    content: sectionData.content || sections[currentSectionKey]?.content, // Use pre-defined content if available
     cta: sections[currentSectionKey]?.cta
   } : null;
 
