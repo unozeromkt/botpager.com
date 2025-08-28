@@ -9,9 +9,6 @@ export default function Demo2Page() {
         <section className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
             <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 items-center">
-              <div className="flex items-center justify-center">
-                <BotFrame />
-              </div>
               <div className="flex flex-col justify-center space-y-6">
                 <div className="space-y-4">
                   <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-primary-foreground">
@@ -27,6 +24,9 @@ export default function Demo2Page() {
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </div>
+              </div>
+              <div className="flex items-center justify-center">
+                <BotFrame />
               </div>
             </div>
           </div>
