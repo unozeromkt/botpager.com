@@ -1,6 +1,11 @@
 // src/lib/botpage-data.ts
 
 export const botpageData = {
+  appearance: {
+    logoUrl: "",
+    primaryColor: "#6B46C1",
+    iframeCode: `<iframe id="JotFormIFrame-01971cae816e73068d6b8e6f19ab11aa4dac" title="ISSA: Representante de ventas Online" allowTransparency allow="geolocation; microphone; camera; fullscreen" src="https://agent.jotform.com/01971cae816e73068d6b8e6f19ab11aa4dac?embedMode=iframe&background=0&header=1&source=embed-next" frameBorder="0" style={{minWidth: '100%', height: '100%', border: 'none', width: '100%'}} scrolling="no"></iframe>`
+  },
   whatWeDo: {
     title: "Qué hacemos",
     description: "Nos especializamos en la reestructuración de deudas para personas y pequeños negocios. Nuestro enfoque se centra en crear acuerdos de pago viables y, cuando es necesario, guiar en el proceso de liquidación patrimonial para un nuevo comienzo financiero.",
@@ -54,5 +59,13 @@ export const botpageData = {
         answer: "Generalmente se pueden incluir deudas de consumo como tarjetas de crédito, préstamos personales y créditos de libre inversión. Deudas hipotecarias o con garantías reales tienen un tratamiento especial."
       }
     ]
+  },
+  socials: {
+    instagram: "https://instagram.com",
+    facebook: "https://facebook.com",
+    tiktok: "https://tiktok.com",
+    youtube: "https://youtube.com",
+    linkedin: "https://linkedin.com",
+    x: "https://x.com",
   }
 };

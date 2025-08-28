@@ -2,6 +2,7 @@
 'use client';
 
 import type { Dispatch, SetStateAction } from 'react';
+import Image from 'next/image';
 import { Bot, Home, Users, Briefcase, HelpCircle, Menu } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -12,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { cn } from '@/lib/utils';
-import type { Section } from '@/app/demo-2/page';
+import type { Section } from '@/app/page';
 import { botpageData } from '@/lib/botpage-data';
 
 interface HeaderDemo2Props {
@@ -33,17 +34,21 @@ export function HeaderDemo2({ activeSection, setActiveSection }: HeaderDemo2Prop
       <div className="container flex h-16 max-w-screen-2xl items-center">
         <div className="mr-4 flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <Bot className="h-6 w-6 text-primary" />
-            <span className="font-bold font-headline">FinanceFlow AI</span>
+            {botpageData.appearance.logoUrl ? (
+              <Image src={botpageData.appearance.logoUrl} alt="Logo" width={32} height={32} />
+            ) : (
+              <Bot className="h-8 w-8 text-primary" />
+            )}
+            <span className="font-bold font-headline">Botpage</span>
           </Link>
           <nav className="hidden items-center gap-2 text-sm md:flex">
-            {navItems.map(({ key, label, icon: Icon }) => (
+            {navItems.map(({ key, label }) => (
               <Button
                 key={key}
                 variant="ghost"
                 onClick={() => setActiveSection(key)}
                 className={cn(
-                  'gap-2 px-4 py-3 text-base font-medium transition-colors hover:text-foreground',
+                  'gap-2 px-4 py-3 text-lg font-medium transition-colors hover:text-foreground',
                   activeSection === key
                     ? 'font-semibold text-primary'
                     : 'font-normal text-muted-foreground'
