@@ -1,15 +1,21 @@
+// src/app/demo-2/page.tsx
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { BotFrame } from "@/components/landing/bot-frame";
 import { ArrowRight, Users, Briefcase, HelpCircle, Home } from "lucide-react";
 
-type Section = "home" | "about" | "services" | "faq";
+export type Section = "home" | "about" | "services" | "faq";
 
-export default function Demo2Page() {
-  const [activeSection, setActiveSection] = useState<Section>("home");
+export default function Demo2Page({
+  params,
+}: {
+  params: { activeSection: Section };
+}) {
 
+  // This is a bit of a hack to pass the active section to the children
+  const activeSection = (params as any).activeSection as Section;
+  
   const sections = {
     home: {
       icon: Home,
@@ -17,7 +23,7 @@ export default function Demo2Page() {
       description:
         "Ofrecemos un camino claro para salir de deudas a personas y pequeños comerciantes, mediante acuerdos flexibles o liquidación patrimonial.",
       cta: (
-        <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" onClick={() => setActiveSection('services')}>
+        <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
           Empieza tu consulta
           <ArrowRight className="ml-2 h-5 w-5" />
         </Button>
@@ -44,11 +50,12 @@ export default function Demo2Page() {
   };
 
   const renderContent = () => {
-    const section = sections[activeSection];
+    // Fallback to home if the section is not found
+    const section = sections[activeSection] || sections.home;
     return (
       <div key={activeSection} className="flex flex-col justify-center space-y-6 animate-in fade-in duration-500">
         <div className="space-y-4">
-          <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-primary-foreground">
+          <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-primary-foreground">
             {section.title}
           </h1>
           <p className="max-w-[600px] text-muted-foreground md:text-xl font-body">
@@ -69,41 +76,6 @@ export default function Demo2Page() {
           <div className="container px-4 md:px-6">
             <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 items-start">
               <div className="flex flex-col justify-start space-y-8">
-                <div className="flex gap-2 flex-wrap">
-                  {(Object.keys(sections) as Section[]).map((key) => {
-                    const section = sections[key];
-                    const Icon = section.icon;
-                    // Don't render a tab for the main CTA button's target
-                    if(key === 'home') return null;
-
-                    return (
-                      <Button
-                        key={key}
-                        variant={activeSection === key ? "secondary" : "ghost"}
-                        onClick={() => setActiveSection(key)}
-                        className="gap-2"
-                      >
-                        <Icon className="h-4 w-4" />
-                        {
-                            key === 'services' ? 'Qué hacemos' : 
-                            key === 'about' ? 'Sobre Nosotros' : 
-                            key === 'faq' ? 'FAQ' : ''
-                        }
-                      </Button>
-                    );
-                  })}
-                   {activeSection !== 'home' && (
-                     <Button
-                        variant="ghost"
-                        onClick={() => setActiveSection('home')}
-                        className="gap-2"
-                      >
-                        <Home className="h-4 w-4" />
-                        Inicio
-                      </Button>
-                   )}
-                </div>
-
                 <div className="min-h-[300px]">{renderContent()}</div>
               </div>
               <div className="flex items-center justify-center">
@@ -116,5 +88,3 @@ export default function Demo2Page() {
     </div>
   );
 }
-
-    
