@@ -9,9 +9,11 @@ import {
   SidebarMenuButton,
   SidebarInset,
   SidebarTrigger,
+  SidebarFooter,
 } from "@/components/ui/sidebar"
-import { Bot, Paintbrush, FileText, Share2, Settings } from "lucide-react"
+import { Bot, Paintbrush, FileText, Share2, Settings, Eye } from "lucide-react"
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 export default function AdminLayout({
   children,
@@ -56,6 +58,14 @@ export default function AdminLayout({
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarContent>
+          <SidebarFooter>
+             <Button asChild variant="outline">
+                <Link href="/" target="_blank">
+                  <Eye className="mr-2"/>
+                  Ver BotPage
+                </Link>
+             </Button>
+          </SidebarFooter>
         </Sidebar>
         <SidebarInset>
           <header className="flex items-center justify-between p-4 border-b">
