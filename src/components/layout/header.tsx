@@ -14,7 +14,7 @@ export function Header() {
           <nav className="hidden items-center gap-6 text-sm md:flex">
             <Link href="/" className="text-muted-foreground transition-colors hover:text-foreground">Demo 1</Link>
             <Link href="/demo-2" className="text-muted-foreground transition-colors hover:text-foreground">Demo 2</Link>
-            <Link href="#" className="text-muted-foreground transition-colors hover:text-foreground">Demo 3</Link>
+            <Link href="/demo-3" className="text-muted-foreground transition-colors hover:text-foreground">Demo 3</Link>
           </nav>
         </div>
         <div className="flex flex-1 items-center justify-end space-x-4">
