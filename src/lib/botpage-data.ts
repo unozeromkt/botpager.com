@@ -26,9 +26,9 @@ function hexToHsl(hex: string): string {
 
 const rawBotData = {
   appearance: {
-    logoUrl: "",
-    heroImageUrl: "https://picsum.photos/seed/finance/1200/800",
-    primaryColor: "#6B46C1",
+    logoUrl: "http://botpager.com/img/botpager-logo.png",
+    heroImageUrl: "http://botpager.com/img/hero-botpager.webp",
+    primaryColor: "#8975c6",
     backgroundColor: "#1C1721",
     backgroundType: "image" as "color" | "image",
     iframeCode: `<iframe id="JotFormIFrame-01971cae816e73068d6b8e6f19ab11aa4dac" title="ISSA: Representante de ventas Online" allowTransparency="true" allow="geolocation; microphone; camera; fullscreen" src="https://agent.jotform.com/01971cae816e73068d6b8e6f19ab11aa4dac?embedMode=iframe&background=0&header=1&source=embed-next" frameBorder="0" style="min-width: 100%; height: 100%; border:none; width:100%;" scrolling="no"></iframe>`
@@ -40,8 +40,8 @@ const rawBotData = {
     { key: 'faq', label: 'Preguntas', icon: 'HelpCircle' },
   ],
   home: {
-    title: "Te ayudamos a recuperar tu vida financiera.",
-    description: "Persona natural y pequeños comerciantes. A través de este proceso puedes salir de deudas, por medio de un acuerdo o liquidación patrimonial."
+    title: "Vende más y atiende 24/7 con una BotPage.",
+    description: "Automatiza tu servicio al cliente, recibe reservas y capta clientes. Combinamos un sitio web de alta conversión con Inteligencia Artificial que vende y brinda soporte a tu negocio 24/7."
   },
   whatWeDo: {
     title: "Qué hacemos",

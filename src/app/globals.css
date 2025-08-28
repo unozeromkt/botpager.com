@@ -10,17 +10,17 @@ body {
 @layer base {
   :root {
     --background: var(--background-dynamic, 270 50% 96%);
-    --foreground: 270 20% 25%;
+    --foreground: 210 2% 76%; /* #c1c1c1 */
     --card: 270 50% 99%;
-    --card-foreground: 270 20% 25%;
+    --card-foreground: 0 0% 100%; /* #ffffff */
     --popover: 270 50% 99%;
-    --popover-foreground: 270 20% 25%;
+    --popover-foreground: 0 0% 100%; /* #ffffff */
     --primary: var(--primary-dynamic, 270 40% 45%);
     --primary-foreground: 270 0% 100%;
     --secondary: 270 30% 90%;
     --secondary-foreground: 270 30% 30%;
     --muted: 270 20% 80%;
-    --muted-foreground: 270 10% 45%;
+    --muted-foreground: 210 2% 76%; /* #c1c1c1 */
     --accent: 270 60% 85%;
     --accent-foreground: 270 60% 25%;
     --destructive: 0 84.2% 60.2%;
@@ -45,17 +45,17 @@ body {
   }
   .dark {
     --background: var(--background-dynamic, 270 15% 15%);
-    --foreground: 270 15% 90%;
+    --foreground: 210 2% 76%; /* #c1c1c1 */
     --card: 270 15% 18%;
-    --card-foreground: 270 15% 90%;
+    --card-foreground: 0 0% 100%; /* #ffffff */
     --popover: 270 15% 18%;
-    --popover-foreground: 270 15% 90%;
+    --popover-foreground: 0 0% 100%; /* #ffffff */
     --primary: var(--primary-dynamic, 270 50% 65%);
     --primary-foreground: 270 0% 100%;
     --secondary: 270 15% 25%;
     --secondary-foreground: 270 15% 90%;
     --muted: 270 15% 30%;
-    --muted-foreground: 270 10% 65%;
+    --muted-foreground: 210 2% 76%; /* #c1c1c1 */
     --accent: 270 50% 50%;
     --accent-foreground: 270 0% 100%;
     --destructive: 0 62.8% 30.6%;
