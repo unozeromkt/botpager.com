@@ -8,6 +8,7 @@ import { botpageData } from "@/lib/botpage-data";
 import * as LucideIcons from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
 import { VerticalNav } from "@/components/layout/vertical-nav";
+import Link from 'next/link';
 
 
 export type Section = "home" | "about" | "services" | "faq";
@@ -32,9 +33,11 @@ export default function Demo2Page({
       description:
         "Ofrecemos un camino claro para salir de deudas a personas y pequeños comerciantes, mediante acuerdos flexibles o liquidación patrimonial.",
       cta: (
-        <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
-          Empieza tu consulta
-          <ArrowRight className="ml-2 h-5 w-5" />
+        <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+          <Link href="#bot-frame-section">
+            Empieza tu consulta
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Link>
         </Button>
       ),
     },
