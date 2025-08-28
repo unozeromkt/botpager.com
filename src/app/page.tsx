@@ -1,3 +1,4 @@
+
 // src/app/page.tsx
 "use client";
 
@@ -13,7 +14,7 @@ import { Footer } from '@/components/layout/footer';
 
 export type Section = "home" | "about" | "services" | "faq";
 
-export default function Home() {
+function BotpageContent() {
   const [activeSection, setActiveSection] = useState<Section>("home");
 
   const getIcon = (name: string) => {
@@ -121,5 +122,26 @@ export default function Home() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+
+export default function Home() {
+  const { primaryColorHsl, backgroundColorHsl } = botpageData.appearance;
+
+  return (
+    <>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            :root {
+              --primary-dynamic: ${primaryColorHsl};
+              --background-dynamic: ${backgroundColorHsl};
+            }
+          `,
+        }}
+      />
+      <BotpageContent />
+    </>
   );
 }
