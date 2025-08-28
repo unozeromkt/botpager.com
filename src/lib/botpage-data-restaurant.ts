@@ -1,3 +1,4 @@
+
 // src/lib/botpage-data-restaurant.ts
 
 function hexToHsl(hex: string): string {
@@ -28,7 +29,7 @@ function hexToHsl(hex: string): string {
 export const restaurantBotpageData = {
   appearance: {
     logoUrl: "",
-    heroImageUrl: "https://picsum.photos/seed/pizzeria/1200/800",
+    heroImageUrl: "https://picsum.photos/seed/pizzeria-interior/1200/800",
     primaryColor: "#E53E3E", // Red for pizza sauce
     backgroundColor: "#2D3748", // Dark gray
     backgroundType: "image" as "color" | "image",
@@ -100,9 +101,12 @@ export const restaurantBotpageData = {
   },
   location: {
     title: "Horarios y Ubicación",
-    description: "Encuéntranos en Calle Falsa 123, de Martes a Domingo, de 12:00 PM a 11:00 PM. ¡Te esperamos para compartir el auténtico sabor de la pizza artesanal!",
+    address: "Calle Falsa 123, El Poblado, Medellín",
+    hours: "Martes a Domingo: 12:00 PM - 11:00 PM",
+    mapImage: "https://picsum.photos/seed/map/600/400",
+    aiHint: "city map",
+    description: "¡Te esperamos para compartir el auténtico sabor de la pizza artesanal!",
   },
-  // Adding placeholder sections to avoid errors
   whatWeDo: { title: "", description: ""},
   aboutUs: { title: "", description: ""},
   services: { title: "Servicios", items: [] },

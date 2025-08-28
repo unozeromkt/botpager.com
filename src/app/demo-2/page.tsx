@@ -1,8 +1,9 @@
+
 // src/app/demo-2/page.tsx
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle } from "lucide-react";
+import { ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle, MapPin, Clock } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { botpageData as defaultBotData } from "@/lib/botpage-data";
 import * as LucideIcons from "lucide-react";
@@ -62,7 +63,7 @@ export default function Demo2Page({
                     data-ai-hint={item.aiHint}
                 />
                 <CardContent className="p-4 flex flex-col flex-1">
-                  <h3 className="font-bold text-lg text-foreground">{item.name}</h3>
+                  <h3 className="font-bold text-lg text-foreground mb-1">{item.name}</h3>
                   <p className="text-sm text-muted-foreground mt-1 flex-1">{item.description}</p>
                   <p className="text-primary font-semibold text-lg mt-3">{item.price}</p>
                 </CardContent>
@@ -70,6 +71,35 @@ export default function Demo2Page({
             ))}
           </div>
         </ScrollArea>
+      )
+    },
+    location: {
+      icon: MapPin,
+      title: botData.location?.title,
+      content: botData.location && (
+        <div className="space-y-6">
+          <Card className="overflow-hidden shadow-lg">
+            <Image 
+              src={botData.location.mapImage}
+              alt="Mapa de ubicación"
+              width={600}
+              height={400}
+              className="w-full h-auto object-cover"
+              data-ai-hint={botData.location.aiHint}
+            />
+          </Card>
+          <ul className="space-y-4 text-muted-foreground md:text-lg">
+            <li className="flex items-center gap-4">
+              <MapPin className="h-6 w-6 text-primary" />
+              <span>{botData.location.address}</span>
+            </li>
+            <li className="flex items-center gap-4">
+              <Clock className="h-6 w-6 text-primary" />
+              <span>{botData.location.hours}</span>
+            </li>
+          </ul>
+          <p className="text-muted-foreground pt-2">{botData.location.description}</p>
+        </div>
       )
     },
     services: {
