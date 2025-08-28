@@ -98,7 +98,7 @@ export default function Demo2Page({
     );
 
     return (
-      <div key={activeSection} className="flex flex-col justify-center space-y-6 animate-in fade-in-50 duration-500">
+      <div key={activeSection} className="flex flex-col justify-center space-y-6 animate-in fade-in-50 duration-500 min-h-[450px]">
         <div className="space-y-4">
            {/* Navegación para móvil */}
           <div className="lg:hidden mb-8">

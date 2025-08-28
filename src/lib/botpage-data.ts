@@ -1,4 +1,3 @@
-
 // src/lib/botpage-data.ts
 
 function hexToHsl(hex: string): string {
@@ -29,7 +28,7 @@ function hexToHsl(hex: string): string {
 export const botpageData = {
   appearance: {
     logoUrl: "",
-    heroImageUrl: "https://picsum.photos/800/450",
+    heroImageUrl: "https://picsum.photos/seed/finance/1200/800",
     primaryColor: "#6B46C1",
     backgroundColor: "#1C1721",
     get primaryColorHsl() { return hexToHsl(this.primaryColor); },

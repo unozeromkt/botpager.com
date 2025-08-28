@@ -10,6 +10,7 @@ import { BotFrame } from '@/components/landing/bot-frame';
 import { VerticalNav } from '@/components/layout/vertical-nav';
 import { botpageData } from '@/lib/botpage-data';
 import Image from 'next/image';
+import { cn } from '@/lib/utils';
 
 export default function Demo2Layout({
   children,
@@ -17,6 +18,7 @@ export default function Demo2Layout({
   children: React.ReactNode;
 }>) {
   const [activeSection, setActiveSection] = useState<Section>("home");
+  const [isChatFocused, setIsChatFocused] = useState(false);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -26,19 +28,24 @@ export default function Demo2Layout({
             <Image
               src={botpageData.appearance.heroImageUrl}
               alt="Background"
-              layout="fill"
+              fill
               objectFit="cover"
-              className="absolute inset-0 z-0 opacity-30"
-              data-ai-hint="abstract texture"
+              className="absolute inset-0 z-0"
+              data-ai-hint="personal finance"
             />
          )}
-         <div className="absolute inset-0 z-10 bg-background/50 backdrop-blur-sm"></div>
+         <div className="absolute inset-0 z-10 bg-background/70 backdrop-blur-sm"></div>
 
         <section className="container mx-auto py-12 md:py-20 relative z-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
             
             {/* Columna de Navegación y Contenido */}
-            <div className="lg:col-span-7 flex gap-8">
+            <div 
+              className={cn(
+                "lg:col-span-7 flex gap-8 transition-all duration-300",
+                isChatFocused && "lg:opacity-50 lg:blur-sm"
+              )}
+            >
               <div className="hidden lg:block">
                  <VerticalNav
                   activeSection={activeSection}
@@ -52,7 +59,11 @@ export default function Demo2Layout({
             </div>
 
             {/* Columna del Chatbot */}
-            <div className="lg:col-span-5 flex items-center justify-center sticky top-24 h-[688px]">
+            <div 
+              className="lg:col-span-5 flex items-center justify-center sticky top-24 h-[688px] transition-all duration-300"
+              onMouseEnter={() => setIsChatFocused(true)}
+              onMouseLeave={() => setIsChatFocused(false)}
+            >
               <BotFrame />
             </div>
 
