@@ -12,23 +12,13 @@ export function Header() {
         <div className="mr-4 flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
              {botpageData.appearance.logoUrl ? (
-              <Image src={botpageData.appearance.logoUrl} alt="Logo" width={80} height={80} />
+              <Image src={botpageData.appearance.logoUrl} alt="Logo" width={265} height={65} />
             ) : (
               <Bot className="h-8 w-8 text-primary" />
             )}
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-end space-x-4">
-           <Button variant="ghost" asChild>
-            <Link href="/examples">
-              Ejemplos
-            </Link>
-          </Button>
-          <Button variant="ghost" asChild>
-            <Link href="/admin/appearance">
-              Admin
-            </Link>
-          </Button>
           <Button>Empezar ahora</Button>
         </div>
       </div>

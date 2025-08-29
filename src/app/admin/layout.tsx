@@ -36,7 +36,7 @@ export default function AdminLayout({
           <SidebarHeader>
             <div className="flex items-center gap-2">
                {botpageData.appearance.logoUrl ? (
-                <Image src={botpageData.appearance.logoUrl} alt="Logo" width={80} height={80} />
+                <Image src={botpageData.appearance.logoUrl} alt="Logo" width={265} height={65} />
               ) : (
                 <Bot className="h-6 w-6 text-primary" />
               )}
