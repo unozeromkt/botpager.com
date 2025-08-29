@@ -76,7 +76,8 @@ export function BotFrame() {
     
     // Cleanup function to remove the script when the component unmounts
     return () => {
-      document.body.removeChild(script);
+      // It's generally safe to leave the Jotform script, but if cleanup is needed:
+      // document.body.removeChild(script);
     };
   }, [iframeId]);
 
