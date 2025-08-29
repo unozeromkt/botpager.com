@@ -36,7 +36,7 @@ const rawBotData = {
   navItems: [
     { key: 'home', label: 'Inicio', icon: 'Home' },
     { key: 'services', label: 'Servicios', icon: 'Briefcase' },
-    { key: 'about', label: 'Nosotros', icon: 'Users' },
+    { key: 'about', label: '¿Qué es un BotPage?', icon: 'Users' },
     { key: 'faq', label: 'Preguntas', icon: 'HelpCircle' },
   ],
   home: {
@@ -48,8 +48,8 @@ const rawBotData = {
     description: "Nos especializamos en la reestructuración de deudas para personas y pequeños negocios. Nuestro enfoque se centra en crear acuerdos de pago viables y, cuando es necesario, guiar en el proceso de liquidación patrimonial para un nuevo comienzo financiero.",
   },
   aboutUs: {
-    title: "Sobre Nosotros",
-    description: "Somos un equipo de expertos financieros y legales comprometidos con tu bienestar. Creemos que todos merecen una segunda oportunidad y trabajamos incansablemente para encontrar la mejor solución a tu situación de endeudamiento.",
+    title: "Tu negocio trabajando para ti, Incluso mientas duermes",
+    description: "Una BotPage no es solo un sitio web: es una solución digital que integra presencia profesional en línea con un agente de IA capaz de responder, agendar y convertir visitantes en clientes automáticamente, disponible 24/7.",
   },
   services: {
     title: "Nuestros Servicios",
