@@ -1,9 +1,10 @@
 
 // src/app/demo-2/page.tsx
 "use client";
+import { useState } from 'react';
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle, MapPin, Clock, Bot, Calendar, Moon, Globe, MessageCircle, Share2 } from "lucide-react";
+import { ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle, MapPin, Clock, Bot, Calendar, Moon, Globe, MessageCircle, Share2, PlayCircle } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { botpageData as defaultBotData } from "@/lib/botpage-data";
 import * as LucideIcons from "lucide-react";
@@ -13,6 +14,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent } from "@/components/ui/card";
+import { VideoPlayerPopup } from '@/components/landing/video-player-popup';
 
 
 export type Section = "home" | "about" | "services" | "faq" | string;
@@ -26,6 +28,7 @@ export default function Demo2Page({
   setActiveSection: (section: Section) => void;
   botData?: any;
 }) {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   const getIcon = (name: string) => {
     const Icon = (LucideIcons as any)[name];
@@ -38,12 +41,18 @@ export default function Demo2Page({
       title: botData.home?.title || botData.whatWeDo?.title || "Bienvenido",
       description: botData.home?.description || botData.whatWeDo?.description || "",
       cta: (
-        <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
-          <Link href="#bot-frame-section">
-            Empieza tu consulta
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Link>
-        </Button>
+         <div className="flex flex-wrap gap-4 items-center">
+            <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+                <Link href="#bot-frame-section">
+                    Empieza tu consulta
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+            </Button>
+            <Button variant="outline" size="lg" onClick={() => setIsVideoOpen(true)} className="text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+                 <PlayCircle className="mr-2 h-5 w-5" />
+                ¿Cómo funciona?
+            </Button>
+        </div>
       ),
     },
     menu: {
@@ -206,28 +215,35 @@ export default function Demo2Page({
     const cta = sectionData.cta;
 
     return (
-      <div key={activeSection} className="flex flex-col justify-center space-y-6 animate-in fade-in-50 duration-500 min-h-[450px]">
-        <div className="space-y-4">
-           {/* Navegación para móvil */}
-          <div className="lg:hidden mb-8">
-            <VerticalNav
-              activeSection={activeSection}
-              setActiveSection={setActiveSection}
-              navItems={[...botData.navItems, ...(botData.customSections || [])]}
-              isMobile={true}
-            />
-          </div>
-          <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl text-card-foreground" style={{color: '#FFFFFF'}}>
-            {sectionData.title}
-          </h1>
-          <div className="font-body text-card-foreground/80">
-            {content}
-          </div>
-           { cta && <div className="pt-8">
-            {cta}
-          </div>}
+       <>
+        <VideoPlayerPopup 
+            isOpen={isVideoOpen}
+            onOpenChange={setIsVideoOpen}
+            youtubeUrl="https://www.youtube.com/embed/vUtfinyDFuY"
+        />
+        <div key={activeSection} className="flex flex-col justify-center space-y-6 animate-in fade-in-50 duration-500 min-h-[450px]">
+            <div className="space-y-4">
+            {/* Navegación para móvil */}
+            <div className="lg:hidden mb-8">
+                <VerticalNav
+                activeSection={activeSection}
+                setActiveSection={setActiveSection}
+                navItems={[...botData.navItems, ...(botData.customSections || [])]}
+                isMobile={true}
+                />
+            </div>
+            <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl text-card-foreground" style={{color: '#FFFFFF'}}>
+                {sectionData.title}
+            </h1>
+            <div className="font-body text-card-foreground/80">
+                {content}
+            </div>
+            { cta && <div className="pt-8">
+                {cta}
+            </div>}
+            </div>
         </div>
-      </div>
+       </>
     );
   };
 

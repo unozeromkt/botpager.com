@@ -40,7 +40,7 @@ const useCases = [
   {
     title: "Agencias de Marketing y Servicios",
     description: "Captación y calificación de leads, presentación de portafolios y agendamiento de reuniones.",
-    imageUrl: "http://botpager.com/img/chatbot-inmobiliarias.jpg",
+    imageUrl: "http://botpager.com/img/chatbot-agencia-marketing.jpg",
     aiHint: "modern office space"
   },
   {
@@ -50,15 +50,15 @@ const useCases = [
     aiHint: "veterinary clinic examination room"
   },
     {
-    title: "Coaching y Consultoría",
-    description: "Venta de sesiones, agendamiento de llamadas de descubrimiento y entrega de recursos.",
-    imageUrl: "http://botpager.com/img/chatbot-floristeria.jpg",
+    title: "Inmobiliarias",
+    description: "Agendamiento de visitas, búsqueda de propiedades y respuesta a preguntas frecuentes.",
+    imageUrl: "http://botpager.com/img/chatbot-inmobiliarias.jpg",
     aiHint: "person coaching online meeting"
   },
   {
     title: "Tiendas Online (E-commerce)",
     description: "Soporte al cliente, seguimiento de pedidos, recomendaciones de productos y recuperación de carritos.",
-    imageUrl: "http://botpager.com/img/chatbot-clinica-estetica.jpg",
+    imageUrl: "http://botpager.com/img/chatbot-ecommerce.jpg",
     aiHint: "online shopping interface"
   },
 ];
