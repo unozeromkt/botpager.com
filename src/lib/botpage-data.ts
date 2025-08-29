@@ -31,12 +31,7 @@ const rawBotData = {
     primaryColor: "#8975c6",
     backgroundColor: "#1C1721",
     backgroundType: "image" as "color" | "image",
-    iframeCode: `<iframe id="JotFormIFrame-01989fe94cf47b0a8a67e225e6a31e7a1f07"
-  title="Yuno - Agente Virtual - UnoZero " onload="window.parent.scrollTo(0,0)"
-  allowtransparency="true" allow="geolocation; microphone; camera; fullscreen"
-  src="https://agent.jotform.com/01989fe94cf47b0a8a67e225e6a31e7a1f07?embedMode=iframe&background=0&shadow=1"
-  frameborder="0" style="max-width:100%;height:688px;border:none;width:100%;" scrolling="no">
-</iframe>`
+    iframeCode: `<iframe id="JotFormIFrame-01989fe94cf47b0a8a67e225e6a31e7a1f07" title="Yuno - Agente Virtual - UnoZero " allowTransparency="true" allow="geolocation; microphone; camera; fullscreen" src="https://agent.jotform.com/01989fe94cf47b0a8a67e225e6a31e7a1f07?embedMode=iframe&background=0&shadow=1" frameBorder="0" style="min-width: 100%; height: 100%; border:none; width:100%;" scrolling="no"></iframe>`
   },
   navItems: [
     { key: 'home', label: 'Inicio', icon: 'Home' },
