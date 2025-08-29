@@ -31,12 +31,12 @@ const rawBotData = {
     primaryColor: "#8975c6",
     backgroundColor: "#1C1721",
     backgroundType: "image" as "color" | "image",
-    iframeCode: `<iframe id="JotFormIFrame-01989fe94cf47b0a8a67e225e6a31e7a1f07" title="Yuno - Agente Virtual - UnoZero " allowTransparency="true" allow="geolocation; microphone; camera; fullscreen" src="https://agent.jotform.com/01989fe94cf47b0a8a67e225e6a31e7a1f07?embedMode=iframe&background=0&shadow=1" frameBorder="0" scrolling="no"></iframe>`
+    iframeCode: `<iframe id="JotFormIFrame-01989fe94cf47b0a8a67e225e6a31e7a1f07" title="Yuno - Agente Virtual - UnoZero " allowTransparency="true" allow="geolocation; microphone; camera; fullscreen" src="https://agent.jotform.com/01989fe94cf47b0a8a67e225e6a31e7a1f07?embedMode=iframe&background=0&shadow=1" frameBorder="0" style="max-width:100%;height:100%;border:none;width:100%;" scrolling="no"></iframe>`
   },
   navItems: [
     { key: 'home', label: 'Inicio', icon: 'Home' },
     { key: 'about', label: '¿Qué es un BotPage?', icon: 'Bot' },
-    { key: 'services', label: 'Servicios', icon: 'Briefcase' },
+    { key: 'services', label: 'Beneficios', icon: 'Briefcase' },
     { key: 'faq', label: 'Preguntas', icon: 'HelpCircle' },
   ],
   home: {
@@ -52,27 +52,28 @@ const rawBotData = {
     description: "Una BotPage no es solo un sitio web: es una solución digital que integra presencia profesional en línea con un agente de IA capaz de responder, agendar y convertir visitantes en clientes automáticamente, disponible 24/7.",
   },
   services: {
-    title: "Nuestros Servicios",
+    title: "Revoluciona Tu Presencia Digital",
+    description: "Transforma tu negocio con tecnología de vanguardia que trabaja 24/7, capta clientes potenciales de forma automática y ofrece resultados profesionales en solo 5 días.",
     items: [
       {
-        icon: "Scale",
-        title: "Acuerdos Flexibles",
-        description: "Negociamos con tus acreedores para lograr acuerdos de pago que se ajusten a tu capacidad económica."
+        icon: "Globe",
+        title: "Presencia Digital Profesional",
+        description: "Tu negocio visible en línea, totalmente optimizado para captar la atención."
       },
       {
-        icon: "ShieldCheck",
-        title: "Liquidación Patrimonial",
-        description: "Te guiamos en el proceso legal para liquidar tus deudas y empezar de cero, protegiendo tus bienes esenciales."
+        icon: "MessageCircle",
+        title: "Chatbot Con IA Integrado",
+        description: "Responde al instante, proporciona cotizaciones, califica clientes potenciales y agenda citas automáticamente."
       },
       {
-        icon: "BookUser",
-        title: "Asesoría Personalizada",
-        description: "Analizamos tu caso particular para ofrecerte la estrategia de resolución de deudas más efectiva."
+        icon: "Clock",
+        title: "Disponible 24/7",
+        description: "Tu negocio nunca cierra. Siempre hay alguien atendiendo, incluso si no eres tú."
       },
       {
-        icon: "FileText",
-        title: "Gestión Documental",
-        description: "Nos encargamos de todo el papeleo y los trámites legales para que tú no tengas que preocuparte."
+        icon: "Share2",
+        title: "Funciona En Tu Web, WhatsApp Y Redes Sociales",
+        description: "Tus clientes te encuentran donde están: en su teléfono."
       }
     ]
   },

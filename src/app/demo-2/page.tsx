@@ -104,9 +104,10 @@ export default function Demo2Page({
     services: {
       icon: Briefcase,
       title: botData.services?.title,
+      description: botData.whatWeDo?.description,
       content: botData.services?.items && (
         <div className="space-y-6">
-           <p className="text-muted-foreground">{botData.whatWeDo?.description}</p>
+           <p className="text-muted-foreground md:text-lg">{botData.services?.description}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
             {botData.services.items.map((service: any, index: number) => (
               <div key={index} className="flex items-start gap-4 p-4 rounded-lg hover:bg-card/80 transition-all">
@@ -165,7 +166,7 @@ export default function Demo2Page({
       const section = staticSections[key];
       const content = section.content || (
         <>
-          <p className="max-w-[600px] text-muted-foreground md:text-xl font-normal">
+          <p className="max-w-[600px] text-muted-foreground md:text-lg font-normal">
             {section.description}
           </p>
           {section.features}
@@ -184,7 +185,7 @@ export default function Demo2Page({
         title: customSection.title,
         content: (
             // whitespace-pre-wrap preserves line breaks from the textarea
-            <p className="max-w-[600px] text-muted-foreground md:text-xl font-normal whitespace-pre-wrap">
+            <p className="max-w-[600px] text-muted-foreground md:text-lg font-normal whitespace-pre-wrap">
               {customSection.content}
             </p>
         )
@@ -215,7 +216,7 @@ export default function Demo2Page({
               isMobile={true}
             />
           </div>
-          <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-5xl text-card-foreground" style={{color: '#FFFFFF'}}>
+          <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl text-card-foreground" style={{color: '#FFFFFF'}}>
             {sectionData.title}
           </h1>
           <div className="font-body text-card-foreground/80">
