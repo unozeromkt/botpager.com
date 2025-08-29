@@ -3,7 +3,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle, MapPin, Clock, Bot, Calendar, Moon } from "lucide-react";
+import { ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle, MapPin, Clock, Bot, Calendar, Moon, Globe, MessageCircle, Share2 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { botpageData as defaultBotData } from "@/lib/botpage-data";
 import * as LucideIcons from "lucide-react";
@@ -23,7 +23,7 @@ export default function Demo2Page({
   botData = defaultBotData,
 }: {
   activeSection: Section;
-  setActiveSection: Dispatch<SetStateAction<Section>>;
+  setActiveSection: (section: Section) => void;
   botData?: any;
 }) {
 

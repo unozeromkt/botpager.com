@@ -1,3 +1,4 @@
+
 // src/lib/botpage-data.ts
 
 function hexToHsl(hex: string): string {
@@ -38,6 +39,7 @@ const rawBotData = {
     { key: 'about', label: '¿Qué es un BotPage?', icon: 'Bot' },
     { key: 'services', label: 'Beneficios', icon: 'Briefcase' },
     { key: 'faq', label: 'Preguntas', icon: 'HelpCircle' },
+    { key: 'use-cases', label: 'Casos de uso', icon: 'GalleryHorizontal' },
   ],
   home: {
     title: "Vende más y atiende 24/7 con una BotPage.",

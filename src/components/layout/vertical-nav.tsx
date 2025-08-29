@@ -16,7 +16,7 @@ interface NavItem {
 
 interface VerticalNavProps {
   activeSection: Section;
-  setActiveSection: Dispatch<SetStateAction<Section>>;
+  setActiveSection: (section: Section) => void;
   navItems: NavItem[];
   isMobile?: boolean;
 }
@@ -62,7 +62,7 @@ export function VerticalNav({
           onClick={() => setActiveSection(key)}
           className={cn(
             "w-full justify-start text-base gap-3 px-4 py-6",
-            activeSection === key
+            activeSection === key && key !== 'use-cases'
               ? "font-bold bg-accent text-accent-foreground"
               : "font-normal text-muted-foreground"
           )}
