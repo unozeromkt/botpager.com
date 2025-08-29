@@ -66,7 +66,7 @@ export default function Demo2Layout({
 
             {/* Columna del Chatbot */}
             <div 
-              className="lg:col-span-5 flex items-center justify-center sticky top-24 h-[688px] transition-all duration-300"
+              className="lg:col-span-5 flex items-center justify-center sticky top-24 h-[600px] transition-all duration-300"
               onMouseEnter={() => setIsChatFocused(true)}
               onMouseLeave={() => setIsChatFocused(false)}
             >

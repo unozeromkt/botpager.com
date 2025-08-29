@@ -63,7 +63,7 @@ export default function Demo2Page({
                     data-ai-hint={item.aiHint}
                 />
                 <CardContent className="p-4 flex flex-col flex-1">
-                  <h3 className="font-bold text-lg text-foreground mb-1">{item.name}</h3>
+                  <h3 className="font-bold text-lg text-card-foreground mb-1">{item.name}</h3>
                   <p className="text-sm text-muted-foreground mt-1 flex-1">{item.description}</p>
                   <p className="text-primary font-semibold text-lg mt-3">{item.price}</p>
                 </CardContent>
@@ -113,7 +113,7 @@ export default function Demo2Page({
               <div key={index} className="flex items-start gap-4 p-4 rounded-lg hover:bg-card/80 transition-all">
                 <div>{getIcon(service.icon)}</div>
                 <div>
-                  <h3 className="font-semibold text-lg mb-1">{service.title}</h3>
+                  <h3 className="font-semibold text-lg mb-1 text-card-foreground">{service.title}</h3>
                   <p className="text-muted-foreground text-sm">{service.description}</p>
                 </div>
               </div>
@@ -134,7 +134,7 @@ export default function Demo2Page({
         <Accordion type="single" collapsible className="w-full">
           {botData.faqs.items.map((faq: any, index: number) => (
              <AccordionItem value={`item-${index}`} key={index}>
-              <AccordionTrigger className="text-base font-semibold hover:no-underline">{faq.question}</AccordionTrigger>
+              <AccordionTrigger className="text-base font-semibold hover:no-underline text-card-foreground">{faq.question}</AccordionTrigger>
               <AccordionContent className="pt-2 text-muted-foreground">{faq.answer}</AccordionContent>
             </AccordionItem>
           ))}
@@ -196,10 +196,10 @@ export default function Demo2Page({
               isMobile={true}
             />
           </div>
-          <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-foreground">
+          <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-card-foreground">
             {sectionData.title}
           </h1>
-          <div className="font-body">
+          <div className="font-body text-card-foreground/80">
             {content}
           </div>
            { cta && <div className="pt-8">

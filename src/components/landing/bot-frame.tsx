@@ -83,7 +83,7 @@ export function BotFrame() {
 
 
   return (
-    <Card id="bot-frame-section" className="overflow-hidden shadow-2xl rounded-xl w-full h-[688px] border-2 border-primary/20 bg-card animate-border-pulse">
+    <Card id="bot-frame-section" className="overflow-hidden shadow-2xl rounded-xl w-full h-[600px] border-2 border-primary/20 bg-card animate-border-pulse">
       <iframe
         {...props}
       ></iframe>
