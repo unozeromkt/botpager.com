@@ -81,20 +81,20 @@ const rawBotData = {
     title: "Preguntas Frecuentes",
     items: [
       {
-        question: "¿Este proceso afecta mi historial de crédito?",
-        answer: "Inicialmente puede haber un impacto, pero a largo plazo, resolver tus deudas de manera estructurada te permitirá reconstruir un historial de crédito sólido y saludable."
+        question: "¿Para qué tipo de negocios está pensada una BotPage?",
+        answer: "Está diseñada para emprendedores, pymes, coaches, consultores, negocios locales y tiendas online que buscan clientes rápido. También es ideal para negocios tradicionales que aún no han dado el salto digital y desean resultados inmediatos."
       },
       {
-        question: "¿Cuánto tiempo toma el proceso?",
-        answer: "La duración varía según la complejidad del caso y la opción elegida, pero en promedio, un acuerdo de pago puede tomar entre 3 a 5 años, mientras que una liquidación es más rápida."
+        question: "¿Cuánto tiempo toma implementar mi BotPage?",
+        answer: "La gran ventaja es la velocidad: tu BotPage puede estar lista y funcionando en máximo 72 horas, incluyendo diseño, configuración de IA y conexión con la web y los canales sociales que requieras (WhatsApp, Messenger, Instagram)."
       },
       {
-        question: "¿Necesito un abogado?",
-        answer: "Sí, es fundamental contar con la representación de un abogado experto en insolvencia para garantizar que tus derechos sean protegidos y el proceso se realice correctamente. Nosotros te proporcionamos ese respaldo."
+        question: "¿Qué planes o costos existen para implementar una BotPage?",
+        answer: "Los planes van desde 499USD pago único por implantación y un fee de mantenimiento mensual de 24USD."
       },
       {
-        question: "¿Qué deudas se pueden incluir?",
-        answer: "Generalmente se pueden incluir deudas de consumo como tarjetas de crédito, préstamos personales y créditos de libre inversión. Deudas hipotecarias o con garantías reales tienen un tratamiento especial."
+        question: "¿Ofrecen servicios de generación de tráfico?",
+        answer: "Sí tenemos un plan que incluye generación de contenido con IA y pauta publicitaria para atraer tráfico y prospectos a tu BotPage."
       }
     ]
   },

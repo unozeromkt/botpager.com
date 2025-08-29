@@ -108,7 +108,7 @@ export default function Demo2Page({
       content: botData.services?.items && (
         <div className="space-y-6">
            <p className="text-muted-foreground md:text-lg">{botData.services?.description}</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+          <div className="grid grid-cols-1 gap-6 pt-4">
             {botData.services.items.map((service: any, index: number) => (
               <div key={index} className="flex items-start gap-4 p-4 rounded-lg hover:bg-card/80 transition-all">
                 <div>{getIcon(service.icon)}</div>
@@ -123,7 +123,7 @@ export default function Demo2Page({
       ),
     },
     about: {
-      icon: Users,
+      icon: Bot,
       title: botData.aboutUs?.title,
       description: botData.aboutUs?.description,
       features: (
