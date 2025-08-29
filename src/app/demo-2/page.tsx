@@ -1,9 +1,8 @@
-
 // src/app/demo-2/page.tsx
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle, MapPin, Clock } from "lucide-react";
+import { ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle, MapPin, Clock, Bot, Calendar, Moon } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { botpageData as defaultBotData } from "@/lib/botpage-data";
 import * as LucideIcons from "lucide-react";
@@ -126,6 +125,22 @@ export default function Demo2Page({
       icon: Users,
       title: botData.aboutUs?.title,
       description: botData.aboutUs?.description,
+      features: (
+        <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4 text-base font-medium">
+          <div className="flex items-center gap-2">
+            <CheckCircle className="h-5 w-5 text-primary" />
+            <span>Responde al instante</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Calendar className="h-5 w-5 text-primary" />
+            <span>Agenda y convierte</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Moon className="h-5 w-5 text-primary" />
+            <span>Disponible 24/7</span>
+          </div>
+        </div>
+      )
     },
     faq: {
       icon: HelpCircle,
@@ -148,14 +163,18 @@ export default function Demo2Page({
     if (activeSection in staticSections) {
       const key = activeSection as keyof typeof staticSections;
       const section = staticSections[key];
-      return {
-        ...section,
-        cta: staticSections[key]?.cta, 
-        content: section.content || (
+      const content = section.content || (
+        <>
           <p className="max-w-[600px] text-muted-foreground md:text-xl font-normal">
             {section.description}
           </p>
-        )
+          {section.features}
+        </>
+      );
+      return {
+        ...section,
+        cta: staticSections[key]?.cta, 
+        content: content
       };
     }
     // Check in custom sections
@@ -196,7 +215,7 @@ export default function Demo2Page({
               isMobile={true}
             />
           </div>
-          <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-card-foreground">
+          <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl md:text-5xl text-card-foreground" style={{color: '#FFFFFF'}}>
             {sectionData.title}
           </h1>
           <div className="font-body text-card-foreground/80">

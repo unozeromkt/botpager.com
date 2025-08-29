@@ -31,12 +31,12 @@ const rawBotData = {
     primaryColor: "#8975c6",
     backgroundColor: "#1C1721",
     backgroundType: "image" as "color" | "image",
-    iframeCode: `<iframe id="JotFormIFrame-01989fe94cf47b0a8a67e225e6a31e7a1f07" title="Yuno - Agente Virtual - UnoZero " allowTransparency="true" allow="geolocation; microphone; camera; fullscreen" src="https://agent.jotform.com/01989fe94cf47b0a8a67e225e6a31e7a1f07?embedMode=iframe&background=0&shadow=1" frameBorder="0" style="min-width: 100%; height: 100%; border:none; width:100%;" scrolling="no"></iframe>`
+    iframeCode: `<iframe id="JotFormIFrame-01989fe94cf47b0a8a67e225e6a31e7a1f07" title="Yuno - Agente Virtual - UnoZero " allowTransparency="true" allow="geolocation; microphone; camera; fullscreen" src="https://agent.jotform.com/01989fe94cf47b0a8a67e225e6a31e7a1f07?embedMode=iframe&background=0&shadow=1" frameBorder="0" scrolling="no"></iframe>`
   },
   navItems: [
     { key: 'home', label: 'Inicio', icon: 'Home' },
+    { key: 'about', label: '¿Qué es un BotPage?', icon: 'Bot' },
     { key: 'services', label: 'Servicios', icon: 'Briefcase' },
-    { key: 'about', label: '¿Qué es un BotPage?', icon: 'Users' },
     { key: 'faq', label: 'Preguntas', icon: 'HelpCircle' },
   ],
   home: {
