@@ -12,7 +12,7 @@ export function Header() {
         <div className="mr-4 flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
              {botpageData.appearance.logoUrl ? (
-              <Image src={botpageData.appearance.logoUrl} alt="Logo" width={48} height={48} />
+              <Image src={botpageData.appearance.logoUrl} alt="Logo" width={64} height={64} />
             ) : (
               <Bot className="h-8 w-8 text-primary" />
             )}
