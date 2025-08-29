@@ -59,7 +59,7 @@ export default function Demo2Layout({
                   navItems={allNavItems}
                 />
               </div>
-              <div className="flex-1 min-h-[450px] bg-card/40 backdrop-blur-lg rounded-xl p-8 border border-white/10 shadow-2xl">
+              <div className="flex-1 min-h-[688px] bg-card/40 backdrop-blur-lg rounded-xl p-8 border border-white/10 shadow-2xl">
                  <Demo2Page activeSection={activeSection} setActiveSection={setActiveSection} />
               </div>
             </div>
