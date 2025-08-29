@@ -1,3 +1,4 @@
+
 // src/app/demo-2/page.tsx
 "use client";
 
@@ -150,8 +151,8 @@ export default function Demo2Page({
         <Accordion type="single" collapsible className="w-full">
           {botData.faqs.items.map((faq: any, index: number) => (
              <AccordionItem value={`item-${index}`} key={index}>
-              <AccordionTrigger className="text-base font-semibold hover:no-underline text-card-foreground">{faq.question}</AccordionTrigger>
-              <AccordionContent className="pt-2 text-muted-foreground">{faq.answer}</AccordionContent>
+              <AccordionTrigger className="text-base font-semibold hover:no-underline text-card-foreground text-left">{faq.question}</AccordionTrigger>
+              <AccordionContent className="pt-2 text-muted-foreground text-left">{faq.answer}</AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>
