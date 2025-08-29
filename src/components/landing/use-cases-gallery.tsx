@@ -28,37 +28,37 @@ const useCases = [
   {
     title: "Restaurantes",
     description: "Toma de pedidos automatizada, menús interactivos y reservas 24/7.",
-    imageUrl: "https://picsum.photos/seed/restaurant/1280/720",
+    imageUrl: "http://botpager.com/img/chatbot-pizzeria.jpg",
     aiHint: "modern restaurant interior"
   },
   {
     title: "Clínicas y Consultorios",
     description: "Agendamiento de citas, recordatorios automáticos y resolución de dudas frecuentes.",
-    imageUrl: "https://picsum.photos/seed/clinic/1280/720",
+    imageUrl: "http://botpager.com/img/chatbot-odontologia.jpg",
     aiHint: "dental clinic waiting room"
   },
   {
     title: "Agencias de Marketing y Servicios",
     description: "Captación y calificación de leads, presentación de portafolios y agendamiento de reuniones.",
-    imageUrl: "https://picsum.photos/seed/agency/1280/720",
+    imageUrl: "http://botpager.com/img/chatbot-inmobiliarias.jpg",
     aiHint: "modern office space"
   },
   {
     title: "Veterinarias",
     description: "Gestión de citas para mascotas, recordatorios de vacunación y consultas de emergencia.",
-    imageUrl: "https://picsum.photos/seed/veterinary/1280/720",
+    imageUrl: "http://botpager.com/img/chatbot-veterinarias.jpg",
     aiHint: "veterinary clinic examination room"
   },
     {
     title: "Coaching y Consultoría",
     description: "Venta de sesiones, agendamiento de llamadas de descubrimiento y entrega de recursos.",
-    imageUrl: "https://picsum.photos/seed/coaching/1280/720",
+    imageUrl: "http://botpager.com/img/chatbot-floristeria.jpg",
     aiHint: "person coaching online meeting"
   },
   {
     title: "Tiendas Online (E-commerce)",
     description: "Soporte al cliente, seguimiento de pedidos, recomendaciones de productos y recuperación de carritos.",
-    imageUrl: "https://picsum.photos/seed/ecommerce/1280/720",
+    imageUrl: "http://botpager.com/img/chatbot-clinica-estetica.jpg",
     aiHint: "online shopping interface"
   },
 ];
