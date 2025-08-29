@@ -3,8 +3,7 @@
 "use client";
 
 import { useState } from 'react';
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
+import Link from 'next/link';
 import type { Section } from './page';
 import Demo2Page from './page';
 import { BotFrame } from '@/components/landing/bot-frame';
@@ -13,6 +12,7 @@ import { botpageData } from '@/lib/botpage-data';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { UseCasesGallery } from '@/components/landing/use-cases-gallery';
+import { Footer } from '@/components/layout/footer';
 
 export default function Demo2Layout({
   children,
@@ -37,7 +37,6 @@ export default function Demo2Layout({
   return (
     <>
       <div className="flex flex-col min-h-screen">
-         <Header />
          <main className="flex-1 w-full relative">
            {appearance.backgroundType === 'image' && appearance.heroImageUrl && (
               <>
@@ -63,7 +62,19 @@ export default function Demo2Layout({
                   isChatFocused && "lg:opacity-50 lg:blur-sm"
                 )}
               >
-                <div className="hidden lg:block">
+                <div className="hidden lg:block w-64">
+                   {botpageData.appearance.logoUrl && (
+                    <div className="mb-8 pl-4">
+                      <Link href="/">
+                        <Image
+                            src={botpageData.appearance.logoUrl}
+                            alt="Logo"
+                            width={180}
+                            height={44}
+                        />
+                      </Link>
+                    </div>
+                  )}
                    <VerticalNav
                     activeSection={activeSection}
                     setActiveSection={handleNavItemClick}
