@@ -1,4 +1,8 @@
+
 // src/app/admin/layout.tsx
+"use client";
+
+import { useState } from "react";
 import {
   SidebarProvider,
   Sidebar,
@@ -11,17 +15,20 @@ import {
   SidebarTrigger,
   SidebarFooter,
 } from "@/components/ui/sidebar"
-import { Bot, Paintbrush, FileText, Share2, Settings, Eye, Download } from "lucide-react"
+import { Bot, Paintbrush, FileText, Share2, Settings, Eye, Download, GalleryHorizontal } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { botpageData } from "@/lib/botpage-data"
+import { ExamplesGallery } from "@/components/admin/examples-gallery";
 
 export default function AdminLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+
   return (
     <SidebarProvider>
       <div className="flex min-h-screen">
@@ -29,11 +36,10 @@ export default function AdminLayout({
           <SidebarHeader>
             <div className="flex items-center gap-2">
                {botpageData.appearance.logoUrl ? (
-                <Image src={botpageData.appearance.logoUrl} alt="Logo" width={24} height={24} />
+                <Image src={botpageData.appearance.logoUrl} alt="Logo" width={80} height={80} />
               ) : (
                 <Bot className="h-6 w-6 text-primary" />
               )}
-              <span className="text-lg font-semibold font-headline">Botpage Admin</span>
             </div>
           </SidebarHeader>
           <SidebarContent>
@@ -52,6 +58,12 @@ export default function AdminLayout({
                     <FileText />
                     Secciones
                   </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+               <SidebarMenuItem>
+                <SidebarMenuButton onClick={() => setIsGalleryOpen(true)}>
+                  <GalleryHorizontal />
+                  Ejemplos
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
@@ -94,6 +106,7 @@ export default function AdminLayout({
           </main>
         </SidebarInset>
       </div>
+      <ExamplesGallery isOpen={isGalleryOpen} onOpenChange={setIsGalleryOpen} />
     </SidebarProvider>
   )
 }
