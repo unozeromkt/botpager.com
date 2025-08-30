@@ -1,4 +1,3 @@
-
 // src/app/demo-2/page.tsx
 "use client";
 import { useState, useEffect } from 'react';
@@ -63,9 +62,8 @@ export default function Demo2Page({
       cta: (
          <div className="flex flex-wrap gap-4 items-center">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
-                <Link href="#bot-frame-section">
-                    Empieza tu consulta
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                <Link href="https://form.jotform.com/252408899499076" target="_blank">
+                    Empieza Ahora
                 </Link>
             </Button>
             <Button variant="outline" size="lg" onClick={() => setIsVideoOpen(true)} className="text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
@@ -180,7 +178,7 @@ export default function Demo2Page({
       content: botData.plans?.items && (
         <div className="space-y-6">
           <p className="text-muted-foreground md:text-lg text-center">{botData.plans?.description}</p>
-          <div className="w-full max-w-4xl mx-auto">
+          <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto">
             <Carousel
                 setApi={setCarouselApi}
                 opts={{

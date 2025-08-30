@@ -1,4 +1,3 @@
-
 // src/components/landing/pricing-card.tsx
 "use client";
 
@@ -6,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { CheckCircle } from "lucide-react";
+import Link from 'next/link';
 
 interface PricingCardProps {
     name: string;
@@ -44,13 +44,16 @@ export function PricingCard({ name, price, features, cta, isPopular = false }: P
       </CardContent>
       <CardFooter>
         <Button 
+          asChild
           size="lg" 
           className={cn(
             "w-full transition-colors", 
             !isPopular && "bg-secondary hover:bg-accent hover:text-accent-foreground text-secondary-foreground"
           )}
         >
-          {cta}
+          <Link href="https://form.jotform.com/252408899499076" target="_blank">
+            {cta}
+          </Link>
         </Button>
       </CardFooter>
     </Card>
