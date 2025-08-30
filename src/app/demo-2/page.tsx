@@ -178,7 +178,7 @@ export default function Demo2Page({
       content: botData.plans?.items && (
         <div className="space-y-6">
           <p className="text-muted-foreground md:text-lg text-center">{botData.plans?.description}</p>
-          <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto">
+          <div className="w-full max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-4xl mx-auto">
             <Carousel
                 setApi={setCarouselApi}
                 opts={{
