@@ -180,38 +180,40 @@ export default function Demo2Page({
       content: botData.plans?.items && (
         <div className="space-y-6">
           <p className="text-muted-foreground md:text-lg">{botData.plans?.description}</p>
-          <Carousel
-              setApi={setCarouselApi}
-              opts={{
-                align: "start",
-                loop: true,
-              }}
-              className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto"
-            >
-              <CarouselContent>
-                {botData.plans.items.map((plan: any, index: number) => (
-                  <CarouselItem key={index} className="sm:basis-1/1 md:basis-1/1 lg:basis-1/1">
-                     <div className="p-1 h-full">
-                        <PricingCard {...plan} />
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
-            </Carousel>
-             <div className="flex justify-center gap-2 mt-4">
-                {Array.from({ length: slideCount }).map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => carouselApi?.scrollTo(index)}
-                    className={cn(
-                      "h-2 w-2 rounded-full transition-all",
-                      currentSlide === index ? "w-4 bg-primary" : "bg-muted"
-                    )}
-                  />
-                ))}
-              </div>
+          <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto">
+            <Carousel
+                setApi={setCarouselApi}
+                opts={{
+                  align: "start",
+                  loop: true,
+                }}
+                className="w-full"
+              >
+                <CarouselContent>
+                  {botData.plans.items.map((plan: any, index: number) => (
+                    <CarouselItem key={index} className="sm:basis-1/1 md:basis-1/1 lg:basis-1/1">
+                       <div className="p-1 h-full">
+                          <PricingCard {...plan} />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+              </Carousel>
+              <div className="flex justify-center gap-2 mt-4">
+                  {Array.from({ length: slideCount }).map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => carouselApi?.scrollTo(index)}
+                      className={cn(
+                        "h-2 w-2 rounded-full transition-all",
+                        currentSlide === index ? "w-4 bg-primary" : "bg-muted"
+                      )}
+                    />
+                  ))}
+                </div>
+          </div>
         </div>
       ),
     },
@@ -311,3 +313,5 @@ export default function Demo2Page({
 
   return renderContent();
 }
+
+    
