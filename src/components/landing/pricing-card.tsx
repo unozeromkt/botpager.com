@@ -18,7 +18,7 @@ interface PricingCardProps {
 export function PricingCard({ name, price, features, cta, isPopular = false }: PricingCardProps) {
   return (
     <Card className={cn(
-      "flex flex-col border-2",
+      "flex flex-col border-2 h-full",
       isPopular ? "border-primary shadow-primary/20 shadow-lg" : "border-border"
     )}>
       {isPopular && (
@@ -45,7 +45,10 @@ export function PricingCard({ name, price, features, cta, isPopular = false }: P
       <CardFooter>
         <Button 
           size="lg" 
-          className={cn("w-full", !isPopular && "bg-secondary hover:bg-secondary/90 text-secondary-foreground")}
+          className={cn(
+            "w-full transition-colors", 
+            !isPopular && "bg-secondary hover:bg-accent hover:text-accent-foreground text-secondary-foreground"
+          )}
         >
           {cta}
         </Button>

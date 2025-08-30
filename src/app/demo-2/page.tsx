@@ -1,7 +1,8 @@
 
 // src/app/demo-2/page.tsx
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import type { EmblaCarouselType } from 'embla-carousel-react';
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle, MapPin, Clock, Bot, Calendar, Moon, Globe, MessageCircle, Share2, PlayCircle, DollarSign } from "lucide-react";
@@ -16,7 +17,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent } from "@/components/ui/card";
 import { VideoPlayerPopup } from '@/components/landing/video-player-popup';
 import { PricingCard } from '@/components/landing/pricing-card';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { cn } from '@/lib/utils';
 
 
 export type Section = "home" | "about" | "services" | "faq" | string;
@@ -31,6 +33,22 @@ export default function Demo2Page({
   botData?: any;
 }) {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | undefined>()
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [slideCount, setSlideCount] = useState(0)
+
+  useEffect(() => {
+    if (!carouselApi) {
+      return
+    }
+
+    setSlideCount(carouselApi.scrollSnapList().length)
+    setCurrentSlide(carouselApi.selectedScrollSnap())
+
+    carouselApi.on("select", () => {
+      setCurrentSlide(carouselApi.selectedScrollSnap())
+    })
+  }, [carouselApi])
 
   const getIcon = (name: string) => {
     const Icon = (LucideIcons as any)[name];
@@ -163,15 +181,16 @@ export default function Demo2Page({
         <div className="space-y-6">
           <p className="text-muted-foreground md:text-lg">{botData.plans?.description}</p>
           <Carousel
+              setApi={setCarouselApi}
               opts={{
                 align: "start",
                 loop: true,
               }}
-              className="w-full max-w-sm sm:max-w-md md:max-w-lg mx-auto"
+              className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto"
             >
               <CarouselContent>
                 {botData.plans.items.map((plan: any, index: number) => (
-                  <CarouselItem key={index} className="md:basis-1/1 lg:basis-1/1">
+                  <CarouselItem key={index} className="sm:basis-1/1 md:basis-1/1 lg:basis-1/1">
                      <div className="p-1 h-full">
                         <PricingCard {...plan} />
                     </div>
@@ -181,6 +200,18 @@ export default function Demo2Page({
               <CarouselPrevious />
               <CarouselNext />
             </Carousel>
+             <div className="flex justify-center gap-2 mt-4">
+                {Array.from({ length: slideCount }).map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => carouselApi?.scrollTo(index)}
+                    className={cn(
+                      "h-2 w-2 rounded-full transition-all",
+                      currentSlide === index ? "w-4 bg-primary" : "bg-muted"
+                    )}
+                  />
+                ))}
+              </div>
         </div>
       ),
     },
@@ -280,5 +311,3 @@ export default function Demo2Page({
 
   return renderContent();
 }
-
-    
