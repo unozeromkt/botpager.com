@@ -4,7 +4,7 @@
 import { useState } from 'react';
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle, MapPin, Clock, Bot, Calendar, Moon, Globe, MessageCircle, Share2, PlayCircle } from "lucide-react";
+import { ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle, MapPin, Clock, Bot, Calendar, Moon, Globe, MessageCircle, Share2, PlayCircle, DollarSign } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { botpageData as defaultBotData } from "@/lib/botpage-data";
 import * as LucideIcons from "lucide-react";
@@ -15,6 +15,7 @@ import Image from 'next/image';
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent } from "@/components/ui/card";
 import { VideoPlayerPopup } from '@/components/landing/video-player-popup';
+import { PricingCard } from '@/components/landing/pricing-card';
 
 
 export type Section = "home" | "about" | "services" | "faq" | string;
@@ -152,6 +153,21 @@ export default function Demo2Page({
           </div>
         </div>
       )
+    },
+    plans: {
+      icon: DollarSign,
+      title: botData.plans?.title,
+      description: botData.plans?.description,
+      content: botData.plans?.items && (
+        <div className="space-y-6">
+          <p className="text-muted-foreground md:text-lg">{botData.plans?.description}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-4 items-stretch">
+            {botData.plans.items.map((plan: any, index: number) => (
+              <PricingCard key={index} {...plan} />
+            ))}
+          </div>
+        </div>
+      ),
     },
     faq: {
       icon: HelpCircle,

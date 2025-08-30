@@ -38,6 +38,7 @@ const rawBotData = {
     { key: 'home', label: 'Inicio', icon: 'Home' },
     { key: 'about', label: '¿Qué es un BotPage?', icon: 'Bot' },
     { key: 'services', label: 'Beneficios', icon: 'Briefcase' },
+    { key: 'plans', label: 'Planes', icon: 'DollarSign' },
     { key: 'faq', label: 'Preguntas', icon: 'HelpCircle' },
     { key: 'use-cases', label: 'Casos de uso', icon: 'GalleryHorizontal' },
   ],
@@ -76,6 +77,46 @@ const rawBotData = {
         icon: "Share2",
         title: "Funciona En Tu Web, WhatsApp Y Redes Sociales",
         description: "Tus clientes te encuentran donde están: en su teléfono."
+      }
+    ]
+  },
+  plans: {
+    title: "Planes diseñados para crecer contigo",
+    description: "Elige el plan que mejor se adapte a las necesidades de tu negocio. Sin contratos a largo plazo, puedes cambiar de plan cuando quieras.",
+    items: [
+      {
+        name: "Starter",
+        price: "24 USD/mes",
+        features: [
+          "1 BotPage personalizado para tu negocio y entrenamiento completo del Agente IA",
+          "Hasta 500 conversaciones / 1 formulario al mes",
+          "Canales Base: Web + WhatsApp",
+          "Canales Adicionales: Instagram y Messenger (+7 USD)"
+        ],
+        cta: "Comenzar con Starter"
+      },
+      {
+        name: "Growth",
+        price: "39 USD/mes",
+        isPopular: true,
+        features: [
+          "1 BotPage personalizado para tu negocio y entrenamiento completo del Agente IA",
+          "Hasta 1,000 conversaciones / 3 formularios al mes",
+          "Canales Base: Web + WhatsApp",
+          "Canales Adicionales: Instagram y Messenger (+7 USD)"
+        ],
+        cta: "Comenzar con Growth"
+      },
+      {
+        name: "Pro",
+        price: "59 USD/mes",
+        features: [
+          "1 BotPage personalizado para tu negocio y entrenamiento completo del Agente IA",
+          "Hasta 2,000 conversaciones / 5 formularios al mes",
+          "Canales Base: Web + WhatsApp",
+          "Canales Adicionales: Instagram y Messenger (+7 USD)"
+        ],
+        cta: "Comenzar con Pro"
       }
     ]
   },
