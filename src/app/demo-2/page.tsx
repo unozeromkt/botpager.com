@@ -16,6 +16,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent } from "@/components/ui/card";
 import { VideoPlayerPopup } from '@/components/landing/video-player-popup';
 import { PricingCard } from '@/components/landing/pricing-card';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 
 export type Section = "home" | "about" | "services" | "faq" | string;
@@ -161,11 +162,25 @@ export default function Demo2Page({
       content: botData.plans?.items && (
         <div className="space-y-6">
           <p className="text-muted-foreground md:text-lg">{botData.plans?.description}</p>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-4 items-stretch">
-            {botData.plans.items.map((plan: any, index: number) => (
-              <PricingCard key={index} {...plan} />
-            ))}
-          </div>
+          <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full max-w-sm sm:max-w-md md:max-w-lg mx-auto"
+            >
+              <CarouselContent>
+                {botData.plans.items.map((plan: any, index: number) => (
+                  <CarouselItem key={index} className="md:basis-1/1 lg:basis-1/1">
+                     <div className="p-1 h-full">
+                        <PricingCard {...plan} />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
         </div>
       ),
     },
@@ -265,3 +280,5 @@ export default function Demo2Page({
 
   return renderContent();
 }
+
+    
