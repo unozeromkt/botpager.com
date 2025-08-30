@@ -44,7 +44,7 @@ export default function Demo2Layout({
                   src={appearance.heroImageUrl}
                   alt="Background"
                   fill
-                  objectFit="cover"
+                  style={{ objectFit: 'cover' }}
                   className="absolute inset-0 z-0"
                   data-ai-hint="personal finance"
                 />
@@ -58,7 +58,8 @@ export default function Demo2Layout({
               {/* Columna de Navegación y Contenido */}
               <div 
                 className={cn(
-                  "lg:col-span-7 flex gap-8 transition-all duration-300",
+                  "flex gap-8 transition-all duration-300",
+                  activeSection === 'plans' ? "lg:col-span-12" : "lg:col-span-7",
                   isChatFocused && "lg:opacity-50 lg:blur-sm"
                 )}
               >
@@ -81,14 +82,20 @@ export default function Demo2Layout({
                     navItems={allNavItems}
                   />
                 </div>
-                <div className="flex-1 min-h-[688px] bg-card/40 backdrop-blur-lg rounded-xl p-8 border border-white/10 shadow-2xl">
+                <div className={cn(
+                    "flex-1 min-h-[688px] rounded-xl p-8",
+                    activeSection !== 'plans' && "bg-card/40 backdrop-blur-lg border border-white/10 shadow-2xl"
+                )}>
                    <Demo2Page activeSection={activeSection} setActiveSection={handleNavItemClick} />
                 </div>
               </div>
 
               {/* Columna del Chatbot */}
               <div 
-                className="lg:col-span-5 flex items-center justify-center sticky top-24 h-[688px] transition-all duration-300"
+                className={cn(
+                  "lg:col-span-5 flex items-center justify-center sticky top-24 h-[688px] transition-all duration-300",
+                  activeSection === 'plans' && "hidden"
+                )}
                 onMouseEnter={() => setIsChatFocused(true)}
                 onMouseLeave={() => setIsChatFocused(false)}
               >

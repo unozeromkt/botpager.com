@@ -179,8 +179,8 @@ export default function Demo2Page({
       description: botData.plans?.description,
       content: botData.plans?.items && (
         <div className="space-y-6">
-          <p className="text-muted-foreground md:text-lg">{botData.plans?.description}</p>
-          <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl mx-auto">
+          <p className="text-muted-foreground md:text-lg text-center">{botData.plans?.description}</p>
+          <div className="w-full max-w-4xl mx-auto">
             <Carousel
                 setApi={setCarouselApi}
                 opts={{
@@ -191,7 +191,7 @@ export default function Demo2Page({
               >
                 <CarouselContent>
                   {botData.plans.items.map((plan: any, index: number) => (
-                    <CarouselItem key={index} className="sm:basis-1/1 md:basis-1/1 lg:basis-1/1">
+                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                        <div className="p-1 h-full">
                           <PricingCard {...plan} />
                       </div>
@@ -286,7 +286,7 @@ export default function Demo2Page({
             youtubeUrl="https://www.youtube.com/embed/vUtfinyDFuY"
         />
         <div key={activeSection} className="flex flex-col justify-center space-y-6 animate-in fade-in-50 duration-500 min-h-[450px]">
-            <div className="space-y-4">
+            <div className={cn("space-y-4", activeSection === 'plans' ? "text-center" : "")}>
             {/* Navegación para móvil */}
             <div className="lg:hidden mb-8">
                 <VerticalNav
@@ -296,7 +296,7 @@ export default function Demo2Page({
                 isMobile={true}
                 />
             </div>
-            <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl text-card-foreground" style={{color: '#FFFFFF'}}>
+            <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl text-card-foreground">
                 {sectionData.title}
             </h1>
             <div className="font-body text-card-foreground/80">
@@ -313,5 +313,3 @@ export default function Demo2Page({
 
   return renderContent();
 }
-
-    
