@@ -1,3 +1,4 @@
+
 // src/app/demo-2/page.tsx
 "use client";
 import { useState, useEffect } from 'react';
@@ -18,6 +19,7 @@ import { VideoPlayerPopup } from '@/components/landing/video-player-popup';
 import { PricingCard } from '@/components/landing/pricing-card';
 import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { cn } from '@/lib/utils';
+import { BotFrame } from '@/components/landing/bot-frame';
 
 
 export type Section = "home" | "about" | "services" | "faq" | string;
@@ -26,10 +28,12 @@ export default function Demo2Page({
   activeSection,
   setActiveSection,
   botData = defaultBotData,
+  isMobile = false,
 }: {
   activeSection: Section;
   setActiveSection: (section: Section) => void;
   botData?: any;
+  isMobile?: boolean;
 }) {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [carouselApi, setCarouselApi] = useState<CarouselApi | undefined>()
@@ -231,10 +235,10 @@ export default function Demo2Page({
     },
   };
 
-  const findSectionData = () => {
+  const findSectionData = (sectionKey: Section) => {
     // Check in static sections first
-    if (activeSection in staticSections) {
-      const key = activeSection as keyof typeof staticSections;
+    if (sectionKey in staticSections) {
+      const key = sectionKey as keyof typeof staticSections;
       const section = staticSections[key];
       const content = section.content || (
         <>
@@ -251,7 +255,7 @@ export default function Demo2Page({
       };
     }
     // Check in custom sections
-    const customSection = botData.customSections?.find((s: any) => s.key === activeSection);
+    const customSection = botData.customSections?.find((s: any) => s.key === sectionKey);
     if (customSection) {
       return {
         title: customSection.title,
@@ -266,48 +270,91 @@ export default function Demo2Page({
     return null;
   }
   
-  const sectionData = findSectionData();
+  const homeData = findSectionData('home');
+  const sectionData = findSectionData(activeSection);
 
-
-  const renderContent = () => {
-    
-    if (!sectionData || !sectionData.title) return <div className="flex items-center justify-center h-full"><p>Contenido para "{activeSection}" no encontrado.</p></div>
-
-    const content = sectionData.content;
-    const cta = sectionData.cta;
+  const renderSectionContent = (data: any) => {
+     if (!data || !data.title) return <div className="flex items-center justify-center h-full"><p>Contenido para "{activeSection}" no encontrado.</p></div>
 
     return (
-       <>
+      <div key={activeSection} className="flex flex-col justify-center space-y-6 animate-in fade-in-50 duration-500 min-h-[450px]">
+        <div className={cn("space-y-4", activeSection === 'plans' ? "text-center" : "")}>
+          <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl text-card-foreground">
+              {data.title}
+          </h1>
+          <div className="font-body text-card-foreground/80">
+              {data.content}
+          </div>
+          { data.cta && <div className="pt-8">
+              {data.cta}
+          </div>}
+        </div>
+      </div>
+    );
+  }
+
+  // Mobile View
+  if (isMobile) {
+    return (
+      <div className="space-y-12">
+        {/* Hero Section */}
+        <section className="text-center space-y-4">
+           {homeData && (
+             <>
+                <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl text-foreground">
+                    {homeData.title}
+                </h1>
+                 <p className="max-w-[600px] mx-auto text-muted-foreground md:text-xl font-normal">
+                    {homeData.description}
+                 </p>
+                 <div className="flex flex-wrap gap-4 items-center justify-center pt-4">
+                    <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+                        <Link href="https://form.jotform.com/252408899499076" target="_blank">
+                            Empieza Ahora
+                        </Link>
+                    </Button>
+                    <Button variant="outline" size="lg" onClick={() => setIsVideoOpen(true)} className="text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+                         <PlayCircle className="mr-2 h-5 w-5" />
+                        ¿Cómo funciona?
+                    </Button>
+                </div>
+             </>
+           )}
+        </section>
+        
+        {/* Bot Frame Section */}
+        <section className="h-[600px] w-full">
+            <BotFrame />
+        </section>
+
+        {/* Other Sections */}
+        <section>
+          {activeSection !== 'home' && sectionData && (
+            <div className="min-h-[450px] bg-card/40 backdrop-blur-lg rounded-xl p-8 border border-white/10 shadow-2xl">
+              {renderSectionContent(sectionData)}
+            </div>
+          )}
+        </section>
+        
         <VideoPlayerPopup 
             isOpen={isVideoOpen}
             onOpenChange={setIsVideoOpen}
             youtubeUrl="https://www.youtube.com/embed/vUtfinyDFuY"
         />
-        <div key={activeSection} className="flex flex-col justify-center space-y-6 animate-in fade-in-50 duration-500 min-h-[450px]">
-            <div className={cn("space-y-4", activeSection === 'plans' ? "text-center" : "")}>
-            {/* Navegación para móvil */}
-            <div className="lg:hidden mb-8">
-                <VerticalNav
-                activeSection={activeSection}
-                setActiveSection={setActiveSection}
-                navItems={[...botData.navItems, ...(botData.customSections || [])]}
-                isMobile={true}
-                />
-            </div>
-            <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl text-card-foreground">
-                {sectionData.title}
-            </h1>
-            <div className="font-body text-card-foreground/80">
-                {content}
-            </div>
-            { cta && <div className="pt-8">
-                {cta}
-            </div>}
-            </div>
-        </div>
-       </>
-    );
-  };
+      </div>
+    )
+  }
 
-  return renderContent();
+  // Desktop View
+  return (
+    <>
+      <VideoPlayerPopup 
+            isOpen={isVideoOpen}
+            onOpenChange={setIsVideoOpen}
+            youtubeUrl="https://www.youtube.com/embed/vUtfinyDFuY"
+      />
+      {renderSectionContent(sectionData)}
+    </>
+  );
 }
+
