@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import type { EmblaCarouselType } from 'embla-carousel-react';
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle, MapPin, Clock, Bot, Calendar, Moon, Globe, MessageCircle, Share2, PlayCircle, DollarSign } from "lucide-react";
+import { ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle, MapPin, Clock, Bot, Calendar, Moon, Globe, MessageCircle, Share2, PlayCircle, DollarSign, Pizza } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { botpageData as defaultBotData } from "@/lib/botpage-data";
 import * as LucideIcons from "lucide-react";
@@ -36,9 +36,13 @@ export default function Demo2Page({
   isMobile?: boolean;
 }) {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
-  const [carouselApi, setCarouselApi] = useState<CarouselApi | undefined>()
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>()
   const [currentSlide, setCurrentSlide] = useState(0)
   const [slideCount, setSlideCount] = useState(0)
+
+  const { navItems, customSections = [] } = botData;
+  const allNavItems = [...navItems, ...(customSections || [])];
+
 
   useEffect(() => {
     if (!carouselApi) {
@@ -78,7 +82,7 @@ export default function Demo2Page({
       ),
     },
     menu: {
-      icon: Briefcase,
+      icon: Pizza,
       title: botData.menu?.title,
       content: botData.menu?.items && (
         <ScrollArea className="h-[480px] pr-4">
@@ -193,7 +197,7 @@ export default function Demo2Page({
               >
                 <CarouselContent>
                   {botData.plans.items.map((plan: any, index: number) => (
-                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/2">
+                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/2 h-full">
                        <div className="p-1 h-full">
                           <PricingCard {...plan} />
                       </div>
@@ -301,6 +305,18 @@ export default function Demo2Page({
         <section className="text-center space-y-4">
            {homeData && (
              <>
+                {botData.appearance.logoUrl && (
+                  <div className="mb-6 flex justify-center">
+                    <Link href="/">
+                      <Image
+                          src={botData.appearance.logoUrl}
+                          alt="Logo"
+                          width={180}
+                          height={44}
+                      />
+                    </Link>
+                  </div>
+                )}
                 <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl text-foreground">
                     {homeData.title}
                 </h1>
@@ -328,8 +344,14 @@ export default function Demo2Page({
         </section>
 
         {/* Other Sections */}
-        <section>
-          {activeSection !== 'home' && sectionData && (
+        <section className="space-y-8">
+          <VerticalNav
+            activeSection={activeSection}
+            setActiveSection={setActiveSection}
+            navItems={allNavItems}
+            isMobile={true}
+          />
+          {sectionData && activeSection !== 'home' && (
             <div className="min-h-[450px] bg-card/40 backdrop-blur-lg rounded-xl p-8 border border-white/10 shadow-2xl">
               {renderSectionContent(sectionData)}
             </div>
@@ -358,3 +380,4 @@ export default function Demo2Page({
   );
 }
 
+  

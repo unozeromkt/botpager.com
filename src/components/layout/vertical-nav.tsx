@@ -35,8 +35,8 @@ export function VerticalNav({
   
   if (isMobile) {
     return (
-       <div className="w-full overflow-x-auto pb-2">
-          <div className="flex gap-2">
+       <div className="w-full overflow-x-auto pb-2 -mx-4 px-4">
+          <div className="flex gap-2 whitespace-nowrap">
             {navItems.map(({ key, label }) => (
               <Button
                 key={key}

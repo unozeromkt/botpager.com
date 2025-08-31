@@ -13,7 +13,6 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { UseCasesGallery } from '@/components/landing/use-cases-gallery';
 import { Footer } from '@/components/layout/footer';
-import { HeaderDemo2 } from '@/components/layout/header-demo-2';
 
 export default function Demo2Layout({
   children,
@@ -38,7 +37,6 @@ export default function Demo2Layout({
   return (
     <>
       <div className="flex flex-col min-h-screen">
-         <HeaderDemo2 activeSection={activeSection} setActiveSection={handleNavItemClick} />
          <main className="flex-1 w-full relative">
            {appearance.backgroundType === 'image' && appearance.heroImageUrl && (
               <>
@@ -80,10 +78,12 @@ export default function Demo2Layout({
                     />
                   </div>
                   <div className={cn(
-                      "flex-1 min-h-[688px] rounded-xl p-8",
+                      "flex-1 min-h-[688px] rounded-xl",
                       activeSection !== 'plans' && "bg-card/40 backdrop-blur-lg border border-white/10 shadow-2xl"
                   )}>
-                     <Demo2Page activeSection={activeSection} setActiveSection={handleNavItemClick} isMobile={false} />
+                     <div className="p-8">
+                       <Demo2Page activeSection={activeSection} setActiveSection={handleNavItemClick} isMobile={false} />
+                     </div>
                   </div>
                 </div>
               </div>
