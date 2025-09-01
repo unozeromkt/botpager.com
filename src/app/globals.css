@@ -87,12 +87,3 @@ body {
     @apply bg-background text-foreground;
   }
 }
-
-/* Hide Jotform floating bot on desktop */
-@media (min-width: 768px) {
-  #jotform-feedback-button,
-  .jt-feedback-container,
-  iframe[src*="agent.jotform.com"][title*="Yuno"] {
-    display: none !important;
-  }
-}

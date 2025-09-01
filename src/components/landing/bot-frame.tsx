@@ -51,7 +51,7 @@ export function BotFrame() {
   const iframeId = props.id;
 
   useEffect(() => {
-    // Only run this effect on the client side
+    // Only run this effect on the client side after isMobile has been determined.
     if (typeof isMobile === 'undefined') {
       return;
     }
