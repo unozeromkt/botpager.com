@@ -51,6 +51,11 @@ export function BotFrame() {
   const iframeId = props.id;
 
   useEffect(() => {
+    // Only run this effect on the client side
+    if (typeof isMobile === 'undefined') {
+      return;
+    }
+
     if (isMobile) {
       // Inject floating bot script on mobile
       if(isScriptInjected) return;
@@ -67,14 +72,6 @@ export function BotFrame() {
       document.body.appendChild(script);
       setIsScriptInjected(true);
       
-      return () => {
-        // Optional: cleanup script if component unmounts, though usually not necessary for single page apps
-        // const scriptTag = document.querySelector(`script[src='${floatingBotScriptSrc}']`);
-        // if (scriptTag) {
-        //   document.body.removeChild(scriptTag);
-        // }
-      };
-
     } else {
       // Logic for embedded iframe on desktop
       if (!iframeId) return;
