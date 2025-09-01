@@ -1,3 +1,4 @@
+
 // src/components/landing/bot-frame.tsx
 "use client";
 
