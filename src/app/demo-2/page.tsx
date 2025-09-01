@@ -232,7 +232,7 @@ export default function Demo2Page({
               >
                 <CarouselContent>
                   {botData.plans.items.map((plan: any, index: number) => (
-                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/2 h-full">
+                    <CarouselItem key={index} className="sm:basis-full md:basis-1/2 h-auto">
                        <div className="p-1 h-full">
                           <PricingCard {...plan} />
                       </div>
@@ -335,7 +335,7 @@ export default function Demo2Page({
   if (isMobile) {
     return (
       <div className="space-y-6">
-        {isMobile && <FloatingMobileBot />}
+        <FloatingMobileBot />
         {botData.appearance.logoUrl && (
           <div className="mb-4 flex justify-center">
             <Link href="/">

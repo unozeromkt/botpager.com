@@ -99,7 +99,7 @@ export default function Demo2Layout({
               <div 
                 className={cn(
                   "hidden lg:flex lg:col-span-5 items-center justify-center sticky top-24 h-[688px] transition-all duration-300",
-                   activeSection === 'plans' && "hidden"
+                   activeSection === 'plans' && "lg:hidden"
                 )}
               >
                  <BotFrame />
