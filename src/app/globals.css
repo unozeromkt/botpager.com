@@ -87,3 +87,9 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@media (min-width: 768px) {
+  #jotform-feedback-button {
+    display: none !important;
+  }
+}
