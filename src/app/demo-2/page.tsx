@@ -1,4 +1,3 @@
-
 // src/app/demo-2/page.tsx
 "use client";
 import { useState, useEffect } from 'react';
@@ -301,6 +300,7 @@ export default function Demo2Page({
   if (isMobile) {
     return (
       <div className="space-y-8">
+        <BotFrame />
         {/* Hero Section */}
         <section className="text-center space-y-4">
            {homeData && (
@@ -338,11 +338,6 @@ export default function Demo2Page({
            )}
         </section>
         
-        {/* Bot Frame Section */}
-        <section className="h-[500px] w-full">
-            <BotFrame />
-        </section>
-
         {/* Other Sections */}
         <section className="space-y-8">
           <VerticalNav
@@ -375,6 +370,7 @@ export default function Demo2Page({
             onOpenChange={setIsVideoOpen}
             youtubeUrl="https://www.youtube.com/embed/vUtfinyDFuY"
       />
+       <BotFrame />
       {renderSectionContent(sectionData)}
     </>
   );
