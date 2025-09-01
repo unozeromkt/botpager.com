@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { botpageData } from "@/lib/botpage-data";
 import { useIsMobile } from '@/hooks/use-mobile';
 
-function parseIframe(iframeString: string): { props: Record<string, string>, scriptSrc?: string, scriptContent?: string } {
+function parseIframe(iframeString: string): { props: Record<string, string> } {
   const iframeMatch = iframeString.match(/<iframe\s+(.*?)><\/iframe>/s);
   if (!iframeMatch) return { props: {} };
 
@@ -43,72 +43,95 @@ function parseIframe(iframeString: string): { props: Record<string, string>, scr
 
 const floatingBotScriptSrc = 'https://cdn.jotfor.ms/agent/embedjs/01989fe94cf47b0a8a67e225e6a31e7a1f07/embed.js';
 
+function DesktopBot() {
+    const { props } = parseIframe(botpageData.appearance.iframeCode);
+    const iframeId = props.id;
+
+    useEffect(() => {
+        if (!iframeId) return;
+
+        const existingScript = document.querySelector(`script[src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js']`);
+        if (existingScript) {
+            if (window.jotformEmbedHandler) {
+                window.jotformEmbedHandler(`iframe[id='${iframeId}']`, "https://www.jotform.com");
+            }
+            return;
+        }
+        
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js';
+        script.async = true;
+        document.body.appendChild(script);
+
+        script.onload = () => {
+            if (window.jotformEmbedHandler) {
+                window.jotformEmbedHandler(`iframe[id='${iframeId}']`, "https://www.jotform.com");
+            }
+        };
+
+        // Cleanup function to remove the script if the component unmounts
+        return () => {
+            const scriptTag = document.querySelector(`script[src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js']`);
+            if (scriptTag) {
+                document.body.removeChild(scriptTag);
+            }
+        };
+    }, [iframeId]);
+
+    return (
+        <Card id="bot-frame-section" className="overflow-hidden shadow-2xl rounded-xl w-full h-full border-2 border-primary/20 bg-card animate-border-pulse">
+            <iframe {...props}></iframe>
+        </Card>
+    );
+}
+
+function FloatingMobileBot() {
+    useEffect(() => {
+        const existingScript = document.querySelector(`script[src='${floatingBotScriptSrc}']`);
+        if (existingScript) {
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = floatingBotScriptSrc;
+        script.async = true;
+        document.body.appendChild(script);
+
+        // Cleanup function to remove the script and the jotform elements if the component unmounts
+        return () => {
+            const scriptTag = document.querySelector(`script[src='${floatingBotScriptSrc}']`);
+            if (scriptTag) {
+                document.body.removeChild(scriptTag);
+            }
+            // Jotform adds its elements to the body, so we need to clean them up
+            const jotformButton = document.getElementById('jotform-feedback-button');
+            if (jotformButton) {
+                jotformButton.remove();
+            }
+             const jotformIframe = document.getElementById('jotform-iframe-container');
+            if (jotformIframe) {
+                jotformIframe.remove();
+            }
+        };
+    }, []);
+
+    return null; // This component doesn't render anything itself
+}
+
 
 export function BotFrame() {
+  const [isClient, setIsClient] = useState(false);
   const isMobile = useIsMobile();
-  const [isScriptInjected, setIsScriptInjected] = useState(false);
-  const { props } = parseIframe(botpageData.appearance.iframeCode);
-  const iframeId = props.id;
 
   useEffect(() => {
-    // Only run this effect on the client side after isMobile has been determined.
-    if (typeof isMobile === 'undefined') {
-      return;
-    }
+    setIsClient(true);
+  }, []);
 
-    if (isMobile) {
-      // Inject floating bot script on mobile
-      if(isScriptInjected) return;
-
-      const existingScript = document.querySelector(`script[src='${floatingBotScriptSrc}']`);
-      if (existingScript) {
-        setIsScriptInjected(true);
-        return;
-      }
-      
-      const script = document.createElement('script');
-      script.src = floatingBotScriptSrc;
-      script.async = true;
-      document.body.appendChild(script);
-      setIsScriptInjected(true);
-      
-    } else {
-      // Logic for embedded iframe on desktop
-      if (!iframeId) return;
-
-      const existingScript = document.querySelector(`script[src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js']`);
-      if (existingScript) {
-          if (window.jotformEmbedHandler) {
-              window.jotformEmbedHandler(`iframe[id='${iframeId}']`, "https://www.jotform.com");
-          }
-          return;
-      }
-      
-      const script = document.createElement('script');
-      script.src = 'https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js';
-      script.async = true;
-      document.body.appendChild(script);
-
-      script.onload = () => {
-          if (window.jotformEmbedHandler) {
-              window.jotformEmbedHandler(`iframe[id='${iframeId}']`, "https://www.jotform.com");
-          }
-      };
-    }
-  }, [isMobile, iframeId, isScriptInjected]);
-
-  if (isMobile) {
-    return null; // Don't render anything on mobile, the script will handle the floating button
+  if (!isClient) {
+    return null; // Don't render anything on the server or during hydration mismatch
   }
-
-  // Render the embedded iframe for desktop
-  return (
-    <Card id="bot-frame-section" className="overflow-hidden shadow-2xl rounded-xl w-full h-full border-2 border-primary/20 bg-card animate-border-pulse">
-      <iframe
-        {...props}
-      ></iframe>
-    </Card>
-  );
+  
+  return isMobile ? <FloatingMobileBot /> : <DesktopBot />;
 }
 
 declare global {
