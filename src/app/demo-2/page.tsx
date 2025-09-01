@@ -300,7 +300,7 @@ export default function Demo2Page({
   // Mobile View
   if (isMobile) {
     return (
-      <div className="space-y-12">
+      <div className="space-y-8">
         {/* Hero Section */}
         <section className="text-center space-y-4">
            {homeData && (
@@ -317,19 +317,19 @@ export default function Demo2Page({
                     </Link>
                   </div>
                 )}
-                <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl text-foreground">
+                <h1 className="font-headline text-3xl font-bold tracking-tight text-foreground">
                     {homeData.title}
                 </h1>
-                 <p className="max-w-[600px] mx-auto text-muted-foreground md:text-xl font-normal">
+                 <p className="max-w-[600px] mx-auto text-muted-foreground font-normal">
                     {homeData.description}
                  </p>
-                 <div className="flex flex-wrap gap-4 items-center justify-center pt-4">
-                    <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+                 <div className="flex gap-2 items-center justify-center pt-4">
+                    <Button asChild size="default" className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
                         <Link href="https://form.jotform.com/252408899499076" target="_blank">
                             Empieza Ahora
                         </Link>
                     </Button>
-                    <Button variant="outline" size="lg" onClick={() => setIsVideoOpen(true)} className="text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+                    <Button variant="outline" size="default" onClick={() => setIsVideoOpen(true)} className="flex-1 font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
                          <PlayCircle className="mr-2 h-5 w-5" />
                         ¿Cómo funciona?
                     </Button>
@@ -339,7 +339,7 @@ export default function Demo2Page({
         </section>
         
         {/* Bot Frame Section */}
-        <section className="h-[600px] w-full">
+        <section className="h-[500px] w-full">
             <BotFrame />
         </section>
 
@@ -352,7 +352,7 @@ export default function Demo2Page({
             isMobile={true}
           />
           {sectionData && activeSection !== 'home' && (
-            <div className="min-h-[450px] bg-card/40 backdrop-blur-lg rounded-xl p-8 border border-white/10 shadow-2xl">
+            <div className="min-h-[450px] bg-card/40 backdrop-blur-lg rounded-xl p-6 border border-white/10 shadow-2xl">
               {renderSectionContent(sectionData)}
             </div>
           )}
@@ -379,5 +379,3 @@ export default function Demo2Page({
     </>
   );
 }
-
-  
