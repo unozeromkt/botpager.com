@@ -1,4 +1,3 @@
-
 // src/components/landing/bot-frame.tsx
 "use client";
 
@@ -70,7 +69,6 @@ function DesktopBot() {
             }
         };
 
-        // Cleanup function to remove the script if the component unmounts
         return () => {
             const scriptTag = document.querySelector(`script[src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js']`);
             if (scriptTag) {
@@ -98,13 +96,11 @@ function FloatingMobileBot() {
         script.async = true;
         document.body.appendChild(script);
 
-        // Cleanup function to remove the script and the jotform elements if the component unmounts
         return () => {
             const scriptTag = document.querySelector(`script[src='${floatingBotScriptSrc}']`);
             if (scriptTag) {
                 document.body.removeChild(scriptTag);
             }
-            // Jotform adds its elements to the body, so we need to clean them up
             const jotformButton = document.getElementById('jotform-feedback-button');
             if (jotformButton) {
                 jotformButton.remove();
@@ -129,7 +125,8 @@ export function BotFrame() {
   }, []);
 
   if (!isClient) {
-    return null; // Don't render anything on the server or during hydration mismatch
+    // Return a placeholder or null on the server to avoid hydration mismatches
+    return <div className="hidden lg:block lg:col-span-5 sticky top-24 h-[688px]"></div>;
   }
   
   return isMobile ? <FloatingMobileBot /> : <DesktopBot />;
