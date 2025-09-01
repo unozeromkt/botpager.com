@@ -13,6 +13,7 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { UseCasesGallery } from '@/components/landing/use-cases-gallery';
 import { Footer } from '@/components/layout/footer';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export default function Demo2Layout({
   children,
@@ -20,9 +21,9 @@ export default function Demo2Layout({
   children: React.ReactNode;
 }>) {
   const [activeSection, setActiveSection] = useState<Section>("home");
-  const [isChatFocused, setIsChatFocused] = useState(false);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const { appearance, navItems, customSections = [] } = botpageData;
+  const isMobile = useIsMobile();
 
   const allNavItems = [...navItems, ...(customSections || [])];
 
@@ -82,7 +83,7 @@ export default function Demo2Layout({
                       activeSection !== 'plans' && "bg-card/40 backdrop-blur-lg border border-white/10 shadow-2xl"
                   )}>
                      <div className="p-8">
-                       <Demo2Page activeSection={activeSection} setActiveSection={handleNavItemClick} isMobile={false} />
+                       <Demo2Page activeSection={activeSection} setActiveSection={handleNavItemClick} />
                      </div>
                   </div>
                 </div>
@@ -90,7 +91,7 @@ export default function Demo2Layout({
 
               {/* Contenido Móvil */}
               <div className="lg:hidden lg:col-span-12">
-                <Demo2Page activeSection={activeSection} setActiveSection={handleNavItemClick} isMobile={true} />
+                <Demo2Page activeSection={activeSection} setActiveSection={handleNavItemClick} />
               </div>
 
 
@@ -98,10 +99,10 @@ export default function Demo2Layout({
               <div 
                 className={cn(
                   "hidden lg:flex lg:col-span-5 items-center justify-center sticky top-24 h-[688px] transition-all duration-300",
-                  activeSection === 'plans' && "hidden"
+                   activeSection === 'plans' && "hidden"
                 )}
               >
-                <BotFrame />
+                {!isMobile && <BotFrame />}
               </div>
 
             </div>

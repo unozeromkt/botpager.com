@@ -19,25 +19,60 @@ import { PricingCard } from '@/components/landing/pricing-card';
 import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { cn } from '@/lib/utils';
 import { BotFrame } from '@/components/landing/bot-frame';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 
 export type Section = "home" | "about" | "services" | "faq" | string;
+
+const floatingBotScriptSrc = 'https://cdn.jotfor.ms/agent/embedjs/01989fe94cf47b0a8a67e225e6a31e7a1f07/embed.js';
+
+function FloatingMobileBot() {
+    useEffect(() => {
+        const existingScript = document.querySelector(`script[src='${floatingBotScriptSrc}']`);
+        if (existingScript) {
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = floatingBotScriptSrc;
+        script.async = true;
+        document.body.appendChild(script);
+
+        return () => {
+            const scriptTag = document.querySelector(`script[src='${floatingBotScriptSrc}']`);
+            if (scriptTag && scriptTag.parentElement) {
+                scriptTag.parentElement.removeChild(scriptTag);
+            }
+            const jotformButton = document.getElementById('jotform-feedback-button');
+            if (jotformButton && jotformButton.parentElement) {
+                jotformButton.parentElement.removeChild(jotformButton);
+            }
+             const jotformIframe = document.getElementById('jotform-iframe-container');
+            if (jotformIframe && jotformIframe.parentElement) {
+                jotformIframe.parentElement.removeChild(jotformIframe);
+            }
+        };
+    }, []);
+
+    return null;
+}
+
 
 export default function Demo2Page({
   activeSection,
   setActiveSection,
   botData = defaultBotData,
-  isMobile = false,
 }: {
   activeSection: Section;
   setActiveSection: (section: Section) => void;
   botData?: any;
-  isMobile?: boolean;
 }) {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [carouselApi, setCarouselApi] = useState<CarouselApi>()
   const [currentSlide, setCurrentSlide] = useState(0)
   const [slideCount, setSlideCount] = useState(0)
+  const isMobile = useIsMobile();
+
 
   const { navItems, customSections = [] } = botData;
   const allNavItems = [...navItems, ...(customSections || [])];
@@ -185,7 +220,7 @@ export default function Demo2Page({
       content: botData.plans?.items && (
         <div className="space-y-6">
           <p className="text-muted-foreground md:text-lg text-center">{botData.plans?.description}</p>
-          <div className="w-full max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-4xl mx-auto">
+          <div className="w-full max-w-sm sm:max-w-md md:max-w-4xl lg:max-w-5xl mx-auto">
             <Carousel
                 setApi={setCarouselApi}
                 opts={{
@@ -299,14 +334,14 @@ export default function Demo2Page({
   // Mobile View
   if (isMobile) {
     return (
-      <div className="space-y-8">
-        <BotFrame />
+      <div className="space-y-6">
+        {isMobile && <FloatingMobileBot />}
         {/* Hero Section */}
         <section className="text-center space-y-4">
            {homeData && (
              <>
                 {botData.appearance.logoUrl && (
-                  <div className="mb-6 flex justify-center">
+                  <div className="mb-4 flex justify-center">
                     <Link href="/">
                       <Image
                           src={botData.appearance.logoUrl}
@@ -317,19 +352,19 @@ export default function Demo2Page({
                     </Link>
                   </div>
                 )}
-                <h1 className="font-headline text-3xl font-bold tracking-tight text-foreground">
+                <h1 className="font-headline text-2xl font-bold tracking-tight text-foreground">
                     {homeData.title}
                 </h1>
-                 <p className="max-w-[600px] mx-auto text-muted-foreground font-normal">
+                 <p className="max-w-[600px] mx-auto text-muted-foreground font-normal text-sm">
                     {homeData.description}
                  </p>
-                 <div className="flex gap-2 items-center justify-center pt-4">
-                    <Button asChild size="default" className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+                 <div className="flex gap-2 items-center justify-center pt-2">
+                    <Button asChild size="sm" className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
                         <Link href="https://form.jotform.com/252408899499076" target="_blank">
                             Empieza Ahora
                         </Link>
                     </Button>
-                    <Button variant="outline" size="default" onClick={() => setIsVideoOpen(true)} className="flex-1 font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+                    <Button variant="outline" size="sm" onClick={() => setIsVideoOpen(true)} className="flex-1 font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
                          <PlayCircle className="mr-2 h-5 w-5" />
                         ¿Cómo funciona?
                     </Button>
@@ -339,18 +374,20 @@ export default function Demo2Page({
         </section>
         
         {/* Other Sections */}
-        <section className="space-y-8">
-          <VerticalNav
-            activeSection={activeSection}
-            setActiveSection={setActiveSection}
-            navItems={allNavItems}
-            isMobile={true}
-          />
-          {sectionData && activeSection !== 'home' && (
+        <section className="space-y-6">
+           {sectionData && (
             <div className="min-h-[450px] bg-card/40 backdrop-blur-lg rounded-xl p-6 border border-white/10 shadow-2xl">
               {renderSectionContent(sectionData)}
             </div>
           )}
+          <div className="w-full">
+            <VerticalNav
+                activeSection={activeSection}
+                setActiveSection={setActiveSection}
+                navItems={allNavItems}
+                isMobile={true}
+              />
+          </div>
         </section>
         
         <VideoPlayerPopup 
@@ -370,7 +407,6 @@ export default function Demo2Page({
             onOpenChange={setIsVideoOpen}
             youtubeUrl="https://www.youtube.com/embed/vUtfinyDFuY"
       />
-       <BotFrame />
       {renderSectionContent(sectionData)}
     </>
   );
