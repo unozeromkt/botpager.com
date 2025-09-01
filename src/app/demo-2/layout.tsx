@@ -102,7 +102,7 @@ export default function Demo2Layout({
                    activeSection === 'plans' && "hidden"
                 )}
               >
-                {!isMobile && <BotFrame />}
+                 <BotFrame />
               </div>
 
             </div>

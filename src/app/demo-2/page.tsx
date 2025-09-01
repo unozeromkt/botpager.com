@@ -1,3 +1,4 @@
+
 // src/app/demo-2/page.tsx
 "use client";
 import { useState, useEffect } from 'react';
@@ -308,7 +309,6 @@ export default function Demo2Page({
     return null;
   }
   
-  const homeData = findSectionData('home');
   const sectionData = findSectionData(activeSection);
 
   const renderSectionContent = (data: any) => {
@@ -336,59 +336,32 @@ export default function Demo2Page({
     return (
       <div className="space-y-6">
         {isMobile && <FloatingMobileBot />}
-        {/* Hero Section */}
-        <section className="text-center space-y-4">
-           {homeData && (
-             <>
-                {botData.appearance.logoUrl && (
-                  <div className="mb-4 flex justify-center">
-                    <Link href="/">
-                      <Image
-                          src={botData.appearance.logoUrl}
-                          alt="Logo"
-                          width={180}
-                          height={44}
-                      />
-                    </Link>
-                  </div>
-                )}
-                <h1 className="font-headline text-2xl font-bold tracking-tight text-foreground">
-                    {homeData.title}
-                </h1>
-                 <p className="max-w-[600px] mx-auto text-muted-foreground font-normal text-sm">
-                    {homeData.description}
-                 </p>
-                 <div className="flex gap-2 items-center justify-center pt-2">
-                    <Button asChild size="sm" className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
-                        <Link href="https://form.jotform.com/252408899499076" target="_blank">
-                            Empieza Ahora
-                        </Link>
-                    </Button>
-                    <Button variant="outline" size="sm" onClick={() => setIsVideoOpen(true)} className="flex-1 font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
-                         <PlayCircle className="mr-2 h-5 w-5" />
-                        ¿Cómo funciona?
-                    </Button>
-                </div>
-             </>
-           )}
-        </section>
-        
-        {/* Other Sections */}
-        <section className="space-y-6">
-           {sectionData && (
-            <div className="min-h-[450px] bg-card/40 backdrop-blur-lg rounded-xl p-6 border border-white/10 shadow-2xl">
-              {renderSectionContent(sectionData)}
-            </div>
-          )}
-          <div className="w-full">
+        {botData.appearance.logoUrl && (
+          <div className="mb-4 flex justify-center">
+            <Link href="/">
+              <Image
+                  src={botData.appearance.logoUrl}
+                  alt="Logo"
+                  width={180}
+                  height={44}
+              />
+            </Link>
+          </div>
+        )}
+        <div className="w-full">
             <VerticalNav
                 activeSection={activeSection}
                 setActiveSection={setActiveSection}
                 navItems={allNavItems}
                 isMobile={true}
-              />
+            />
+        </div>
+        
+        {sectionData && (
+          <div className="min-h-[450px] bg-card/40 backdrop-blur-lg rounded-xl p-6 border border-white/10 shadow-2xl">
+            {renderSectionContent(sectionData)}
           </div>
-        </section>
+        )}
         
         <VideoPlayerPopup 
             isOpen={isVideoOpen}
