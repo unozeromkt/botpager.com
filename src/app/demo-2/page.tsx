@@ -103,7 +103,7 @@ export default function Demo2Page({
       title: botData.home?.title || botData.whatWeDo?.title || "Bienvenido",
       description: botData.home?.description || botData.whatWeDo?.description || "",
       cta: (
-         <div className="flex flex-wrap gap-4 items-center justify-center">
+         <div className="flex gap-4 items-center justify-center">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
                 <Link href="https://form.jotform.com/252408899499076" target="_blank">
                     Empieza Ahora
@@ -232,7 +232,7 @@ export default function Demo2Page({
               >
                 <CarouselContent>
                   {botData.plans.items.map((plan: any, index: number) => (
-                    <CarouselItem key={index} className="sm:basis-full md:basis-1/2 h-auto">
+                    <CarouselItem key={index} className="sm:basis-full md:basis-1/2 lg:basis-1/3 h-auto">
                        <div className="p-1 h-full">
                           <PricingCard {...plan} />
                       </div>
@@ -334,41 +334,43 @@ export default function Demo2Page({
   // Mobile View
   if (isMobile) {
     return (
-      <div className="space-y-6">
+       <>
         <FloatingMobileBot />
-        {botData.appearance.logoUrl && (
-          <div className="mb-4 flex justify-center">
-            <Link href="/">
-              <Image
-                  src={botData.appearance.logoUrl}
-                  alt="Logo"
-                  width={180}
-                  height={44}
+        <div className="space-y-6">
+          {botData.appearance.logoUrl && (
+            <div className="mb-4 flex justify-center">
+              <Link href="/">
+                <Image
+                    src={botData.appearance.logoUrl}
+                    alt="Logo"
+                    width={180}
+                    height={44}
+                />
+              </Link>
+            </div>
+          )}
+          <div className="w-full">
+              <VerticalNav
+                  activeSection={activeSection}
+                  setActiveSection={setActiveSection}
+                  navItems={allNavItems}
+                  isMobile={true}
               />
-            </Link>
           </div>
-        )}
-        <div className="w-full">
-            <VerticalNav
-                activeSection={activeSection}
-                setActiveSection={setActiveSection}
-                navItems={allNavItems}
-                isMobile={true}
-            />
+          
+          {sectionData && (
+            <div className="min-h-[450px] bg-card/40 backdrop-blur-lg rounded-xl p-6 border border-white/10 shadow-2xl">
+              {renderSectionContent(sectionData)}
+            </div>
+          )}
+          
+          <VideoPlayerPopup 
+              isOpen={isVideoOpen}
+              onOpenChange={setIsVideoOpen}
+              youtubeUrl="https://www.youtube.com/embed/vUtfinyDFuY"
+          />
         </div>
-        
-        {sectionData && (
-          <div className="min-h-[450px] bg-card/40 backdrop-blur-lg rounded-xl p-6 border border-white/10 shadow-2xl">
-            {renderSectionContent(sectionData)}
-          </div>
-        )}
-        
-        <VideoPlayerPopup 
-            isOpen={isVideoOpen}
-            onOpenChange={setIsVideoOpen}
-            youtubeUrl="https://www.youtube.com/embed/vUtfinyDFuY"
-        />
-      </div>
+      </>
     )
   }
 
