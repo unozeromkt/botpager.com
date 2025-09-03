@@ -37,7 +37,7 @@ const rawBotData = {
   navItems: [
     { key: 'home', label: 'Inicio', icon: 'Home' },
     { key: 'about', label: '¿Qué es un BotPage?', icon: 'Bot' },
-    { key: 'services', label: 'Beneficios', icon: 'Briefcase' },
+    { key: 'services', label: 'Por qué un BotPage?', icon: 'Briefcase' },
     { key: 'plans', label: 'Planes', icon: 'DollarSign' },
     { key: 'faq', label: 'Preguntas', icon: 'HelpCircle' },
     { key: 'use-cases', label: 'Casos de uso', icon: 'GalleryHorizontal' },
