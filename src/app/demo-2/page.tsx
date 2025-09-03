@@ -103,7 +103,7 @@ export default function Demo2Page({
       title: botData.home?.title || botData.whatWeDo?.title || "Bienvenido",
       description: botData.home?.description || botData.whatWeDo?.description || "",
       cta: (
-         <div className="flex flex-wrap gap-4 items-center">
+         <div className="flex flex-wrap gap-4 items-center justify-center">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
                 <Link href="https://form.jotform.com/252408899499076" target="_blank">
                     Empieza Ahora
