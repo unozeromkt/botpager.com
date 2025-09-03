@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import type { EmblaCarouselType } from 'embla-carousel-react';
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle, MapPin, Clock, Bot, Calendar, Moon, Globe, MessageCircle, Share2, PlayCircle, DollarSign, Pizza } from "lucide-react";
+import { ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle, MapPin, Clock, Bot, Calendar, Moon, Globe, MessageCircle, Share2, PlayCircle, DollarSign, Pizza, GalleryHorizontal } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { botpageData as defaultBotData } from "@/lib/botpage-data";
 import * as LucideIcons from "lucide-react";
@@ -232,7 +232,7 @@ export default function Demo2Page({
               >
                 <CarouselContent>
                   {botData.plans.items.map((plan: any, index: number) => (
-                    <CarouselItem key={index} className="sm:basis-full md:basis-1/2 lg:basis-1/3 h-auto">
+                    <CarouselItem key={index} className="sm:basis-full md:basis-1/2 lg:basis-1/2 h-auto">
                        <div className="p-1 h-full">
                           <PricingCard {...plan} />
                       </div>

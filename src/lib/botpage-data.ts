@@ -87,6 +87,8 @@ const rawBotData = {
       {
         name: "Starter",
         price: "24 USD/mes",
+        setupFee: "499 USD (pago único)",
+        setupFeeDescription: "Configuración inicial, entrenamiento de la IA y puesta en marca",
         features: [
           "1 BotPage personalizado para tu negocio y entrenamiento completo del Agente IA",
           "Hasta 500 conversaciones / 1 formulario al mes",
@@ -99,6 +101,8 @@ const rawBotData = {
         name: "Growth",
         price: "39 USD/mes",
         isPopular: true,
+        setupFee: "499 USD (pago único)",
+        setupFeeDescription: "Configuración inicial, entrenamiento de la IA y puesta en marca",
         features: [
           "1 BotPage personalizado para tu negocio y entrenamiento completo del Agente IA",
           "Hasta 1,000 conversaciones / 3 formularios al mes",
@@ -110,6 +114,8 @@ const rawBotData = {
       {
         name: "Pro",
         price: "59 USD/mes",
+        setupFee: "499 USD (pago único)",
+        setupFeeDescription: "Configuración inicial, entrenamiento de la IA y puesta en marca",
         features: [
           "1 BotPage personalizado para tu negocio y entrenamiento completo del Agente IA",
           "Hasta 2,000 conversaciones / 5 formularios al mes",
