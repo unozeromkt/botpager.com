@@ -4,20 +4,21 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Plus } from "lucide-react";
 import Link from 'next/link';
 
 interface PricingCardProps {
     name: string;
     price: string;
-    setupFee?: string;
-    setupFeeDescription?: string;
+    priceDescription: string;
+    monthlyFee: string;
+    monthlyFeeDescription: string;
     features: string[];
     cta: string;
     isPopular?: boolean;
 }
 
-export function PricingCard({ name, price, setupFee, setupFeeDescription, features, cta, isPopular = false }: PricingCardProps) {
+export function PricingCard({ name, price, priceDescription, monthlyFee, monthlyFeeDescription, features, cta, isPopular = false }: PricingCardProps) {
   return (
     <Card className={cn(
       "flex flex-col border-2 h-full",
@@ -28,20 +29,22 @@ export function PricingCard({ name, price, setupFee, setupFeeDescription, featur
           Más Popular
         </div>
       )}
-      <CardHeader className="pt-6 pb-4">
-        <CardTitle className="text-2xl font-bold text-center">{name}</CardTitle>
-        <CardDescription className="text-center text-4xl font-bold text-card-foreground pt-4">
-          {price}
-        </CardDescription>
-         {setupFee && (
-           <div className="text-center pt-2">
-            <p className="font-semibold text-sm text-card-foreground">{setupFee}</p>
-            {setupFeeDescription && <p className="text-xs text-muted-foreground">{setupFeeDescription}</p>}
-          </div>
-        )}
+      <CardHeader className="pt-6 pb-4 text-center">
+        <CardTitle className="text-2xl font-bold">{name}</CardTitle>
+        <div className="flex flex-col items-center justify-center gap-2 pt-4">
+             <div>
+                <p className="text-4xl font-bold text-card-foreground">{price}</p>
+                <p className="text-xs text-muted-foreground">{priceDescription}</p>
+            </div>
+            <Plus className="h-8 w-8 text-muted-foreground" />
+            <div>
+                <p className="text-2xl font-bold text-card-foreground">{monthlyFee}</p>
+                <p className="text-xs text-muted-foreground">{monthlyFeeDescription}</p>
+            </div>
+        </div>
       </CardHeader>
       <CardContent className="flex-1">
-        <ul className="space-y-4">
+        <ul className="space-y-4 pt-4">
           {features.map((feature, index) => (
             <li key={index} className="flex items-start gap-3">
               <CheckCircle className="h-5 w-5 text-primary mt-1 shrink-0" />
