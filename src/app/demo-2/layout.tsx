@@ -34,14 +34,14 @@ export default function Demo2Layout({
 }>) {
   const [activeSection, setActiveSection] = useState<Section>("home");
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-  const { appearance, navItems, customSections = [], ...botData } = botpageData;
+  const { appearance, navItems, ...botData } = botpageData;
   const isMobile = useIsMobile();
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [carouselApi, setCarouselApi] = useState<CarouselApi>()
   const [currentSlide, setCurrentSlide] = useState(0)
   const [slideCount, setSlideCount] = useState(0)
 
-  const allNavItems = [...navItems, ...(customSections || [])];
+  const allNavItems = [...navItems, ...(botpageData.customSections || [])];
 
   const handleNavItemClick = (section: Section) => {
     if (section === 'use-cases') {
@@ -75,7 +75,7 @@ export default function Demo2Layout({
       title: botData.home?.title || botData.whatWeDo?.title || "Bienvenido",
       description: botData.home?.description || botData.whatWeDo?.description || "",
       cta: (
-         <div className="flex items-center justify-center gap-4 flex-wrap">
+         <div className="flex items-center justify-center gap-4">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
                 <Link href="/form" target="_blank">
                     Empieza Ahora
@@ -271,7 +271,7 @@ export default function Demo2Layout({
         content: content
       };
     }
-    const customSection = botData.customSections?.find((s: any) => s.key === sectionKey);
+    const customSection = botpageData.customSections?.find((s: any) => s.key === sectionKey);
     if (customSection) {
       return {
         title: customSection.title,
