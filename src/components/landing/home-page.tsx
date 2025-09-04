@@ -426,7 +426,11 @@ export function HomePage({
               </>
            )}
            
-          {isMobile ? renderMobileView() : renderDesktopView()}
+          {isMobile === undefined
+            ? null
+            : isMobile
+            ? renderMobileView()
+            : renderDesktopView()}
         </main>
         <Footer />
       </div>
