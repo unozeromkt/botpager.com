@@ -75,7 +75,7 @@ export default function Demo2Layout({
       title: botData.home?.title || botData.whatWeDo?.title || "Bienvenido",
       description: botData.home?.description || botData.whatWeDo?.description || "",
       cta: (
-         <div className="flex flex-row gap-4 items-center justify-center">
+         <div className="flex items-center justify-center gap-4 flex-wrap">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
                 <Link href="/form" target="_blank">
                     Empieza Ahora
@@ -247,31 +247,35 @@ export default function Demo2Layout({
   };
 
   const findSectionData = (sectionKey: Section) => {
-    // Check in static sections first
     if (sectionKey in staticSections) {
       const key = sectionKey as keyof typeof staticSections;
       const section = staticSections[key];
-      const content = section.content || (
-        <>
-          <p className="max-w-[600px] text-muted-foreground md:text-lg font-normal">
-            {section.description}
-          </p>
-          {section.features}
-        </>
-      );
+      
+      let content;
+      if ((section as any).content) {
+          content = (section as any).content;
+      } else {
+          content = (
+            <>
+              <p className="max-w-[600px] text-muted-foreground md:text-lg font-normal">
+                {(section as any).description}
+              </p>
+              {(section as any).features}
+            </>
+          );
+      }
+
       return {
         ...section,
-        cta: staticSections[key]?.cta, 
+        cta: (section as any).cta, 
         content: content
       };
     }
-    // Check in custom sections
     const customSection = botData.customSections?.find((s: any) => s.key === sectionKey);
     if (customSection) {
       return {
         title: customSection.title,
         content: (
-            // whitespace-pre-wrap preserves line breaks from the textarea
             <p className="max-w-[600px] text-muted-foreground md:text-lg font-normal whitespace-pre-wrap">
               {customSection.content}
             </p>
@@ -327,7 +331,10 @@ export default function Demo2Layout({
       </div>
       
       {sectionData && (
-        <div className="min-h-[450px] bg-card/40 backdrop-blur-lg rounded-xl p-6 border border-white/10 shadow-2xl">
+        <div className={cn(
+          "min-h-[450px] rounded-xl p-6",
+          activeSection !== 'plans' && "bg-card/40 backdrop-blur-lg border border-white/10 shadow-2xl"
+        )}>
           {renderSectionContent(sectionData)}
         </div>
       )}
@@ -414,8 +421,7 @@ export default function Demo2Layout({
         <Footer />
       </div>
       <UseCasesGallery isOpen={isGalleryOpen} onOpenChange={setIsGalleryOpen} />
+      {children}
     </>
   );
 }
-
-    
