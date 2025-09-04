@@ -314,7 +314,7 @@ export function HomePage({
   }
 
   const renderMobileView = () => (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto py-8 relative z-20">
       {appearance.logoUrl && (
         <div className="mb-4 flex justify-center">
           <Link href="/">
