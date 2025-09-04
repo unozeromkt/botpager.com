@@ -6,7 +6,8 @@ import type { Dispatch, SetStateAction } from "react";
 import * as LucideIcons from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import type { Section } from "@/app/demo-2/layout";
+
+type Section = string;
 
 interface NavItem {
   key: Section;
@@ -74,3 +75,5 @@ export function VerticalNav({
     </nav>
   );
 }
+
+    

@@ -25,14 +25,12 @@ import { VideoPlayerPopup } from '@/components/landing/video-player-popup';
 import { PricingCard } from '@/components/landing/pricing-card';
 import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
-export type Section = "home" | "about" | "services" | "faq" | string;
-
 export function HomePage({
   botpageData = defaultBotpageData
 }: {
   botpageData?: typeof defaultBotpageData;
 }) {
-  const [activeSection, setActiveSection] = useState<Section>("home");
+  const [activeSection, setActiveSection] = useState<string>("home");
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const { appearance, navItems, ...botData } = botpageData;
   const isMobile = useIsMobile();
@@ -46,7 +44,7 @@ export function HomePage({
   const primaryColorHsl = hexToHsl(appearance.primaryColor);
   const backgroundColorHsl = hexToHsl(appearance.backgroundColor);
 
-  const handleNavItemClick = (section: Section) => {
+  const handleNavItemClick = (section: string) => {
     if (section === 'use-cases') {
       setIsGalleryOpen(true);
     } else {
@@ -254,7 +252,7 @@ export function HomePage({
     },
   };
 
-  const findSectionData = (sectionKey: Section) => {
+  const findSectionData = (sectionKey: string) => {
     if ((staticSections as any)[sectionKey] && (staticSections as any)[sectionKey].title) {
       const key = sectionKey as keyof typeof staticSections;
       const section = staticSections[key];
