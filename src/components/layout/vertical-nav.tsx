@@ -6,7 +6,7 @@ import type { Dispatch, SetStateAction } from "react";
 import * as LucideIcons from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import type { Section } from "@/app/demo-2/page";
+import type { Section } from "@/app/demo-2/layout";
 
 interface NavItem {
   key: Section;
