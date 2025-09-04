@@ -1,7 +1,7 @@
 import { Bot } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { botpageData } from '@/lib/botpage-data';
+import { defaultBotpageData } from '@/lib/botpage-data-default';
 import Image from 'next/image';
 
 export function Header() {
@@ -10,8 +10,8 @@ export function Header() {
       <div className="container flex h-24 max-w-screen-2xl items-center">
         <div className="mr-4 flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-             {botpageData.appearance.logoUrl ? (
-              <Image src={botpageData.appearance.logoUrl} alt="Logo" width={265} height={65} />
+             {defaultBotpageData.appearance.logoUrl ? (
+              <Image src={defaultBotpageData.appearance.logoUrl} alt="Logo" width={265} height={65} />
             ) : (
               <Bot className="h-8 w-8 text-primary" />
             )}

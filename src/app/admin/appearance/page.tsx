@@ -19,7 +19,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
 import { Input } from "@/components/ui/input";
-import { botpageData } from "@/lib/botpage-data";
+import { defaultBotpageData } from "@/lib/botpage-data-default";
 import { useEffect } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
@@ -62,12 +62,12 @@ export default function AppearancePage() {
    const form = useForm<z.infer<typeof appearanceSchema>>({
     resolver: zodResolver(appearanceSchema),
     defaultValues: {
-      logoUrl: botpageData.appearance.logoUrl,
-      heroImageUrl: botpageData.appearance.heroImageUrl,
-      iframeCode: botpageData.appearance.iframeCode,
-      primaryColor: botpageData.appearance.primaryColor,
-      backgroundColor: botpageData.appearance.backgroundColor,
-      backgroundType: botpageData.appearance.backgroundType,
+      logoUrl: defaultBotpageData.appearance.logoUrl,
+      heroImageUrl: defaultBotpageData.appearance.heroImageUrl,
+      iframeCode: defaultBotpageData.appearance.iframeCode,
+      primaryColor: defaultBotpageData.appearance.primaryColor,
+      backgroundColor: defaultBotpageData.appearance.backgroundColor,
+      backgroundType: defaultBotpageData.appearance.backgroundType,
     },
   });
 

@@ -1,4 +1,3 @@
-
 // src/app/demo-2/layout.tsx
 "use client";
 
@@ -9,7 +8,8 @@ import * as LucideIcons from "lucide-react";
 
 import { BotFrame } from '@/components/landing/bot-frame';
 import { VerticalNav } from '@/components/layout/vertical-nav';
-import { botpageData } from '@/lib/botpage-data';
+import { defaultBotpageData } from '@/lib/botpage-data';
+import { hexToHsl } from '@/lib/botpage-data';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { UseCasesGallery } from '@/components/landing/use-cases-gallery';
@@ -28,8 +28,10 @@ export type Section = "home" | "about" | "services" | "faq" | string;
 
 export default function Demo2Layout({
   children,
+  botpageData = defaultBotpageData
 }: Readonly<{
   children: React.ReactNode;
+  botpageData?: typeof defaultBotpageData;
 }>) {
   const [activeSection, setActiveSection] = useState<Section>("home");
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
@@ -41,6 +43,9 @@ export default function Demo2Layout({
   const [slideCount, setSlideCount] = useState(0)
 
   const allNavItems = [...navItems, ...(botpageData.customSections || [])];
+  
+  const primaryColorHsl = hexToHsl(appearance.primaryColor);
+  const backgroundColorHsl = hexToHsl(appearance.backgroundColor);
 
   const handleNavItemClick = (section: Section) => {
     if (section === 'use-cases') {
@@ -270,7 +275,7 @@ export default function Demo2Layout({
         content: content
       };
     }
-    const customSection = botpageData.customSections?.find((s) => s.key === sectionKey);
+    const customSection = botData.customSections?.find((s) => s.key === sectionKey);
     if (customSection) {
       return {
         title: customSection.title,
@@ -308,11 +313,11 @@ export default function Demo2Layout({
 
   const renderMobileView = () => (
     <div className="container mx-auto py-8">
-      {botpageData.appearance.logoUrl && (
+      {appearance.logoUrl && (
         <div className="mb-4 flex justify-center">
           <Link href="/">
             <Image
-              src={botpageData.appearance.logoUrl}
+              src={appearance.logoUrl}
               alt="Logo"
               width={180}
               height={44}
@@ -352,11 +357,11 @@ export default function Demo2Layout({
         <div className="hidden lg:block lg:col-span-7">
           <div className="flex gap-8">
             <div className="w-64">
-              {botpageData.appearance.logoUrl && (
+              {appearance.logoUrl && (
                 <div className="mb-8 pl-4">
                   <Link href="/">
                     <Image
-                        src={botpageData.appearance.logoUrl}
+                        src={appearance.logoUrl}
                         alt="Logo"
                         width={180}
                         height={44}
@@ -399,6 +404,16 @@ export default function Demo2Layout({
 
   return (
     <>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            :root {
+              --primary-dynamic: ${primaryColorHsl};
+              --background-dynamic: ${backgroundColorHsl};
+            }
+          `,
+        }}
+      />
       <div className="flex flex-col min-h-screen">
          <main className="flex-1 w-full relative">
            {appearance.backgroundType === 'image' && appearance.heroImageUrl && (

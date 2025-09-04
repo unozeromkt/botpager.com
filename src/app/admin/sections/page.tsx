@@ -21,7 +21,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "@/hooks/use-toast";
 import { PlusCircle, Trash2 } from "lucide-react";
-import { botpageData } from "@/lib/botpage-data";
+import { defaultBotpageData } from "@/lib/botpage-data-default";
 
 // Esquema para la sección "Qué hacemos"
 const whatWeDoSchema = z.object({
@@ -78,17 +78,17 @@ const customSectionsSchema = z.object({
 export default function SectionsPage() {
   const whatWeDoForm = useForm<z.infer<typeof whatWeDoSchema>>({
     resolver: zodResolver(whatWeDoSchema),
-    defaultValues: botpageData.whatWeDo,
+    defaultValues: defaultBotpageData.whatWeDo,
   });
 
   const aboutUsForm = useForm<z.infer<typeof aboutUsSchema>>({
     resolver: zodResolver(aboutUsSchema),
-    defaultValues: botpageData.aboutUs,
+    defaultValues: defaultBotpageData.aboutUs,
   });
 
   const servicesForm = useForm<z.infer<typeof servicesSchema>>({
     resolver: zodResolver(servicesSchema),
-    defaultValues: botpageData.services,
+    defaultValues: defaultBotpageData.services,
   });
 
   const { fields: serviceFields, append: appendService, remove: removeService } = useFieldArray({
@@ -98,7 +98,7 @@ export default function SectionsPage() {
 
   const faqsForm = useForm<z.infer<typeof faqsSchema>>({
     resolver: zodResolver(faqsSchema),
-    defaultValues: botpageData.faqs,
+    defaultValues: defaultBotpageData.faqs,
   });
 
   const { fields: faqFields, append: appendFaq, remove: removeFaq } = useFieldArray({
@@ -108,7 +108,7 @@ export default function SectionsPage() {
 
   const customSectionsForm = useForm<z.infer<typeof customSectionsSchema>>({
     resolver: zodResolver(customSectionsSchema),
-    defaultValues: { sections: botpageData.customSections || [] },
+    defaultValues: { sections: defaultBotpageData.customSections || [] },
   });
 
   const { fields: customFields, append: appendCustom, remove: removeCustom } = useFieldArray({

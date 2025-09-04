@@ -19,7 +19,7 @@ import { Bot, Paintbrush, FileText, Share2, Settings, Eye, Download, GalleryHori
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
-import { botpageData } from "@/lib/botpage-data"
+import { defaultBotpageData } from "@/lib/botpage-data-default"
 import { ExamplesGallery } from "@/components/admin/examples-gallery";
 
 export default function AdminLayout({
@@ -35,8 +35,8 @@ export default function AdminLayout({
         <Sidebar>
           <SidebarHeader>
             <div className="flex items-center gap-2">
-               {botpageData.appearance.logoUrl ? (
-                <Image src={botpageData.appearance.logoUrl} alt="Logo" width={265} height={65} />
+               {defaultBotpageData.appearance.logoUrl ? (
+                <Image src={defaultBotpageData.appearance.logoUrl} alt="Logo" width={265} height={65} />
               ) : (
                 <Bot className="h-6 w-6 text-primary" />
               )}

@@ -3,7 +3,7 @@
 
 import { useEffect } from 'react';
 import { Card } from "@/components/ui/card";
-import { botpageData } from "@/lib/botpage-data";
+import { defaultBotpageData } from "@/lib/botpage-data-default";
 
 function parseIframe(iframeString: string): { props: Record<string, string> } {
   const iframeMatch = iframeString.match(/<iframe\s+(.*?)><\/iframe>/s);
@@ -42,7 +42,7 @@ function parseIframe(iframeString: string): { props: Record<string, string> } {
 
 
 export function BotFrame() {
-    const { props } = parseIframe(botpageData.appearance.iframeCode);
+    const { props } = parseIframe(defaultBotpageData.appearance.iframeCode);
     const iframeId = props.id;
 
     useEffect(() => {
