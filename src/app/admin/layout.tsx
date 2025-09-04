@@ -106,7 +106,7 @@ export default function AdminLayout({
           </main>
         </SidebarInset>
       </div>
-      <ExamplesGallery isOpen={isGalleryOpen} onOpenChange={setIsGalleryOpen} />
+       <ExamplesGallery isOpen={isGalleryOpen} onOpenChange={setIsGalleryOpen} />
     </SidebarProvider>
   )
 }

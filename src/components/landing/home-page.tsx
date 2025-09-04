@@ -344,12 +344,6 @@ export function HomePage({
           {renderSectionContent(sectionData)}
         </div>
       )}
-      
-      <VideoPlayerPopup 
-        isOpen={isVideoOpen}
-        onOpenChange={setIsVideoOpen}
-        youtubeUrl="https://www.youtube.com/embed/vUtfinyDFuY"
-      />
     </div>
   );
 
@@ -394,8 +388,8 @@ export function HomePage({
         </div>
         <div 
           className={cn(
-            "hidden lg:flex lg:col-span-5 items-center justify-center sticky top-24 h-[688px] transition-all duration-300",
-            activeSection === 'plans' && "hidden"
+            "lg:col-span-5 items-center justify-center sticky top-24 h-[688px] transition-all duration-300",
+            activeSection === 'plans' ? "hidden" : "hidden lg:flex"
           )}
         >
           <BotFrame />
@@ -440,5 +434,3 @@ export function HomePage({
     </>
   );
 }
-
-    
