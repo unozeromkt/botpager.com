@@ -1,4 +1,3 @@
-
 // src/components/landing/home-page.tsx
 "use client";
 
@@ -24,6 +23,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { VideoPlayerPopup } from '@/components/landing/video-player-popup';
 import { PricingCard } from '@/components/landing/pricing-card';
 import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { MobileBotScript } from './mobile-bot-script';
 
 export function HomePage({
   botpageData = defaultBotpageData
@@ -315,6 +315,7 @@ export function HomePage({
 
   const renderMobileView = () => (
     <div className="container mx-auto py-8 relative z-20">
+      <MobileBotScript />
       {appearance.logoUrl && (
         <div className="mb-4 flex justify-center">
           <Link href="/">
@@ -344,10 +345,6 @@ export function HomePage({
           {renderSectionContent(sectionData)}
         </div>
       )}
-
-      <div className="fixed bottom-4 right-4 z-50 h-96 w-full max-w-sm">
-        <BotFrame />
-      </div>
     </div>
   );
 
@@ -442,5 +439,3 @@ export function HomePage({
     </>
   );
 }
-
-    
