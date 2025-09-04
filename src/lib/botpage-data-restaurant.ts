@@ -1,30 +1,4 @@
-
 // src/lib/botpage-data-restaurant.ts
-
-function hexToHsl(hex: string): string {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    if (!result) return "0 0% 0%";
-    let r = parseInt(result[1], 16) / 255;
-    let g = parseInt(result[2], 16) / 255;
-    let b = parseInt(result[3], 16) / 255;
-    const max = Math.max(r, g, b), min = Math.min(r, g, b);
-    let h = 0, s = 0, l = (max + min) / 2;
-    if (max !== min) {
-      const d = max - min;
-      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-      switch (max) {
-        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-        case g: h = (b - r) / d + 2; break;
-        case b: h = (r - g) / d + 4; break;
-      }
-      h /= 6;
-    }
-    h = Math.round(h * 360);
-    s = Math.round(s * 100);
-    l = Math.round(l * 100);
-    return `${h} ${s}% ${l}%`;
-}
-
 
 export const restaurantBotpageData = {
   appearance: {
@@ -33,8 +7,6 @@ export const restaurantBotpageData = {
     primaryColor: "#E53E3E", // Red for pizza sauce
     backgroundColor: "#2D3748", // Dark gray
     backgroundType: "image" as "color" | "image",
-    get primaryColorHsl() { return hexToHsl(this.primaryColor); },
-    get backgroundColorHsl() { return hexToHsl(this.backgroundColor); },
     iframeCode: `<iframe id="JotFormIFrame-01971cae816e73068d6b8e6f19ab11aa4dac" title="ISSA: Representante de ventas Online" allowTransparency="true" allow="geolocation; microphone; camera; fullscreen" src="https://agent.jotform.com/01971cae816e73068d6b8e6f19ab11aa4dac?embedMode=iframe&background=0&header=1&source=embed-next" frameBorder="0" style="min-width: 100%; height: 100%; border:none; width:100%;" scrolling="no"></iframe>`
   },
   navItems: [
@@ -109,8 +81,10 @@ export const restaurantBotpageData = {
   },
   whatWeDo: { title: "", description: ""},
   aboutUs: { title: "", description: ""},
-  services: { title: "Servicios", items: [] },
+  services: { title: "Servicios", description: "", items: [] },
   faqs: { title: "Preguntas Frecuentes", items: [] },
+  plans: { title: "Planes", description: "", items: [] },
+  customSections: [],
   socials: {
     instagram: "https://instagram.com",
     facebook: "https://facebook.com",
