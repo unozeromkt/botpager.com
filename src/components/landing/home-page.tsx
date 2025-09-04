@@ -76,7 +76,7 @@ export function HomePage({
       title: botData.home?.title || botData.whatWeDo?.title || "Bienvenido",
       description: botData.home?.description || botData.whatWeDo?.description || "",
       cta: (
-         <div className="flex items-center justify-center gap-4">
+         <div className="flex flex-col md:flex-row items-center justify-center gap-4">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
                 <Link href="/form" target="_blank">
                     Empieza Ahora
@@ -344,6 +344,10 @@ export function HomePage({
           {renderSectionContent(sectionData)}
         </div>
       )}
+
+      <div className="fixed bottom-4 right-4 z-50 h-96 w-full max-w-sm">
+        <BotFrame />
+      </div>
     </div>
   );
 
@@ -438,3 +442,5 @@ export function HomePage({
     </>
   );
 }
+
+    
