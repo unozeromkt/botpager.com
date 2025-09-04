@@ -1,3 +1,4 @@
+
 // src/lib/botpage-data.ts
 
 function hexToHsl(hex: string): string {
@@ -22,6 +23,14 @@ function hexToHsl(hex: string): string {
     s = Math.round(s * 100);
     l = Math.round(l * 100);
     return `${h} ${s}% ${l}%`;
+}
+
+interface CustomSection {
+  key: string;
+  label: string;
+  icon: string;
+  title: string;
+  content: string;
 }
 
 const rawBotData = {
@@ -149,7 +158,7 @@ const rawBotData = {
       }
     ]
   },
-  customSections: [],
+  customSections: [] as CustomSection[],
   socials: {
     instagram: "https://instagram.com",
     facebook: "https://facebook.com",

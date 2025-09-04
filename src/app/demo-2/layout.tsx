@@ -5,7 +5,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import type { UseEmblaCarouselType } from 'embla-carousel-react';
-import type { Dispatch, SetStateAction } from "react";
 import * as LucideIcons from "lucide-react";
 
 import { BotFrame } from '@/components/landing/bot-frame';
@@ -271,7 +270,7 @@ export default function Demo2Layout({
         content: content
       };
     }
-    const customSection = botpageData.customSections?.find((s: any) => s.key === sectionKey);
+    const customSection = botpageData.customSections?.find((s) => s.key === sectionKey);
     if (customSection) {
       return {
         title: customSection.title,
