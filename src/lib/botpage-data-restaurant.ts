@@ -1,3 +1,4 @@
+
 // src/lib/botpage-data-restaurant.ts
 import { CustomSection } from './botpage-data';
 
@@ -89,5 +90,9 @@ export const restaurantBotpageData = {
   socials: {
     instagram: "https://instagram.com",
     facebook: "https://facebook.com",
+    tiktok: "",
+    youtube: "",
+    linkedin: "",
+    x: "",
   }
 };
