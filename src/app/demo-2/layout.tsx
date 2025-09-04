@@ -4,7 +4,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import type { EmblaCarouselType } from 'embla-carousel-react';
+import type { UseEmblaCarouselType } from 'embla-carousel-react';
 import type { Dispatch, SetStateAction } from "react";
 import * as LucideIcons from "lucide-react";
 
@@ -75,7 +75,7 @@ export default function Demo2Layout({
       title: botData.home?.title || botData.whatWeDo?.title || "Bienvenido",
       description: botData.home?.description || botData.whatWeDo?.description || "",
       cta: (
-         <div className="flex flex-wrap gap-4 items-center justify-center">
+         <div className="flex flex-row gap-4 items-center justify-center">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
                 <Link href="/form" target="_blank">
                     Empieza Ahora
@@ -417,3 +417,5 @@ export default function Demo2Layout({
     </>
   );
 }
+
+    
