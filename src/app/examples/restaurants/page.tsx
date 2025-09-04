@@ -1,7 +1,8 @@
+
 // src/app/examples/restaurants/page.tsx
 "use client";
 
-import HomePage from '@/app/page';
+import { HomePage } from '@/components/landing/home-page';
 import { restaurantBotpageData } from '@/lib/botpage-data-restaurant';
 
 export default function RestaurantPage() {
