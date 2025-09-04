@@ -356,7 +356,7 @@ export function HomePage({
   const renderDesktopView = () => (
     <div className="container mx-auto py-12 md:py-20 relative z-20">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-        <div className="hidden lg:block lg:col-span-7">
+        <div className={cn("lg:col-span-7", activeSection === 'plans' && "lg:col-span-12")}>
           <div className="flex gap-8">
             <div className="w-64">
               {appearance.logoUrl && (
@@ -440,3 +440,5 @@ export function HomePage({
     </>
   );
 }
+
+    
