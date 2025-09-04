@@ -10,7 +10,8 @@ const nextConfig: NextConfig = {
         hostname: 'botpager.com',
       },
       {
-        protocol: 'https',
+        protocol: 'https'
+        ,
         hostname: 'picsum.photos',
       }
     ],
