@@ -1,4 +1,3 @@
-
 // src/components/landing/pricing-card.tsx
 "use client";
 
@@ -60,7 +59,7 @@ export function PricingCard({ name, price, setupFee, setupFeeDescription, featur
             !isPopular && "bg-secondary hover:bg-accent hover:text-accent-foreground text-secondary-foreground"
           )}
         >
-          <Link href="https://form.jotform.com/252408899499076" target="_blank">
+          <Link href="/form" target="_blank">
             {cta}
           </Link>
         </Button>

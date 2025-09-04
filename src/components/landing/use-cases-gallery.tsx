@@ -1,4 +1,3 @@
-
 // src/components/landing/use-cases-gallery.tsx
 "use client"
 
@@ -18,6 +17,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 interface UseCasesGalleryProps {
   isOpen: boolean
@@ -101,7 +101,11 @@ export function UseCasesGallery({ isOpen, onOpenChange }: UseCasesGalleryProps) 
           </Carousel>
         </div>
          <div className="flex justify-center pb-8">
-            <Button size="lg" className="text-lg px-8 py-6">Comenzar Ahora</Button>
+            <Button asChild size="lg" className="text-lg px-8 py-6">
+              <Link href="/form" target="_blank">
+                Comenzar Ahora
+              </Link>
+            </Button>
         </div>
       </DialogContent>
     </Dialog>
