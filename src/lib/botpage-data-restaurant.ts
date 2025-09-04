@@ -1,4 +1,5 @@
 // src/lib/botpage-data-restaurant.ts
+import { CustomSection } from './botpage-data';
 
 export const restaurantBotpageData = {
   appearance: {
@@ -84,7 +85,7 @@ export const restaurantBotpageData = {
   services: { title: "Servicios", description: "", items: [] },
   faqs: { title: "Preguntas Frecuentes", items: [] },
   plans: { title: "Planes", description: "", items: [] },
-  customSections: [],
+  customSections: [] as CustomSection[],
   socials: {
     instagram: "https://instagram.com",
     facebook: "https://facebook.com",
