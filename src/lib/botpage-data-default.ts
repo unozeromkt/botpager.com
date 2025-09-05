@@ -19,7 +19,7 @@ export const defaultBotpageData = {
     { key: 'use-cases', label: 'Casos de uso', icon: 'GalleryHorizontal' },
   ],
   home: {
-    title: "Vende más y atiende 24/7 con una BotPage.",
+    title: "Tu Sitio Web con IA que vende 24/7",
     description: "Automatiza tu servicio al cliente, recibe reservas y capta clientes. Combinamos un sitio web de alta conversión con Inteligencia Artificial que vende y brinda soporte a tu negocio 24/7."
   },
   whatWeDo: {
