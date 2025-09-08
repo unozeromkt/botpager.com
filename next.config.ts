@@ -3,12 +3,20 @@ import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
-  output: 'export',
+  output: 'standalone',
   images: {
-    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'botpager.com',
+      },
+      {
+        protocol: 'https'
+        ,
+        hostname: 'picsum.photos',
+      }
+    ],
   },
 };
 
 export default nextConfig;
-
-    
