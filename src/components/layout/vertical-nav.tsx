@@ -1,11 +1,10 @@
-
 // src/components/layout/vertical-nav.tsx
 "use client";
 
 import type { Dispatch, SetStateAction } from "react";
-import * as LucideIcons from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Home, Bot, Briefcase, DollarSign, HelpCircle, GalleryHorizontal, FileText } from 'lucide-react';
 
 type Section = string;
 
@@ -22,6 +21,17 @@ interface VerticalNavProps {
   isMobile?: boolean;
 }
 
+const icons = {
+  Home,
+  Bot,
+  Briefcase,
+  DollarSign,
+  HelpCircle,
+  GalleryHorizontal,
+  FileText
+};
+
+
 export function VerticalNav({
   activeSection,
   setActiveSection,
@@ -30,8 +40,8 @@ export function VerticalNav({
 }: VerticalNavProps) {
 
   const getIcon = (name: string) => {
-    const Icon = (LucideIcons as any)[name];
-    return Icon ? <Icon /> : null;
+    const Icon = (icons as any)[name];
+    return Icon ? <Icon /> : <FileText />;
   };
   
   if (isMobile) {

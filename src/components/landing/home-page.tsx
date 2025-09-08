@@ -4,7 +4,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import type { UseEmblaCarouselType } from 'embla-carousel-react';
-import * as LucideIcons from "lucide-react";
 
 import { BotFrame } from '@/components/landing/bot-frame';
 import { VerticalNav } from '@/components/layout/vertical-nav';
@@ -24,6 +23,10 @@ import { VideoPlayerPopup } from '@/components/landing/video-player-popup';
 import { PricingCard } from '@/components/landing/pricing-card';
 import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { MobileBotScript } from './mobile-bot-script';
+
+const icons = {
+    ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle, MapPin, Clock, Bot, Calendar, Moon, Globe, MessageCircle, Share2, PlayCircle, DollarSign, Pizza, GalleryHorizontal, Bike
+}
 
 export function HomePage({
   botpageData = defaultBotpageData
@@ -66,7 +69,7 @@ export function HomePage({
   }, [carouselApi])
 
   const getIcon = (name: string) => {
-    const Icon = (LucideIcons as any)[name];
+    const Icon = (icons as any)[name];
     return Icon ? <Icon className="h-8 w-8 text-primary" /> : <Briefcase className="h-8 w-8 text-primary" />;
   };
   
