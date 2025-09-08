@@ -78,7 +78,7 @@ export function HomePage({
   const staticSections = {
     home: {
       icon: Home,
-      title: botData.home?.title || botData.whatWeDo?.title || "Bienvenido",
+      title: "Tu Sitio Web con IA que vende 24/7",
       description: botData.home?.description || botData.whatWeDo?.description || "",
       cta: (
          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
@@ -86,10 +86,6 @@ export function HomePage({
                 <Link href="/form" target="_blank">
                     Empieza Ahora
                 </Link>
-            </Button>
-            <Button variant="outline" size="lg" onClick={() => setIsVideoOpen(true)} className="text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
-                 <PlayCircle className="mr-2 h-5 w-5" />
-                ¿Cómo funciona?
             </Button>
         </div>
       ),
@@ -319,28 +315,33 @@ export function HomePage({
   }
 
   const renderMobileView = () => (
-    <div className="container mx-auto py-8 relative z-20">
-      <MobileBotScript />
-      {appearance.logoUrl && (
-        <div className="mb-4 flex justify-center">
+    <div className="container mx-auto py-4 space-y-4 relative z-20">
+       <MobileBotScript />
+      <div className="flex items-center justify-between">
+        {appearance.logoUrl && (
           <Link href="/">
             <Image
               src={appearance.logoUrl}
               alt="Logo"
-              width={180}
-              height={44}
+              width={140}
+              height={34}
             />
           </Link>
-        </div>
-      )}
-      <div className="w-full mb-4">
+        )}
+        <Button variant="ghost" size="sm" onClick={() => setIsVideoOpen(true)}>
+             <PlayCircle className="mr-2 h-4 w-4" />
+            ¿Cómo funciona?
+        </Button>
+      </div>
+
+      <Card className="p-2 bg-card/60 backdrop-blur-lg border border-white/10 shadow-xl">
         <VerticalNav
           activeSection={activeSection}
           setActiveSection={handleNavItemClick}
           navItems={allNavItems}
           isMobile={true}
         />
-      </div>
+      </Card>
       
       {sectionData && (
         <div className={cn(
