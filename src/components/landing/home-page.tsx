@@ -1,9 +1,12 @@
+
 // src/components/landing/home-page.tsx
 "use client";
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import type { UseEmblaCarouselType } from 'embla-carousel-react';
+import { Home, Bot, Briefcase, DollarSign, HelpCircle, GalleryHorizontal, Users, CheckCircle, MapPin, Clock, Calendar, Moon, Globe, MessageCircle, Share2, PlayCircle, Pizza, Bike, FileText, ArrowRight } from "lucide-react";
+
 
 import { BotFrame } from '@/components/landing/bot-frame';
 import { VerticalNav } from '@/components/layout/vertical-nav';
@@ -15,7 +18,6 @@ import { UseCasesGallery } from '@/components/landing/use-cases-gallery';
 import { Footer } from '@/components/layout/footer';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle, MapPin, Clock, Bot, Calendar, Moon, Globe, MessageCircle, Share2, PlayCircle, DollarSign, Pizza, GalleryHorizontal, Bike } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent } from "@/components/ui/card";
@@ -25,8 +27,8 @@ import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, Car
 import { MobileBotScript } from './mobile-bot-script';
 
 const icons = {
-    ArrowRight, Users, Briefcase, HelpCircle, Home, CheckCircle, MapPin, Clock, Bot, Calendar, Moon, Globe, MessageCircle, Share2, PlayCircle, DollarSign, Pizza, GalleryHorizontal, Bike
-}
+    Home, Bot, Briefcase, DollarSign, HelpCircle, GalleryHorizontal, Users, CheckCircle, MapPin, Clock, Calendar, Moon, Globe, MessageCircle, Share2, PlayCircle, Pizza, Bike, FileText, ArrowRight
+};
 
 export function HomePage({
   botpageData = defaultBotpageData
