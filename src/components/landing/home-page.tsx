@@ -306,6 +306,17 @@ export function HomePage({
   const renderSectionContent = (data: any) => {
      if (!data || !data.title) return <div className="flex items-center justify-center h-full"><p>Contenido para "{activeSection}" no encontrado.</p></div>
 
+    // Crear CTA solo con botón "Empieza Ahora" para móvil
+    const mobileCta = activeSection === 'home' ? (
+      <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+         <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+             <Link href="/form" target="_blank">
+                 Empieza Ahora
+             </Link>
+         </Button>
+     </div>
+    ) : data.cta;
+
     return (
       <div key={activeSection} className="flex flex-col justify-center space-y-6 animate-in fade-in-50 duration-500 min-h-[450px]">
         <div className={cn("space-y-4", activeSection === 'plans' ? "text-center" : "")}>
@@ -315,8 +326,8 @@ export function HomePage({
           <div className="font-body text-card-foreground/80">
               {data.content}
           </div>
-          { data.cta && <div className="pt-8">
-              {data.cta}
+          { (isMobile ? mobileCta : data.cta) && <div className="pt-8">
+              {isMobile ? mobileCta : data.cta}
           </div>}
         </div>
       </div>
@@ -392,11 +403,6 @@ export function HomePage({
                 activeSection !== 'plans' && "bg-card/40 backdrop-blur-lg border border-white/10 shadow-2xl"
             )}>
               <div className="p-8">
-                <VideoPlayerPopup 
-                  isOpen={isVideoOpen}
-                  onOpenChange={setIsVideoOpen}
-                  localVideoUrl="/videos/botpager-web.mp4"
-                />
                 {renderSectionContent(sectionData)}
               </div>
             </div>
@@ -451,6 +457,11 @@ export function HomePage({
         <Footer />
       </div>
       <UseCasesGallery isOpen={isGalleryOpen} onOpenChange={setIsGalleryOpen} />
+      <VideoPlayerPopup 
+        isOpen={isVideoOpen}
+        onOpenChange={setIsVideoOpen}
+        localVideoUrl="/videos/botpager-web.mp4"
+      />
     </>
   );
 }

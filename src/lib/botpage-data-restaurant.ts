@@ -88,11 +88,8 @@ export const restaurantBotpageData = {
   plans: { title: "Planes", description: "", items: [] },
   customSections: [] as CustomSection[],
   socials: {
-    instagram: "https://instagram.com",
-    facebook: "https://facebook.com",
-    tiktok: "",
-    youtube: "",
-    linkedin: "",
-    x: "",
+    instagram: "https://www.instagram.com/botpagerapp/",
+    facebook: "https://www.facebook.com/botpager",
+    tiktok: "https://www.tiktok.com/@botpager",
   }
 };

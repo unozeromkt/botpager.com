@@ -128,11 +128,8 @@ export const defaultBotpageData = {
   },
   customSections: [] as CustomSection[],
   socials: {
-    instagram: "https://instagram.com",
-    facebook: "https://facebook.com",
-    tiktok: "https://tiktok.com",
-    youtube: "https://youtube.com",
-    linkedin: "https://linkedin.com",
-    x: "https://x.com",
+    instagram: "https://www.instagram.com/botpagerapp/",
+    facebook: "https://www.facebook.com/botpager",
+    tiktok: "https://www.tiktok.com/@botpager",
   }
 };
