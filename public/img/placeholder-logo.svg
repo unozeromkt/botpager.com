@@ -1,0 +1,13 @@
+<svg width="265" height="65" viewBox="0 0 265 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8975c6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="265" height="65" rx="12" fill="url(#logoGradient)"/>
+  <circle cx="40" cy="32.5" r="12" fill="rgba(255,255,255,0.2)"/>
+  <circle cx="40" cy="32.5" r="8" fill="white"/>
+  <text x="70" y="25" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white">BotPager</text>
+  <text x="70" y="42" font-family="Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.8)">Sitios web inteligentes con IA</text>
+</svg>

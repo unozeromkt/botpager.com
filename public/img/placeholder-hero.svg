@@ -1,0 +1,31 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1C1721;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#2a2332;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8975c6;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#8975c6;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#8975c6;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#heroGradient)"/>
+  <ellipse cx="600" cy="315" rx="400" ry="200" fill="url(#glow)"/>
+  
+  <!-- Bot icon -->
+  <circle cx="450" cy="250" r="40" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <circle cx="440" cy="240" r="4" fill="white"/>
+  <circle cx="460" cy="240" r="4" fill="white"/>
+  <rect x="435" y="255" width="30" height="3" rx="1.5" fill="white"/>
+  
+  <!-- Main text -->
+  <text x="600" y="280" font-family="Arial, sans-serif" font-size="52" font-weight="bold" text-anchor="middle" fill="white">BotPager</text>
+  <text x="600" y="340" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="rgba(255,255,255,0.9)">Sitios web inteligentes con IA</text>
+  <text x="600" y="380" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="rgba(255,255,255,0.9)">para captar clientes 24/7</text>
+  
+  <!-- Decorative elements -->
+  <circle cx="850" cy="150" r="6" fill="rgba(255,255,255,0.3)"/>
+  <circle cx="200" cy="400" r="4" fill="rgba(255,255,255,0.2)"/>
+  <circle cx="950" cy="450" r="8" fill="rgba(255,255,255,0.25)"/>
+</svg>

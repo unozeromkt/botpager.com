@@ -9,7 +9,7 @@ export const restaurantBotpageData = {
     primaryColor: "#E53E3E", // Red for pizza sauce
     backgroundColor: "#2D3748", // Dark gray
     backgroundType: "image" as "color" | "image",
-    iframeCode: `<iframe id="JotFormIFrame-01971cae816e73068d6b8e6f19ab11aa4dac" title="ISSA: Representante de ventas Online" allowTransparency="true" allow="geolocation; microphone; camera; fullscreen" src="https://agent.jotform.com/01971cae816e73068d6b8e6f19ab11aa4dac?embedMode=iframe&background=0&header=1&source=embed-next" frameBorder="0" style="min-width: 100%; height: 100%; border:none; width:100%;" scrolling="no"></iframe>`
+    iframeCode: `<iframe id="JotFormIFrame-01971cae816e73068d6b8e6f19ab11aa4dac" title="ISSA: Representante de ventas Online" allowtransparency="true" allow="geolocation; microphone; camera; fullscreen" src="https://agent.jotform.com/01971cae816e73068d6b8e6f19ab11aa4dac?embedMode=iframe&background=0&header=1&source=embed-next" frameborder="0" style="min-width: 100%; height: 100%; border:none; width:100%;" scrolling="no"></iframe>`
   },
   navItems: [
     { key: 'home', label: 'Botzza', icon: 'Home' },

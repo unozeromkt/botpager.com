@@ -87,6 +87,15 @@ export function HomePage({
                     Empieza Ahora
                 </Link>
             </Button>
+            <Button 
+              variant="outline" 
+              size="lg" 
+              onClick={() => setIsVideoOpen(true)}
+              className="bg-transparent border-primary text-white hover:bg-primary hover:text-primary-foreground text-base font-semibold px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              <PlayCircle className="mr-2 h-5 w-5" />
+              ¿Cómo funciona?
+            </Button>
         </div>
       ),
     },
@@ -386,7 +395,7 @@ export function HomePage({
                 <VideoPlayerPopup 
                   isOpen={isVideoOpen}
                   onOpenChange={setIsVideoOpen}
-                  youtubeUrl="https://www.youtube.com/embed/vUtfinyDFuY"
+                  localVideoUrl="/videos/botpager-web.mp4"
                 />
                 {renderSectionContent(sectionData)}
               </div>

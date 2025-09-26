@@ -28,37 +28,43 @@ const useCases = [
   {
     title: "Restaurantes",
     description: "Toma de pedidos automatizada, menús interactivos y reservas 24/7.",
-    imageUrl: "http://botpager.com/img/chatbot-pizzeria.jpg",
+    imageUrl: "/img/use-cases/chatbot-pizzeria.jpg",
     aiHint: "modern restaurant interior"
   },
   {
     title: "Clínicas y Consultorios",
     description: "Agendamiento de citas, recordatorios automáticos y resolución de dudas frecuentes.",
-    imageUrl: "http://botpager.com/img/chatbot-odontologia.jpg",
+    imageUrl: "/img/use-cases/chatbot-odontologia.jpg",
     aiHint: "dental clinic waiting room"
+  },
+  {
+    title: "Clínicas Estéticas",
+    description: "Agendamiento de tratamientos, consultas previas y seguimiento post-procedimiento.",
+    imageUrl: "/img/use-cases/chatbot-clinica-estetica.jpg",
+    aiHint: "aesthetic clinic treatment room"
   },
   {
     title: "Agencias de Marketing y Servicios",
     description: "Captación y calificación de leads, presentación de portafolios y agendamiento de reuniones.",
-    imageUrl: "http://botpager.com/img/chatbot-agencia-marketing.jpg",
+    imageUrl: "/img/use-cases/chatbot-agencia-marketing.jpg",
     aiHint: "modern office space"
   },
   {
     title: "Veterinarias",
     description: "Gestión de citas para mascotas, recordatorios de vacunación y consultas de emergencia.",
-    imageUrl: "http://botpager.com/img/chatbot-veterinarias.jpg",
+    imageUrl: "/img/use-cases/chatbot-veterinarias.jpg",
     aiHint: "veterinary clinic examination room"
   },
-    {
+  {
     title: "Inmobiliarias",
     description: "Agendamiento de visitas, búsqueda de propiedades y respuesta a preguntas frecuentes.",
-    imageUrl: "http://botpager.com/img/chatbot-inmobiliarias.jpg",
+    imageUrl: "/img/use-cases/chatbot-inmobiliarias.jpg",
     aiHint: "person coaching online meeting"
   },
   {
     title: "Tiendas Online (E-commerce)",
     description: "Soporte al cliente, seguimiento de pedidos, recomendaciones de productos y recuperación de carritos.",
-    imageUrl: "http://botpager.com/img/chatbot-ecommerce.jpg",
+    imageUrl: "/img/use-cases/chatbot-ecommerce.jpg",
     aiHint: "online shopping interface"
   },
 ];
