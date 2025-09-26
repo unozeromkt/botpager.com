@@ -14,7 +14,7 @@ export function MobileBotScript() {
 
     const script = document.createElement('script');
     script.id = scriptId;
-    script.src = 'https://cdn.jotfor.ms/agent/embedjs/01989fe94cf47b0a8a67e225e6a31e7a1f07/embed.js';
+    script.src = 'https://cdn.jotfor.ms/agent/embedjs/0198a03a852179d2b8ff0f45ab80ee154199/embed.js';
     script.async = true;
 
     document.body.appendChild(script);
