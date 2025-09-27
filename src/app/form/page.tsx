@@ -18,7 +18,7 @@ export default function FormPage() {
     script.onload = () => {
       // Inicializar el handler de JotForm
       if (window.jotformEmbedHandler) {
-        window.jotformEmbedHandler("iframe[id='JotFormIFrame-252655299961674']", "https://form.jotform.com/")
+        window.jotformEmbedHandler("iframe[id='JotFormIFrame-252408899499076']", "https://form.jotform.com/")
       }
     }
     document.body.appendChild(script)
@@ -40,12 +40,12 @@ export default function FormPage() {
   return (
     <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden' }}>
       <iframe
-        id="JotFormIFrame-252655299961674"
-        title="BotPager - Flujo Inicial"
+        id="JotFormIFrame-252408899499076"
+        title="Botpager - Datos de Cliente"
         onLoad={handleIframeLoad}
         allow="geolocation; microphone; camera; fullscreen; payment"
-        src="https://form.jotform.com/252655299961674"
-        style={{ minWidth: '100%', maxWidth: '100%', height: '100%', border: 'none' }}
+        src="https://form.jotform.com/252408899499076"
+        style={{ minWidth: '100%', maxWidth: '100%', height: '539px', border: 'none' }}
         scrolling="no"
       />
     </div>
