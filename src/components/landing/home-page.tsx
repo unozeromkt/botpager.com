@@ -4,7 +4,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import type { UseEmblaCarouselType } from 'embla-carousel-react';
 import { Home, Bot, Briefcase, DollarSign, HelpCircle, GalleryHorizontal, Users, CheckCircle, MapPin, Clock, Calendar, Moon, Globe, MessageCircle, Share2, PlayCircle, Pizza, Bike, FileText, ArrowRight } from "lucide-react";
 
 
@@ -21,14 +20,55 @@ import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent } from "@/components/ui/card";
+import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { VideoPlayerPopup } from '@/components/landing/video-player-popup';
 import { PricingCard } from '@/components/landing/pricing-card';
-import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { MobileBotScript } from './mobile-bot-script';
+import BlurText from '@/components/ui/blur-text';
+import CardSwap, { Card as SwapCard } from '@/components/ui/card-swap';
 
 const icons = {
     Home, Bot, Briefcase, DollarSign, HelpCircle, GalleryHorizontal, Users, CheckCircle, MapPin, Clock, Calendar, Moon, Globe, MessageCircle, Share2, PlayCircle, Pizza, Bike, FileText, ArrowRight
 };
+
+// Casos de uso para el carrusel
+const useCases = [
+  {
+    title: "🍕 Restaurantes",
+    description: "Toma de pedidos automatizada, menús interactivos y reservas 24/7.",
+    imageUrl: "/img/use-cases/chatbot-pizzeria.jpg",
+  },
+  {
+    title: "🏥 Clínicas y Consultorios",
+    description: "Agendamiento de citas, recordatorios automáticos y resolución de dudas frecuentes.",
+    imageUrl: "/img/use-cases/chatbot-odontologia.jpg",
+  },
+  {
+    title: "✨ Clínicas Estéticas",
+    description: "Agendamiento de tratamientos, consultas previas y seguimiento post-procedimiento.",
+    imageUrl: "/img/use-cases/chatbot-clinica-estetica.jpg",
+  },
+  {
+    title: "📈 Agencias de Marketing",
+    description: "Captación y calificación de leads, presentación de portafolios y agendamiento de reuniones.",
+    imageUrl: "/img/use-cases/chatbot-agencia-marketing.jpg",
+  },
+  {
+    title: "🐕 Veterinarias",
+    description: "Gestión de citas para mascotas, recordatorios de vacunación y consultas de emergencia.",
+    imageUrl: "/img/use-cases/chatbot-veterinarias.jpg",
+  },
+  {
+    title: "🏠 Inmobiliarias",
+    description: "Agendamiento de visitas, búsqueda de propiedades y respuesta a preguntas frecuentes.",
+    imageUrl: "/img/use-cases/chatbot-inmobiliarias.jpg",
+  },
+  {
+    title: "🛒 Tiendas Online",
+    description: "Soporte al cliente, seguimiento de pedidos, recomendaciones de productos y recuperación de carritos.",
+    imageUrl: "/img/use-cases/chatbot-ecommerce.jpg",
+  },
+];
 
 export function HomePage({
   botpageData = defaultBotpageData
@@ -273,7 +313,7 @@ export function HomePage({
       } else {
           content = (
             <>
-              <p className="max-w-[600px] text-muted-foreground md:text-lg font-normal">
+              <p className="max-w-[600px] text-muted-foreground md:text-lg font-normal text-center mx-auto">
                 {(section as any).description}
               </p>
               {(section as any).features}
@@ -318,11 +358,29 @@ export function HomePage({
     ) : data.cta;
 
     return (
-      <div key={activeSection} className="flex flex-col justify-center space-y-6 animate-in fade-in-50 duration-500 min-h-[450px]">
-        <div className={cn("space-y-4", activeSection === 'plans' ? "text-center" : "")}>
-          <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl text-card-foreground">
+      <div key={activeSection} className={cn(
+        "flex flex-col justify-center space-y-6 animate-in fade-in-50 duration-500",
+        activeSection === 'home' ? "relative" : ""
+      )}>
+        <div className={cn(
+          "space-y-4 relative z-10", 
+          activeSection === 'plans' ? "text-center" : ""
+        )}>
+          {/* Título con animación blur solo en home */}
+          {activeSection === 'home' ? (
+            <BlurText 
+              text={data.title}
+              className="font-headline text-4xl font-bold tracking-tight sm:text-5xl text-card-foreground"
+              animateBy="words"
+              duration={0.8}
+              delay={0.2}
+            />
+          ) : (
+            <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl text-card-foreground">
               {data.title}
-          </h1>
+            </h1>
+          )}
+          
           <div className="font-body text-card-foreground/80">
               {data.content}
           </div>
@@ -375,48 +433,104 @@ export function HomePage({
   );
 
   const renderDesktopView = () => (
-    <div className="container mx-auto py-12 md:py-20 relative z-20">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-        <div className={cn("lg:col-span-7", activeSection === 'plans' && "lg:col-span-12")}>
-          <div className="flex gap-8">
-            <div className="w-64">
-              {appearance.logoUrl && (
-                <div className="mb-8 pl-4">
-                  <Link href="/">
-                    <Image
-                        src={appearance.logoUrl}
-                        alt="Logo"
-                        width={180}
-                        height={44}
-                    />
-                  </Link>
+    <div className="relative min-h-screen flex items-center">
+      {/* Contenido principal con margen derecho para el sidebar */}
+      <div className="mr-[520px] py-12 md:py-20 relative z-20 w-full">
+        <div className="max-w-6xl mx-auto px-8">
+          <div className="grid grid-cols-1 gap-8 items-start">
+            <div className="w-full">
+              <div className="flex gap-8">
+                <div className="w-64">
+                  {appearance.logoUrl && (
+                    <div className="mb-8 pl-4">
+                      <Link href="/">
+                        <Image
+                            src={appearance.logoUrl}
+                            alt="Logo"
+                            width={180}
+                            height={44}
+                        />
+                      </Link>
+                    </div>
+                  )}
+                  <VerticalNav
+                    activeSection={activeSection}
+                    setActiveSection={handleNavItemClick}
+                    navItems={allNavItems}
+                  />
                 </div>
-              )}
-              <VerticalNav
-                activeSection={activeSection}
-                setActiveSection={handleNavItemClick}
-                navItems={allNavItems}
-              />
-            </div>
-            <div className={cn(
-                "flex-1 min-h-[688px] rounded-xl",
-                activeSection !== 'plans' && "bg-card/40 backdrop-blur-lg border border-white/10 shadow-2xl"
-            )}>
-              <div className="p-8">
-                {renderSectionContent(sectionData)}
+                <div className={cn(
+                    "flex-1 min-h-[688px] flex items-center rounded-xl relative overflow-hidden",
+                    activeSection !== 'plans' && "bg-card/40 backdrop-blur-lg border border-white/10 shadow-2xl"
+                )}>
+                  {/* Video de fondo solo para la sección home */}
+                  {activeSection === 'home' && (
+                    <div className="absolute inset-0 z-0">
+                      <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover opacity-20"
+                      >
+                        <source src="/videos/botpager-videobg.mp4" type="video/mp4" />
+                        <source src="/videos/botpager-videobg.webm" type="video/webm" />
+                      </video>
+                    </div>
+                  )}
+                  
+                  <div className="p-8 relative z-10 w-full flex items-center justify-center">
+                    <div className="w-full">
+                      {renderSectionContent(sectionData)}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div 
-          className={cn(
-            "lg:col-span-5 items-center justify-center sticky top-24 h-[688px] transition-all duration-300",
-            activeSection === 'plans' ? "hidden" : "hidden lg:flex"
-          )}
-        >
-          <BotFrame />
-        </div>
       </div>
+      
+      {/* Cards animadas de casos de uso - posicionadas respecto a toda la vista */}
+      {activeSection === 'home' && (
+        <div className="absolute bottom-0 right-0 z-0 transform translate-x-[20%] translate-y-[10%]">
+          <div style={{ height: '350px', position: 'relative', width: '400px' }}>
+            <CardSwap
+              width={350}
+              height={250}
+              cardDistance={20}
+              verticalDistance={25}
+              delay={3500}
+              pauseOnHover={true}
+              easing="elastic"
+            >
+              {useCases.slice(0, 5).map((useCase, index) => (
+                <SwapCard key={index} customClass="bg-white border border-gray-200 shadow-2xl rounded-xl overflow-hidden">
+                  <div className="relative h-full">
+                    <div className="relative h-40 w-full">
+                      <Image
+                        src={useCase.imageUrl}
+                        alt={useCase.title}
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                    </div>
+                    <div className="p-4 space-y-2">
+                      <h3 className="text-lg font-bold text-gray-900 line-clamp-1">
+                        {useCase.title}
+                      </h3>
+                      <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
+                        {useCase.description}
+                      </p>
+                    </div>
+                  </div>
+                </SwapCard>
+              ))}
+            </CardSwap>
+          </div>
+        </div>
+      )}
     </div>
   );
 

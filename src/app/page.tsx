@@ -4,11 +4,17 @@
 
 import { HomePage } from '@/components/landing/home-page';
 import { defaultBotpageData } from '@/lib/botpage-data-default';
+import { HomeSidebarJotForm } from '@/components/home/home-sidebar-jotform';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export default function Home() {
-  // We are now re-using the Home Page component, which contains all the logic.
-  // We just pass the default data as a prop.
+  const isMobile = useIsMobile();
+  
   return (
+    <>
       <HomePage botpageData={defaultBotpageData} />
+      {/* Sidebar fijo de JotForm - completamente separado del HomePage */}
+      {!isMobile && <HomeSidebarJotForm iframeCode={defaultBotpageData.appearance.iframeCode} />}
+    </>
   );
 }
